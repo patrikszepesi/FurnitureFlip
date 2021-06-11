@@ -16,7 +16,7 @@ const Login = () => {
     state: { user },
     dispatch,
   } = useContext(Context);
-  // const { user } = state;
+  
 
   // router
   const router = useRouter();

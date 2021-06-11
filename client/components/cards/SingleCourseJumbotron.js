@@ -180,7 +180,7 @@ const [students, setStudents] = useState(0);
               shape="round"
               icon={<SafetyOutlined />}
               size="large"
-              disabled={loading}
+              disabled={loading || !user}
               onClick={paid ? handlePaidEnrollment : handleFreeEnrollment}
             >
               {user

@@ -176,7 +176,7 @@ export const removeVideo = async (req, res) => {
 export const addLesson = async (req, res) => {
   try {
     const { slug, instructorId } = req.params;
-    const { title, content, video } = req.body;
+    const { title, content, video,chapter,counter } = req.body;
 
     if (req.user._id != instructorId) {
       return res.status(400).send("Unauthorized");
@@ -185,7 +185,7 @@ export const addLesson = async (req, res) => {
     const updated = await Course.findOneAndUpdate(
       { slug },
       {
-        $push: { lessons: { title, content, video, slug: slugify(title) } },
+        $push: { lessons: {chapter, counter,title, content, video, slug: slugify(title) } },
       },
       { new: true }
     )
@@ -237,7 +237,8 @@ export const updateLesson = async (req, res) => {
   try {
     // console.log("UPDATE LESSON", req.body);
     const { slug } = req.params;
-    const { _id, title, content, video, free_preview } = req.body;
+    const { _id, title, content, video, free_preview,chapter,counter } = req.body;
+    console.log(req.body)
     const course = await Course.findOne({ slug }).select("instructor").exec();
 
     if (course.instructor._id != req.user._id) {
@@ -248,6 +249,8 @@ export const updateLesson = async (req, res) => {
       { "lessons._id": _id },
       {
         $set: {
+          "lessons.$.chapter":chapter,
+          "lessons.$.counter":counter,
           "lessons.$.title": title,
           "lessons.$.content": content,
           "lessons.$.video": video,
@@ -311,6 +314,33 @@ export const courses = async (req, res) => {
     .populate("instructor", "_id name")
     .exec();
   res.json(all);
+};
+
+export const invoice = async (req, res) => {
+  console.log("hi fuck fuck fuckt")
+  console.log(req.params.userId)
+  console.log("yellow")
+
+  // let courseIds=req.params.courses.split(',')
+
+  try{
+     var foo= await User.findOne({_id:req.params.userId}).select('purchases -_id')
+
+   }catch(err){
+     console.log(err)
+   }
+  //console.log(req.params.userId)
+  // var classes=[];
+  // for(let i=0;i<courseIds.length;i++){
+  //   try{
+  //     var foo= await Course.find({_id:courseIds[i]})
+  //     classes.push(foo)
+  //   }catch(err){
+  //     console.log(err)
+  //   }
+  // }
+  console.log(foo)
+  res.json(foo)
 };
 
 export const checkEnrollment = async (req, res) => {
@@ -396,7 +426,7 @@ export const paidEnrollment = async (req, res) => {
     return res.status(400).send("Enrollment create failed");
   }
 };
-
+//
 export const stripeSuccess = async (req, res) => {
   try {
     // find course
@@ -410,10 +440,11 @@ export const stripeSuccess = async (req, res) => {
       user.stripeSession.id
     );
     console.log("STRIPE SUCCESS", session);
-    // if session payment status is paid, push course to user's course []
+    // if session payment status is paid, push course to user's course
     if (session.payment_status === "paid") {
       await User.findByIdAndUpdate(user._id, {
-        $addToSet: { courses: course._id },
+        $push: {purchases: {time:Date.now(), courseId: course._id, course:course } },
+        $addToSet: { courses: course._id },//add purchase date and course id
         $set: { stripeSession: {} },
       }).exec();
     }
@@ -433,7 +464,7 @@ export const userCourses = async (req, res) => {
 };
 
 export const markCompleted = async (req, res) => {
-  const { courseId, lessonId } = req.body;
+  const { courseId, lessonId,title } = req.body;
   // console.log(courseId, lessonId);
   // find if user with that course is already created
   const existing = await Completed.findOne({
@@ -449,7 +480,7 @@ export const markCompleted = async (req, res) => {
         course: courseId,
       },
       {
-        $addToSet: { lessons: lessonId },
+        $addToSet: { lessons: title },
       }
     ).exec();
     res.json({ ok: true });
@@ -476,14 +507,11 @@ export const listCompleted = async (req, res) => {
   }
 };
 
-// export const check = async (req, res) => {
-//   console.log(req.params)
-//   console.log("hit after")
-// };
+
 
 export const markIncomplete = async (req, res) => {
   try {
-    const { courseId, lessonId } = req.body;
+    const { courseId, lessonId,title } = req.body;
 
     const updated = await Completed.findOneAndUpdate(
       {
@@ -491,7 +519,7 @@ export const markIncomplete = async (req, res) => {
         course: courseId,
       },
       {
-        $pull: { lessons: lessonId },
+        $pull: { lessons: title },
       }
     ).exec();
     res.json({ ok: true });

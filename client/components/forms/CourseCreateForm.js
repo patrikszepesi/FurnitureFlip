@@ -13,13 +13,14 @@ const CourseCreateForm = ({
   handleImageRemove = (f) => f,
   editPage = false,
 }) => {
+  console.log(values)
   const children = [];
   for (let i = 1000; i <= 15000; i+=500) {
     children.push(<Option key={i.toFixed(2)}>HUF{i}</Option>);
   }
   return (
     <>
-      {values && (
+      {values && values.categories!=undefined && (
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input

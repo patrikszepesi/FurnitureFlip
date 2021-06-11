@@ -14,6 +14,16 @@ const AddLessonForm = ({
   return (
     <div className="container pt-3">
       <form onSubmit={handleAddLesson}>
+
+      <input
+        type="text"
+        className="form-control square"
+        onChange={(e) => setValues({ ...values, chapter: e.target.value })}
+        value={values.chapter}
+        placeholder="Fejezet"
+        autoFocus
+        required
+      />
         <input
           type="text"
           className="form-control square"

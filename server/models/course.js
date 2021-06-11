@@ -12,6 +12,11 @@ const lessonSchema = new mongoose.Schema(
       maxlength: 320,
       required: true,
     },
+    chapter:{
+      type:String,
+      required:true,
+      minLength:3
+    },
     slug: {
       type: String,
       lowercase: true,
@@ -19,6 +24,10 @@ const lessonSchema = new mongoose.Schema(
     content: {
       type: {},
       minlength: 200,
+    },
+    counter: {
+      type:String,
+      
     },
     video: {},
     free_preview: {
@@ -81,6 +90,7 @@ const courseSchema = new mongoose.Schema(
         postedBy: { type: ObjectId, ref: "User" },
       },
     ],
+
     lessons: [lessonSchema],
     disable:[String]
 

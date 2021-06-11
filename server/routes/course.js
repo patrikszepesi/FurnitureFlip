@@ -31,6 +31,7 @@ import {
   markIncomplete,
   search,
   ratings,
+  invoice
 } from "../controllers/course";
 
 
@@ -63,6 +64,7 @@ router.put("/course/lesson/:slug/:instructorId", requireSignin, updateLesson);
 router.put("/course/:slug/:lessonId", requireSignin, removeLesson);
 
 router.get("/check-enrollment/:courseId", requireSignin, checkEnrollment);
+router.get("/course/invoice/:userId", requireSignin, invoice);
 
 // enrollment
 router.post("/free-enrollment/:courseId", requireSignin, freeEnrollment);

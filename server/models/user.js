@@ -38,6 +38,13 @@ const userSchema = new Schema(
       default: "",
     },
     courses: [{ type: ObjectId, ref: "Course" }],
+    purchases: [
+      {
+        time:{type:Date},
+        courseId:{type: ObjectId, ref: "Course"},
+        course:{type:Object,ref:"Course"},
+      },
+    ],
   },
   { timestamps: true }
 );

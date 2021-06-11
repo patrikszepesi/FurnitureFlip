@@ -12,7 +12,7 @@ import UpdateLessonForm from "../../../../components/forms/UpdateLessonForm";
 const { Item } = List;
 
 const CourseEdit = () => {
-  // state
+
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -21,6 +21,10 @@ const CourseEdit = () => {
     paid: true,
     category: "",
     loading: false,
+    categories:["pénzügy","számvitel","programozás","mesterséges intelligencia","Microsoft Excel","egyéb informatika","design","marketing","életmód","fotózás","zene","matematika","statisztika","kémia","biológia","anatómia","egyéb"],
+    difficulties:['kezdő','haladó','profi'],
+    category:'',
+    difficulty:'',
     lessons: [],
   });
   const [image, setImage] = useState({});
