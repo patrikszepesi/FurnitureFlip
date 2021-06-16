@@ -150,7 +150,7 @@ const CourseView = () => {
       console.log(err);
       toast("Hiba");
     }
-  };
+66  };
 
   const handleVideo = async (e) => {
     try {

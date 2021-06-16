@@ -116,6 +116,7 @@ export const uploadVideo = async (req, res) => {
     if (req.user._id != req.params.instructorId) {
       return res.status(400).send("Unauthorized");
     }
+    
 
     const { video } = req.files;
     // console.log(video);
@@ -128,6 +129,7 @@ export const uploadVideo = async (req, res) => {
       Body: readFileSync(video.path),
       ACL: "public-read",
       ContentType: video.type,
+
     };
 
     // upload to s3

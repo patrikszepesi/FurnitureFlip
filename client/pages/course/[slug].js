@@ -38,9 +38,7 @@ const { state, dispatch } = useContext(Context);
 const { user,backendCall } = state;
 
 
-
 let userToBackend;
-
 
 
 const backendCallFalse = () => {
@@ -49,22 +47,17 @@ const backendCallFalse = () => {
   });
 };
 
-useEffect(() => {
- //setUserFromLocal(JSON.parse(window.localStorage.getItem('user')));
- ratingObj={...ratingObj.userToRate=JSON.parse(window.localStorage.getItem('user'))}
-
-}, []);
-
-
-
-console.log(userFromLocal)
-console.log("after")
+// useEffect(() => {
+//  //setUserFromLocal(JSON.parse(window.localStorage.getItem('user')));
+//  ratingObj={...ratingObj.userToRate=JSON.parse(window.localStorage.getItem('user'))}
+//
+// }, []);
 
 
-console.log(ratingObj.text.length);
 
 
   useEffect(() => {
+    ratingObj={...ratingObj.userToRate=JSON.parse(window.localStorage.getItem('user'))}
     if (user && course) checkEnrollment();
   }, [user, course]);
 
@@ -103,10 +96,6 @@ console.log(ratingObj.text.length);
 
   const router = useRouter();
   const { slug } = router.query;
-
-
-console.log("yoooo")
-
 
 
   const handlePaidEnrollment = async () => {

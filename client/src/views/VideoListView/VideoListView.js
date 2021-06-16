@@ -196,9 +196,8 @@ if(course!=undefined&& course.lessons!=undefined && course.lessons.length>1){
 
   })
 }
-console.log(every)
 
-
+//set info of selected video
 const assignVideoItems = async (item) => {
   console.log(item)
 
@@ -223,6 +222,7 @@ const assignVideoItems = async (item) => {
           <>
             <div className="col alert square">
               <b>{videoTitle.substring(0, 30)}</b>
+
             </div>
 
             {clicked &&
@@ -245,6 +245,7 @@ const assignVideoItems = async (item) => {
                           }
                         }}
                     />
+
                   </div>
                 </>
               )}
@@ -253,6 +254,8 @@ const assignVideoItems = async (item) => {
               source={content}
               className="single-post"
             />
+
+
           </>
         ) : (
           <div className="d-flex justify-content-center p-5">
@@ -262,6 +265,7 @@ const assignVideoItems = async (item) => {
             </div>
           </div>
         )}
+
       </div>
         <div style={{ maWidth: 320 }}>
           <Button
@@ -314,7 +318,9 @@ const assignVideoItems = async (item) => {
             )}
           </Grid>
 
+
         </AccordionSummary>
+
         <AccordionDetails>
           <Typography  className="text-primary  btn-block " aria-controls="additional-actions1-content" color="textSecondary">
 
@@ -360,10 +366,22 @@ const assignVideoItems = async (item) => {
           </Typography>
         </AccordionDetails>
 
+
+
+
       </Accordion>
 
+
+
         ))}
+
       </Menu>
+        </div>
+      </div>
+      <div className="d-flex justify-content ">
+        <div className="text-center p-5">
+          <p className="lead">Kommentek/kérdések</p>
+          {'hello'}
         </div>
       </div>
     </StudentRoute>

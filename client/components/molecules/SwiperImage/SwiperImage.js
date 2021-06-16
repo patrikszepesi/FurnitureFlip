@@ -87,47 +87,26 @@ const SwiperImage = props => {
       {...rest}
     >
       <div className="swiper-image__wrapper, swiper-wrapper">
-        {items.map((item, index) => (
+
           <div
             className={clsx(
               'swiper-image__slide',
               'swiper-slide',
               classes.swiperSlide,
             )}
-            key={index}
+            key={items}
           >
             <Image
-              src={item.src}
-              alt={item.alt}
-              srcSet={item.srcSet}
-              lazyProps={{ width: '100%', height: '100%' }}
-              className={clsx(
-                'swiper-image__item',
-                classes.image,
-                imageClassName ? imageClassName : {},
-              )}
+              src={items}
+              alt={items}
+              srcSet={items.srcSet}
+              lazyProps={{ width: '100%', height: '20rem' }}
+
             />
           </div>
-        ))}
+
       </div>
-      <div className={clsx('swiper-image__navigation', classes.swiperNav)}>
-        <div
-          className={clsx(
-            'swiper-image__navigation-button',
-            'swiper-image__navigation-button--prev',
-            'swiper-button-prev',
-            navigationButtonStyle || {},
-          )}
-        />
-        <div
-          className={clsx(
-            'swiper-image__navigation-button',
-            'swiper-image__navigation-button--next',
-            'swiper-button-next',
-            navigationButtonStyle || {},
-          )}
-        />
-      </div>
+
     </div>
   );
 };
