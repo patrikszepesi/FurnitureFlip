@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
+import { toast } from "react-toastify";
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import { useRouter } from "next/router";
+
 import {
   Toolbar,
   Hidden,
@@ -16,6 +20,9 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Image, DarkModeToggler } from '../../../../../components/atoms';
+import { Context } from "../../../../../context";
+
+
 
 const useStyles = makeStyles(theme => ({
   flexGrow: {
@@ -116,6 +123,19 @@ const useStyles = makeStyles(theme => ({
 
 const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...rest }) => {
   const classes = useStyles();
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
+  const router = useRouter();
+
+
+  const logout = async () => {
+    dispatch({ type: "LOGOUT" });
+    window.localStorage.removeItem("user");
+    const { data } = await axios.get("/api/logout");
+    toast(data.message);
+    router.push("/login");
+  };
+
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [openedPopoverId, setOpenedPopoverId] = useState(null);
@@ -208,23 +228,70 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
   };
 
   const AccountPages = () => {
-    const { settings, signup, signin, password, error } = account.children;
+    const { settings } = account.children;
     return (
       <div className={classes.menu}>
         <div className={classes.menuItem}>
           <MenuGroup item={settings} />
         </div>
-        <div className={classes.menuItem}>
-          <MenuGroup item={signup} />
-          <MenuGroup item={signin} />
-        </div>
-        <div className={classes.menuItem}>
-          <MenuGroup item={password} />
-          <MenuGroup item={error} />
-        </div>
       </div>
     );
   };
+let logoutButton;
+if (!user ) {
+   logoutButton=null
+ } else {
+   logoutButton = <Button
+    variant="outlined"
+    component="a"
+    onClick={logout}
+   >
+     Kijelentkezés
+   </Button>
+ }
+let button;
+  if (user ) {
+     button = <Button
+     variant="contained"
+            color="primary"
+            component="a"
+            target="blank"
+       href="/categories"
+     >
+       Veszek
+     </Button>
+   } else {
+     button = <Button
+     variant="contained"
+            color="primary"
+            component="a"
+            target="blank"
+       href="/login"
+     >
+       Bejelentkezés
+     </Button>
+   }
+
+   let registerButton;
+
+   if (user ) {
+      registerButton = <Button
+        variant="outlined"
+        component="a"
+        href="/seller/item/create"
+      >
+        Eladok
+      </Button>
+    } else {
+      registerButton = <Button
+        variant="outlined"
+        component="a"
+        href="/register"
+      >
+        Regisztráció
+      </Button>
+    }
+
 
   const renderPages = id => {
     if (id === 'landing-pages') {
@@ -299,29 +366,18 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
               </Popover>
             </div>
           ))}
+
+          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
+            {button}
+          </ListItem>
+          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
+            {registerButton}
+          </ListItem>
+          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
+            {logoutButton}
+          </ListItem>
           <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
             <DarkModeToggler themeMode={themeMode} onClick={() => themeToggler()} />
-          </ListItem>
-          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
-            <Button
-              variant="outlined"
-              component="a"
-              href="/documentation"
-            >
-              Kezdj bele
-            </Button>
-          </ListItem>
-          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
-            <Button
-              variant="contained"
-              color="primary"
-              component="a"
-              target="blank"
-              href="https://material-ui.com/store/items/the-front-landing-page/"
-              className={classes.listItemButton}
-            >
-              Rólunk
-            </Button>
           </ListItem>
         </List>
       </Hidden>

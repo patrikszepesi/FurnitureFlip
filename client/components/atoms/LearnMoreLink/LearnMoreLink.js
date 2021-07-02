@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, IconButton } from '@material-ui/core';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-
+import { useRouter } from "next/router";
+import slugify from "slugify";
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'inline-flex',
@@ -38,10 +39,12 @@ const LearnMoreLink = props => {
     className,
     iconProps,
     typographyProps,
+    item,
     ...rest
   } = props;
 
   const classes = useStyles();
+  const router = useRouter();
 
   const children = (
     <>
@@ -66,9 +69,11 @@ const LearnMoreLink = props => {
 
   return (
     <a
-      href={href}
+
       className={clsx('learn-more-link', classes.root, className)}
       {...rest}
+      onClick={() => router.push(`/item/${slugify(item.toLowerCase())}`)}
+
     >
       {children}
     </a>

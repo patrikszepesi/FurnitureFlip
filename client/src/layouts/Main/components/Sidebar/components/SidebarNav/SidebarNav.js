@@ -133,7 +133,7 @@ const SidebarNav = props => {
   };
 
   const AccountPages = () => {
-    const { settings, signup, signin, password, error } = account.children;
+    const { settings  } = account.children;
     return (
       <div className={classes.menu}>
         <div className={classes.menuItem}>
@@ -141,9 +141,7 @@ const SidebarNav = props => {
           <MenuGroup item={signup} />
         </div>
         <div className={classes.menuItem}>
-          <MenuGroup item={signin} />
           <MenuGroup item={password} />
-          <MenuGroup item={error} />
         </div>
       </div>
     );

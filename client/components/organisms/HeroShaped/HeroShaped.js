@@ -4,17 +4,22 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider } from '@material-ui/core';
 import { Section } from '../../../components/organisms';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useMediaQuery, Button, Typography,Grid, ListItem, ListItemAvatar,colors } from '@material-ui/core';
+
+
 
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
     width: '100%',
-    overflow: 'hidden',
   },
   hero: {
     position: 'relative',
     width: '100%',
-    height: '100%',
     display: 'flex',
     maxWidth: theme.layout.contentWidth,
     margin: '0 auto',
@@ -23,12 +28,15 @@ const useStyles = makeStyles(theme => ({
     },
   },
   heroLeftSide: {
+
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3, 8),
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(3, 2),
     },
+
+
   },
   heroRightSide: {
     maxWidth: '50%',
@@ -37,31 +45,36 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       maxWidth: '100%',
       flex: '0 0 100%',
-      height: '300px',
+
     },
   },
   heroCover: {
     position: 'relative',
     width: '50vw',
     height: '100%',
+
     [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
-  },
+  },//
   heroImageContainer: {
     height: '100%',
     width: '100%',
-    overflow: 'hidden',
+    minHeight:'100%!important',
+    maxHeight:'100%!important',
+    alignItems: 'center', /* vertical */
+    justifyContent: 'center', /* horizontal */
+
   },
   heroImage: {
-    position: 'absolute',
+    marginTop:theme.spacing(3),
+    //marginLeft:theme.spacing(),
     left: '0%',
     width: '100%',
-    height: '100%',
-    [theme.breakpoints.up('md')]: {
-      shapeOutside: 'polygon(10% 0%, 100% 0, 100% 100%, 0% 100%)',
-      clipPath: 'polygon(10% 0%, 100% 0, 100% 100%, 0% 100%)',
-    },
+    maxHeight: '100%',
+
+
+    clipPath: 'polygon(10% 0%, 100% 0, 100% 100%, 0% 100%)',
   },
 }));
 
@@ -71,7 +84,7 @@ const useStyles = makeStyles(theme => ({
  * @param {Object} props
  */
 const HeroShaped = props => {
-  const { leftSide, rightSide, className, ...rest } = props;
+  const { leftSide, rightSide, item,className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -81,7 +94,22 @@ const HeroShaped = props => {
         <Section
           className={clsx('hero-shaped__left-side', classes.heroLeftSide)}
         >
+
           {leftSide}
+          <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className={classes.heading}>Olvasd el a termék leírást</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      {item.description}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
         </Section>
         <div className={clsx('hero-shaped__right-side', classes.heroRightSide)}>
           <div className={clsx('hero-shaped__cover', classes.heroCover)}>
@@ -94,10 +122,27 @@ const HeroShaped = props => {
               <div className={clsx('hero-shaped__image', classes.heroImage)}>
                 {rightSide}
               </div>
+              <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                      >
+                        <Typography className={classes.heading}>Olvasd el a termék leírást</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Typography>
+                          {item.description}
+                        </Typography>
+                      </AccordionDetails>
+                    </Accordion>
             </div>
+
           </div>
+
         </div>
       </div>
+
       <Divider />
     </div>
   );

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery, Divider } from '@material-ui/core';
 import { Topbar, Footer, Sidebar } from './components';
+import { Context } from "../../../context";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,10 +15,16 @@ const useStyles = makeStyles(theme => ({
 const Main = ({ children, themeToggler, themeMode }) => {
   const classes = useStyles();
 
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
+
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+
+
+
 
   const pages = {
     landings: {
@@ -229,83 +236,35 @@ const Main = ({ children, themeToggler, themeMode }) => {
         },
       },
     },
+
+
     account: {
-      title: 'Account',
+      title: 'Profilod',
       id: 'account',
       children: {
         settings: {
-          groupTitle: 'Settings',
+          groupTitle: user? 'Termékek': "mizu",
           pages: [
             {
-              title: 'General',
-              href: '/account/?pid=general',
+              title: 'Eddig eladtam',
+              href: '/user',
             },
             {
-              title: 'Security',
-              href: '/account/?pid=security',
+              title: 'Jelenlegi hírdetéseim ',
+              href: '/user',
             },
             {
-              title: 'Notifications',
-              href: '/account/?pid=notifications',
+              title: 'Számláim',
+              href: '/invoice',
             },
             {
-              title: 'Billing',
-              href: '/account/?pid=billing',
+              title: 'Bevételeim',
+              href: '/seller/revenue',
             },
           ],
         },
-        signup: {
-          groupTitle: 'Sign up',
-          pages: [
-            {
-              title: 'Simple',
-              href: '/signup-simple',
-            },
-            {
-              title: 'Cover',
-              href: '/signup-cover',
-            },
-          ],
-        },
-        signin: {
-          groupTitle: 'Sign in',
-          pages: [
-            {
-              title: 'Simple',
-              href: '/signin-simple',
-            },
-            {
-              title: 'Cover',
-              href: '/signin-cover',
-            },
-          ],
-        },
-        password: {
-          groupTitle: 'Password reset',
-          pages: [
-            {
-              title: 'Simple',
-              href: '/password-reset-simple',
-            },
-            {
-              title: 'Cover',
-              href: '/password-reset-cover',
-            },
-          ],
-        },
-        error: {
-          groupTitle: 'Error',
-          pages: [
-            {
-              title: 'Simple',
-              href: '/not-found',
-            },
-            {
-              title: 'Cover',
-              href: '/not-found-cover',
-            },
-          ],
-        },
+
+
       },
     },
   };

@@ -7,6 +7,8 @@ import { readFileSync } from "fs";
 import User from "../models/user";
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
+
+
 const awsConfig = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -15,6 +17,7 @@ const awsConfig = {
 };
 
 const S3 = new AWS.S3(awsConfig);
+const SES = new AWS.SES(awsConfig);
 
 export const uploadImage = async (req, res) => {
   // console.log(req.body);
@@ -57,6 +60,7 @@ export const uploadImage = async (req, res) => {
 export const removeImage = async (req, res) => {
   try {
     const { image } = req.body;
+
     // image params
     const params = {
       Bucket: image.Bucket,
@@ -99,8 +103,9 @@ export const create = async (req, res) => {
 };
 
 export const read = async (req, res) => {
+  console.log("READ WAS HIT, THIS IS WHAT YOU WANT")
   try {
-    const course = await Course.findOne({ slug: req.params.slug })
+    const course = await Course.findOne({ _id: req.params.slug })
       .populate("instructor", "_id name")
       .exec();
     res.json(course);
@@ -109,110 +114,25 @@ export const read = async (req, res) => {
   }
 };
 
-export const uploadVideo = async (req, res) => {
-  try {
-    // console.log("req.user._id", req.user._id);
-    // console.log("req.params.instructorId", req.params.instructorId);
-    if (req.user._id != req.params.instructorId) {
-      return res.status(400).send("Unauthorized");
-    }
-    
 
-    const { video } = req.files;
-    // console.log(video);
-    if (!video) return res.status(400).send("No video");
-
-    // video params
-    const params = {
-      Bucket: "vidz-online",
-      Key: `${nanoid()}.${video.type.split("/")[1]}`,
-      Body: readFileSync(video.path),
-      ACL: "public-read",
-      ContentType: video.type,
-
-    };
-
-    // upload to s3
-    S3.upload(params, (err, data) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(400);
-      }
-      console.log(data);
-      res.send(data);
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const removeVideo = async (req, res) => {
-  try {
-    if (req.user._id != req.params.instructorId) {
-      return res.status(400).send("Unauthorized");
-    }
-
-    const { Bucket, Key } = req.body;
-    // console.log("VIDEO REMOVE =====> ", req.body);
-
-    // video params
-    const params = {
-      Bucket,
-      Key,
-    };
-
-    // upload to s3
-    S3.deleteObject(params, (err, data) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(400);
-      }
-      console.log(data);
-      res.send({ ok: true });
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const addLesson = async (req, res) => {
-  try {
-    const { slug, instructorId } = req.params;
-    const { title, content, video,chapter,counter } = req.body;
-
-    if (req.user._id != instructorId) {
-      return res.status(400).send("Unauthorized");
-    }
-
-    const updated = await Course.findOneAndUpdate(
-      { slug },
-      {
-        $push: { lessons: {chapter, counter,title, content, video, slug: slugify(title) } },
-      },
-      { new: true }
-    )
-      .populate("instructor", "_id name")
-      .exec();
-    res.json(updated);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send("Add lesson failed");
-  }
-};
+//
 
 export const update = async (req, res) => {
+  console.log("mi a szar")
+  console.log(req.params)
   try {
     const { slug } = req.params;
     // console.log(slug);
-    const course = await Course.findOne({ slug }).exec();
-    // console.log("COURSE FOUND => ", course);
+    const course = await Course.findOne({ _id:slug }).exec();
+     console.log("COURSE FOUND => ", course);
     if (req.user._id != course.instructor) {
       return res.status(400).send("Unauthorized");
     }
 
-    const updated = await Course.findOneAndUpdate({ slug }, req.body, {
+    const updated = await Course.findOneAndUpdate({ _id:slug }, req.body, {
       new: true,
     }).exec();
+    console.log(updated)
 
     res.json(updated);
   } catch (err) {
@@ -221,19 +141,7 @@ export const update = async (req, res) => {
   }
 };
 
-export const removeLesson = async (req, res) => {
-  const { slug, lessonId } = req.params;
-  const course = await Course.findOne({ slug }).exec();
-  if (req.user._id != course.instructor) {
-    return res.status(400).send("Unauthorized");
-  }
 
-  const deletedCourse = await Course.findByIdAndUpdate(course._id, {
-    $pull: { lessons: { _id: lessonId } },
-  }).exec();
-
-  res.json({ ok: true });
-};
 
 export const updateLesson = async (req, res) => {
   try {
@@ -361,37 +269,17 @@ export const checkEnrollment = async (req, res) => {
   });
 };
 
-export const freeEnrollment = async (req, res) => {
-  try {
-    // check if course is free or paid
-    const course = await Course.findById(req.params.courseId).exec();
-    if (course.paid) return;
 
-    const result = await User.findByIdAndUpdate(
-      req.user._id,
-      {
-        $addToSet: { courses: course._id },
-      },
-      { new: true }
-    ).exec();
-    console.log(result);
-    res.json({
-      message: "Congratulations! You have successfully enrolled",
-      course,
-    });
-  } catch (err) {
-    console.log("free enrollment err", err);
-    return res.status(400).send("Enrollment create failed");
-  }
-};
 
 export const paidEnrollment = async (req, res) => {
+
   try {
     // check if course is free or paid
-    const course = await Course.findById(req.params.courseId)
+    const course = await Course.findById(req.params.itemId)
       .populate("instructor")
       .exec();
-    if (!course.paid) return;
+
+    // if (!course.paid) return;
     // application fee 30%
     const fee = (course.price * 30) / 100;
     // create stripe session
@@ -441,7 +329,7 @@ export const stripeSuccess = async (req, res) => {
     const session = await stripe.checkout.sessions.retrieve(
       user.stripeSession.id
     );
-    console.log("STRIPE SUCCESS", session);
+    console.log("STRIPE SUCCESS", session.customer_details.email);
     // if session payment status is paid, push course to user's course
     if (session.payment_status === "paid") {
       await User.findByIdAndUpdate(user._id, {
@@ -450,6 +338,93 @@ export const stripeSuccess = async (req, res) => {
         $set: { stripeSession: {} },
       }).exec();
     }
+    try {
+
+      // console.log(email);
+
+      // prepare for email
+      const params = {
+        Source: process.env.EMAIL_FROM,
+        Destination: {
+          ToAddresses: [session.customer_details.email],
+        },
+        Message: {
+          Body: {
+            Html: {
+              Charset: "UTF-8",
+              Data: `
+                  <html>
+                    <h1>Vásárlás megerősítése</h1>
+                    <p>User this code to reset your password</p>
+
+                    <h2 style="color:red;">${course.email}</h2>
+                    <h2 style="color:red;">${course.phone}</h2>
+                    <i>edemy.com</i>
+                  </html>
+                `,
+            },
+          },
+          Subject: {
+            Charset: "UTF-8",
+            Data: "Vásárlás",
+          },
+        },
+      };
+
+      const params2 = {
+        Source: process.env.EMAIL_FROM,
+        Destination: {
+          ToAddresses: [course.email],
+        },
+        Message: {
+          Body: {
+            Html: {
+              Charset: "UTF-8",
+              Data: `
+                  <html>
+                    <h1>Valaki akar tőled venni</h1>
+                    <p>User this code to reset your password</p>
+
+                    <h2 style="color:red;">${course.name}</h2>
+                    <h2 style="color:red;">${course.item}</h2>
+                    <i>edemy.com</i>
+                  </html>
+                `,
+            },
+          },
+          Subject: {
+            Charset: "UTF-8",
+            Data: "Vásárlás",
+          },
+        },
+      };
+
+      const emailSent = SES.sendEmail(params).promise();
+      emailSent
+        .then((data) => {
+          console.log("success");
+          //res.json({ ok: true });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+        const emailSentToSeller = SES.sendEmail(params2).promise();
+        emailSentToSeller
+          .then((data) => {
+            console.log("success");
+            //res.json({ ok: true });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+    } catch (err) {
+      console.log(err);
+    }
+
+
+
     res.json({ success: true, course });
   } catch (err) {
     console.log("STRIPE SUCCESS ERR", err);
@@ -465,37 +440,7 @@ export const userCourses = async (req, res) => {
   res.json(courses);
 };
 
-export const markCompleted = async (req, res) => {
-  const { courseId, lessonId,title } = req.body;
-  // console.log(courseId, lessonId);
-  // find if user with that course is already created
-  const existing = await Completed.findOne({
-    user: req.user._id,
-    course: courseId,
-  }).exec();
 
-  if (existing) {
-    // update
-    const updated = await Completed.findOneAndUpdate(
-      {
-        user: req.user._id,
-        course: courseId,
-      },
-      {
-        $addToSet: { lessons: title },
-      }
-    ).exec();
-    res.json({ ok: true });
-  } else {
-    // create
-    const created = await new Completed({
-      user: req.user._id,
-      course: courseId,
-      lessons: lessonId,
-    }).save();
-    res.json({ ok: true });
-  }
-};
 
 export const listCompleted = async (req, res) => {
   try {
@@ -511,24 +456,7 @@ export const listCompleted = async (req, res) => {
 
 
 
-export const markIncomplete = async (req, res) => {
-  try {
-    const { courseId, lessonId,title } = req.body;
 
-    const updated = await Completed.findOneAndUpdate(
-      {
-        user: req.user._id,
-        course: courseId,
-      },
-      {
-        $pull: { lessons: title },
-      }
-    ).exec();
-    res.json({ ok: true });
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export const ratings = async (req, res) => {
   const { star,text,userToRate,name,average } = req.body.toSend;
@@ -575,8 +503,6 @@ if (existingRatingObject === undefined) {
     res.json(ratingUpdated);
   }
 
-
-
 };
 
 
@@ -584,72 +510,42 @@ export const search = async (req, res) => {
   const {
     toSend
   } = req.body;
+  console.log(req.body)
 
-let {difficulty, star, category}=toSend
+let {subcategory, item, category,price,quality,city}=toSend
 
-
-
+console.log(req.body.toSend)
 const handleSearch=async(queryObject)=>{
-console.log("hit")
-
-
-
-
-// Course.aggregate([
-//     {
-//       $project: {
-//         document: "$$ROOT",
-//         // title: "$title",
-//         floorAverage: {
-//           $floor: { $avg: "$ratings.star" }, // floor value of 3.33 will be 3
-//         },
-//
-//       },
-//     },
-//      { $match:{  floorAverage: queryObject.star}},
-//       Course.find({star:1}).exec((err, results) => console.log(results) )
-//
-//   ])
-//
-//     .exec((err, results) => console.log(results) )
-
-
-
-// Course.aggregate([
-//     { "$project": {
-//         "star": { "$avg": "ratings.$star" }
-//     }}
-// ]).exec((err, results) => console.log(results))
-
-
+  console.log("hit")
  try {
-
    let courses = await Course.find(queryObject)
      .populate("instructor", "_id name")
      .exec();
-
+console.log(courses)
    return res.json(courses,);
-
-
     } catch (err) {
    console.log(err);
     }
-
  }
 
-
-
-  let queryObject={ published: true};
+   let queryObject={};
   if(req.body.toSend){
-    if(difficulty.length>0){
-    queryObject = {...queryObject, difficulty}
+    if(subcategory.length>0){
+    queryObject = {...queryObject, subcategory}
     }
-    if(category.length>0){
+    if( category!=undefined && category.length>0){
       queryObject={...queryObject,category}
     }
-    if(star>2){
-      queryObject={...queryObject,star:{$gte:star}}
+    if(item.length>0){
+      queryObject={...queryObject,item}
     }
+    if(quality.length>0){
+      queryObject={...queryObject,quality}
+    }
+    if(city.length>0){
+      queryObject={...queryObject,city}
+    }
+
     console.log(queryObject)
   }
    handleSearch(queryObject)

@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Image } from '../../../components/atoms';
 import { LearnMoreLink } from '../../../components/atoms';
 import { SectionHeader } from '../../../components/molecules';
-import { HeroShaped } from '../../../components/organisms';
+import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
 
 
@@ -96,7 +96,7 @@ const LoginView = () => {
   return (
     <>
     <div className={classes.root}>
-      <HeroShaped
+      <HeroShapedAuth
         leftSide={
           <div className={classes.formContainer}>
             <SectionHeader

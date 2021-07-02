@@ -4,149 +4,44 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Typography } from '@material-ui/core';
 import { SectionHeader, TypedText } from '../../../../../components/molecules';
-import { HeroShaped } from '../../../../../components/organisms';
+import {  Section, HeroSimpleBackground } from '../../../../../components/organisms';
 
-const useStyles = makeStyles(theme => ({
-  fontWeight900: {
-    fontWeight: 900,
-  },
-  leftSideContent: {
-    '& .section-header__cta-container': {
-      [theme.breakpoints.down('xs')]: {
-        flexDirection: 'column',
-        '& .section-header__cta-item-wrapper': {
-          width: '100%',
-          '&:last-child': {
-            marginLeft: 0,
-            marginTop: theme.spacing(1),
-          },
-          '& .MuiButtonBase-root': {
-            width: '100%',
-          },
-        },
-      },
-    }
-  },
-  heroShaped: {
-    '& .hero-shaped__image': {
-      backgroundColor: theme.palette.alternate.main,
-    },
-    [theme.breakpoints.down('sm')]: {
-      '& .hero-shaped__image': {
-        position: 'relative',
-      },
-      '& .hero-shaped__wrapper': {
-        flexDirection: 'column',
-      },
-    },
-  },
-  imageAnimation: {
-    background: `url("https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGxlYXJufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60")`,
-    backgroundRepeat: 'repeat',
-    backgroundAttachment: 'scroll',
-    backgroundSize: '400px auto',
-    animation: `$slideshow 50s linear infinite`,
-    width: '600%',
-    height: '600%',
-    backgroundColor: theme.palette.alternate.dark,
-    top: '-25%',
-    left: '-100%',
-    position: 'absolute',
-    [theme.breakpoints.up('sm')]: {
-      backgroundSize: '800px auto',
-    }
-  },
-  imageAnimationDark: {
-    background: `url("https://assets.maccarianagency.com/the-front/web-screens/home/home-hero-bg-dark.png")`,
-  },
-  '@keyframes slideshow': {
-    '0%': {
-      transform: 'rotate(-13deg) translateY(-25%)',
-    },
-    '100%': {
-      transform: 'rotate(-13deg) translateY(-80%)',
-    },
-  },
-}));
+const Hero = props => {
+  const { className, ...rest } = props;
 
-const Hero = ({ themeMode = 'light', className, ...rest }) => {
-  const classes = useStyles();
-
-  const title = (
-    <Typography variant="h2" component="span" className={classes.fontWeight900}>
-      Tanulj vagy taníts
-      <br />
-      <TypedText
-        component="span"
-        variant="h2"
-        color="secondary"
-        className={classes.fontWeight900}
-        typedProps={{
-          strings: [
-            'online',
-            'bárhol',
-            'bármikor',
-            'jó áron',
-            'kényelmesen',
-            
-
-          ],
-          typeSpeed: 50,
-          loop: true,
-        }}
-      />
-    </Typography>
-  );
-
-  const subtitle = 'Oszd meg tudásod vagy tanulj másoktól bármikor bárhol';
-
-  const docsButton = (
-    <Button size="large" variant="outlined" color="primary" component="a" href="/documentation">
-      Keress kurzust
-    </Button>
-  );
-
-  const buyButton = (
-    <Button
-      size="large"
-      variant="contained"
-      color="primary"
-      component="a"
-      href="/home"
-    >
-    Tanár lennél inkább
-    </Button>
-  );
-
-  const leftSideContent = (
-    <SectionHeader
-      title={title}
-      subtitle={subtitle}
-      align="left"
-      titleProps={{
-        variant: 'h2',
-        color: 'textPrimary',
-      }}
-      ctaGroup={[docsButton, buyButton]}
-      data-aos="fade-right"
-      disableGutter
-      className={classes.leftSideContent}
-    />
-  );
   return (
     <div className={className} {...rest}>
-      <HeroShaped
-        className={classes.heroShaped}
-        leftSide={leftSideContent}
-        rightSide={(
-          <div
-            className={clsx(
-              classes.imageAnimation,
-              themeMode === 'dark' ? classes.imageAnimationDark: '',
-            )}
+      <HeroSimpleBackground backgroundImage="https://assets.maccarianagency.com/the-front/shapes/banner-bg.svg">
+        <Section narrow>
+          <SectionHeader
+            title={
+              <span>
+                Supercharge Your Web Product's{' '}
+                <Typography color="secondary" variant="inherit" component="span">UI/UX Design</Typography>
+              </span>
+            }
+            titleVariant="h3"
+            subtitle="Our mission is to help you to grow your design skills, meet and connect with professional dsigners who share your passions. We help you fulfill your best potential through an engaging lifestyle experience."
+            ctaGroup={[
+              <Button color="primary" variant="contained" size="large">
+                Try for free
+              </Button>,
+              <Button color="secondary" variant="outlined" size="large">
+                See pricings
+              </Button>,
+            ]}
+            disableGutter
           />
-        )}
-      />
+          <Typography
+            variant="overline"
+            align="center"
+            component="p"
+            color="primary"
+          >
+            Fully featured 30-day free trial
+          </Typography>
+        </Section>
+      </HeroSimpleBackground>
     </div>
   );
 };
@@ -156,10 +51,6 @@ Hero.propTypes = {
    * External classes
    */
   className: PropTypes.string,
-  /**
-   * Theme mode
-   */
-  themeMode: PropTypes.string,
 };
 
 export default Hero;

@@ -31,32 +31,9 @@ const History = () => {
 
 
 
-
-
-      // for(let i=0;i<data[0].puchases;i++){
-      //   console.log(data[0])
-      // }
-
     };
 console.log(orders)
 
-//orders[0].map(x=>console.log(x.time))
-
-  //   const loadUserOrders = () =>
-  // getUserOrders(user.token).then(res => {
-  //   console.log(JSON.stringify(res.data, null, 4));
-  //   setOrders(res.data);
-  // });
-  //
-  // const sendRatingToBackend = async() => {
-  //   setTimeout(backendCallFalse,0);
-  //
-  // const { data } = await axios.post(`/api/ratings/${course._id}`,{
-  //   toSend:{...ratingObj}
-  // });
-  //
-  //
-  // };
 
 
 

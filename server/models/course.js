@@ -3,42 +3,6 @@ const moment = require('moment');
 
 const { ObjectId } = mongoose.Schema;
 
-const lessonSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      trim: true,
-      minlength: 3,
-      maxlength: 320,
-      required: true,
-    },
-    chapter:{
-      type:String,
-      required:true,
-      minLength:3
-    },
-    slug: {
-      type: String,
-      lowercase: true,
-    },
-    content: {
-      type: {},
-      minlength: 200,
-    },
-    counter: {
-      type:String,
-      
-    },
-    video: {},
-    free_preview: {
-      type: Boolean,
-      default: false,
-    },
-
-
-  },
-  { timestamps: true }
-);
 
 const courseSchema = new mongoose.Schema(
   {
@@ -60,40 +24,52 @@ const courseSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      default: 9.99,
+      required:true
     },
-    image: {},
-    category: String,
-    difficulty: String,
-    published: {
-      type: Boolean,
-      default: false,
-    },
-    paid: {
-      type: Boolean,
-      default: true,
-    },
-    star:Number,
     instructor: {
       type: ObjectId,
       ref: "User",
       required: true,
     },
 
-    ratings: [
-      {
-        star:{type:Number,required:true},
-        text:{type:String,required:true},
-        name:{type:String,required:true},
-        disable:[String],
-        date:{type:Date,default:moment()},
-        postedBy: { type: ObjectId, ref: "User" },
+    category: {
+      type:String,
+      required:true
+    },
+    subCategory:{
+      type:String,
+      required:true
+    },
+    quality:{
+      type:String,
+      required:true
+    },
+    item:{
+      type:String,
+      required:true
+    },
+    city:{
+      type:String,
+      required:true
+    },
+    street:{
+      type:String,
+      required:true
+    },
+    email:{
+      type:String,
+      required:true
+    },
+    phone:{
+      type:Number,
+      required:true
+    },
+
+    sold:false,
+    
+    images: {
+        type: Array,
       },
-    ],
-
-    lessons: [lessonSchema],
-    disable:[String]
-
   },
   { timestamps: true }
 );

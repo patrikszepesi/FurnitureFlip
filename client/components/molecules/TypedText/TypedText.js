@@ -12,6 +12,7 @@ import { Typography } from '@material-ui/core';
 const TypedText = props => {
   const { className, typedProps, ...rest } = props;
 
+
   return (
     <Typography
       className={clsx('typed-text', className)}

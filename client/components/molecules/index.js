@@ -1,6 +1,7 @@
 export { default as SectionHeader } from './SectionHeader';
 export { default as IconAlternate } from './IconAlternate';
 export { default as SwiperImage } from './SwiperImage';
+export { default as SwiperImageMultiple } from './SwiperImageMultiple';
 export { default as DescriptionCta } from './DescriptionCta';
 export { default as CountUpNumber } from './CountUpNumber';
 export { default as OverlapedImages } from './OverlapedImages';

@@ -33,13 +33,14 @@ export const useDarkMode = () => {
   return [themeMode, themeToggler, mountedComponent];
 };
 
-export default function WithLayout({ component: Component, layout: Layout, ...rest }) {
+export default function WithLayout({ component: Component, layout: Layout, item:Item, ...rest }) {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+    console.log(Item)
 
     AOS.init({
       once: true,
@@ -60,7 +61,7 @@ export default function WithLayout({ component: Component, layout: Layout, ...re
       <CssBaseline />
       <Paper elevation={0}>
         <Layout themeMode={themeMode} themeToggler={themeToggler}>
-          <Component themeMode={themeMode} {...rest} />
+          <Component item={Item} themeMode={themeMode} {...rest} />
         </Layout>
       </Paper>
     </ThemeProvider>

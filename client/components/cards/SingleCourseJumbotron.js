@@ -145,28 +145,8 @@ const [students, setStudents] = useState(0);
         </div>
 
         <div className="col-md-4">
-          {/* {JSON.stringify(lessons[0])} */}
-          {/* show video preview or course image */}
-          {lessons[0].video && lessons[0].video.Location ? (
-            <div
-              onClick={() => {
-                setPreview(lessons[0].video.Location);
-                setShowModal(!showModal);
-              }}
-            >
-              <ReactPlayer
-                className="react-player-div"
-                url={lessons[0].video.Location}
-                light={image.Location}
-                width="100%"
-                height="225px"
-              />
-            </div>
-          ) : (
-            <>
-              <img src={image.Location} alt={name} className="img img-fluid" />
-            </>
-          )}
+
+
           {/* enroll button */}
           {loading ? (
             <div className="d-flex justify-content-center mt-3">

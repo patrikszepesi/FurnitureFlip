@@ -171,17 +171,12 @@ const Footer = props => {
   };
 
   const AccountPages = () => {
-    const { settings, signup, signin, password, error } = account.children;
+    const { settings } = account.children;
     return (
       <div className={classes.menu}>
         <div>
           <MenuGroup item={settings} />
-          <MenuGroup item={signup} />
-        </div>
-        <div>
-          <MenuGroup item={signin} />
-          <MenuGroup item={password} />
-          <MenuGroup item={error} />
+          
         </div>
       </div>
     );

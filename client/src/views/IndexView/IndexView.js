@@ -1,42 +1,65 @@
 import React from 'react';
 import { makeStyles, Divider } from '@material-ui/core';
 import { Section, SectionAlternate } from '../../../components/organisms';
-import { GetStarted, Features, Reviews, QuickStart, Services, Hero } from './components';
+import { GetStarted, QuickStart, Services } from './components';
 
-const useStyles = makeStyles(() => ({
-  sectionAlternateNoPaddingTop: {
-    '& .section-alternate__content': {
-      paddingBottom: 0,
+
+
+import {
+  About,
+  Features,
+  Hero,
+  Integrations,
+  Reviews,
+  Subscription,
+} from './components';
+
+import { integrations, reviews } from './data';
+
+const useStyles = makeStyles(theme => ({
+  hero: {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(-9),
     },
   },
-  dividerSection: {
+  sectionAlternate: {
+    background: 'transparent',
+    backgroundImage: `linear-gradient(180deg, ${theme.palette.alternate.main} 100%, ${theme.palette.background.paper} 0%)`,
+    [theme.breakpoints.up('md')]: {
+      backgroundImage: `linear-gradient(180deg, ${theme.palette.alternate.main} 50%, ${theme.palette.background.paper} 0%)`,
+    },
+  },
+  reviewSection: {
+    background: theme.palette.secondary.main,
+  },
+  sectionSubscription: {
     paddingTop: 0,
-    paddingBottom: 0,
   },
 }));
 
-const IndexView = ({ themeMode }) => {
+const IndexView = () => {
   const classes = useStyles();
 
   return (
     <div>
-      <Hero themeMode={themeMode} />
-      <Services />
-      <SectionAlternate className={classes.sectionAlternateNoPaddingTop}>
-        <QuickStart />
-      </SectionAlternate>
-      <SectionAlternate>
-        <Features />
+      <Hero data-aos="fade-up" className={classes.hero} />
+      <SectionAlternate className={classes.sectionAlternate}>
+        <About />
       </SectionAlternate>
       <Section>
-        <Reviews />
+        <Integrations data={integrations} />
       </Section>
-      <Section className={classes.dividerSection}>
-        <Divider />
-      </Section>
-      <Section narrow>
-        <GetStarted />
-      </Section>
+      <SectionAlternate innerNarrowed>
+        <Features />
+      </SectionAlternate>
+      <SectionAlternate className={classes.reviewSection}>
+        <Reviews data={reviews} />
+      </SectionAlternate>
+      <Divider />
+      <Divider />
+      <Divider />
+      <Divider />
+
     </div>
   );
 };
