@@ -66,10 +66,19 @@ const courseSchema = new mongoose.Schema(
     },
 
     sold:false,
-    
+
     images: {
         type: Array,
       },
+      comments: [
+      {
+        text:{type:String,required:true},
+        answer:{type:String},
+        name:{type:String,required:true},
+        date:{type:Date,default:moment()},
+        postedBy: { type: ObjectId, ref: "User" },
+      },
+    ],
   },
   { timestamps: true }
 );

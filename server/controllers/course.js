@@ -57,6 +57,19 @@ export const uploadImage = async (req, res) => {
   }
 };
 
+export const getUser = async(req,res)=>{
+  try{
+    const currentUser = await User.findOne({
+      _id: req.params.userId,
+    }).select('wishlist -_id ').exec()
+    console.log(currentUser)
+    res.json(currentUser);
+
+  }catch (err){
+    console.log(err)
+  }
+}
+
 export const removeImage = async (req, res) => {
   try {
     const { image } = req.body;
@@ -274,7 +287,6 @@ export const checkEnrollment = async (req, res) => {
 export const paidEnrollment = async (req, res) => {
 
   try {
-    // check if course is free or paid
     const course = await Course.findById(req.params.itemId)
       .populate("instructor")
       .exec();
@@ -285,6 +297,8 @@ export const paidEnrollment = async (req, res) => {
     // create stripe session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
+      receipt_email: req.user.email,
+
       // purchase details
       line_items: [
         {
@@ -330,6 +344,7 @@ export const stripeSuccess = async (req, res) => {
       user.stripeSession.id
     );
     console.log("STRIPE SUCCESS", session.customer_details.email);
+    //update item field sold to true
     // if session payment status is paid, push course to user's course
     if (session.payment_status === "paid") {
       await User.findByIdAndUpdate(user._id, {
@@ -338,6 +353,11 @@ export const stripeSuccess = async (req, res) => {
         $set: { stripeSession: {} },
       }).exec();
     }
+
+    const item = await Course.findByIdAndUpdate(req.params.courseId,{
+      $set:{sold:true}
+    }).exec();
+
     try {
 
       // console.log(email);
@@ -456,56 +476,6 @@ export const listCompleted = async (req, res) => {
 
 
 
-
-
-export const ratings = async (req, res) => {
-  const { star,text,userToRate,name,average } = req.body.toSend;
-  console.log(req.body.toSend)
-
-  const course = await Course.findById(req.params.courseId).exec();
-
-  const user = await User.findOne({ email: userToRate.email }).exec();
-
-  let existingRatingObject = course.ratings.find(
-  (ele) => ele.postedBy.toString() === user._id.toString()
-);
-
-if (existingRatingObject === undefined) {
-
-  let disabled = await Course.findByIdAndUpdate(
-    course._id,
-    {
-      $push: {disable: user._id },
-    }).exec()
-
-    let ratingAdded = await Course.findByIdAndUpdate(
-      course._id,
-      {
-        $push: {ratings: {name,text, star, postedBy: user._id , disable:user._id} },
-
-        $set:{star:average},
-
-      },
-      { new: true }
-    ).exec();
-    console.log("ratingAdded", ratingAdded);
-    res.json(ratingAdded);
-  } else {
-    // if user has already left rating, update it
-    const ratingUpdated = await Course.updateOne(
-      {
-        ratings: { $elemMatch: existingRatingObject },
-      },
-      { $set: { "ratings.$.star": star, "ratings.$.text":text, "ratings.$.name":name } },
-      { new: true }
-    ).exec();
-    console.log("ratingUpdated", ratingUpdated);
-    res.json(ratingUpdated);
-  }
-
-};
-
-
 export const search = async (req, res) => {
   const {
     toSend
@@ -549,5 +519,205 @@ console.log(courses)
     console.log(queryObject)
   }
    handleSearch(queryObject)
+
+};
+
+export const addToWishlist = async (req, res) => {
+  const { itemId } = req.params;
+
+
+  const user = await User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $addToSet: { wishlist: itemId } }//unique
+  ).exec();
+
+  res.json({ok:true});
+};
+
+export const readWishlist = async (req, res) => {
+  try{
+    const list = await User.findOne({ _id: req.user._id })
+      .select("wishlist")
+      .populate("wishlist")
+      .exec();
+
+    res.json(list);
+  } catch (err){
+    console.log(err)
+  }
+};
+
+export const sold = async (req, res) => {
+  console.log(req.user)
+  try{
+    const soldItems = await Course.find({instructor: req.user._id,sold:true })
+      .exec();
+      console.log(soldItems)
+    res.json(soldItems);
+  } catch (err){
+    console.log(err)
+  }
+};
+
+export const removeFromWishlist = async (req, res) => {
+  console.log(req.params)
+  console.log(req.user)
+  const { itemId } = req.params;
+  const user = await User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $pull: { wishlist: itemId } }
+  ).exec();
+
+  res.json({ ok: true });
+};
+
+
+export const comments = async (req, res) => {
+  const { text,name } = req.body.toSend;
+//send email to the owner of the item
+    try{
+      const user = await User.findOne({ email: req.body.user.email }).exec();//i dont think i need this, double check
+
+      let itemWithQuestion = await Course.findById(req.params.itemId)
+
+      let commentAdded = await Course.findByIdAndUpdate(
+        req.params.itemId,
+        {
+          $push: {comments: {name,text, postedBy: req.body.user._id } },
+        },
+        { new: true }
+      ).exec();
+
+      const params = {
+        Source: process.env.EMAIL_FROM,
+        Destination: {
+          ToAddresses: [itemWithQuestion.email],
+        },
+        Message: {
+          Body: {
+            Html: {
+              Charset: "UTF-8",
+              Data: `
+                  <html>
+                    <h1>Valaki kérdezett valamit az egyik termékedről</h1>
+                    <p>Válaszolj neki</p>
+
+                    <h2 style="color:red;">${itemWithQuestion.name}</h2>
+                    <h2 style="color:red;">${itemWithQuestion.item}</h2>
+                    <i>edemy.com</i>
+                  </html>
+                `,
+            },
+          },
+          Subject: {
+            Charset: "UTF-8",
+            Data: "Vásárlás",
+          },
+        },
+      };
+
+      const emailSent = SES.sendEmail(params).promise();
+      emailSent
+        .then((data) => {
+          console.log("success");
+          //res.json({ ok: true });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      console.log("ratingAdded", commentAdded);
+
+
+      res.json(commentAdded);
+    }catch (err){
+      console.log(err)
+    }
+
+};
+
+
+
+
+
+export const getComments = async (req, res) => {
+
+  try{
+    const item = await Course.findOne({ _id: req.params.itemId })
+    .select("comments -_id")
+    .exec();
+    res.json({item})
+    console.log(item)
+  } catch(err){
+    console.log(error)
+  }
+};
+
+export const commentAnswers = async (req, res) => {
+  //send email to the person who asked the question
+  try{
+    const item=await Course.findOneAndUpdate( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } }, {$set:{'comments.$.answer':req.body.toSend.text}} )
+
+
+     const itemToLookFor = await Course.findOne( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } } ).select('comments').exec();
+     const itemToLookForForEmail = await Course.findOne( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } } ).exec();
+
+
+
+    var result = itemToLookFor.comments.map(item => ({ id:item._id, postedBy:item.postedBy }));
+    let needId;
+
+//look at all the comments and see which one has an id that match the commentId from our frontend
+    for(let i=0; i<result.length;i++){
+      if(result[i].id==req.body.toSend.commentId)
+      needId=result[i]
+    }
+
+    const userWhoAskedQuestion = await User.findOne({_id:needId.postedBy}).select("email -_id")
+    console.log(userWhoAskedQuestion)
+
+    const params2 = {
+      Source: process.env.EMAIL_FROM,
+      Destination: {
+        ToAddresses: [userWhoAskedQuestion.email],
+      },
+      Message: {
+        Body: {
+          Html: {
+            Charset: "UTF-8",
+            Data: `
+                <html>
+                  <h1>Válaszoltak a kérdésedre</h1>
+                  <p>Amit ezzel a tárggyal kapcsolatban kérdeztél</p>
+
+                  <h2 style="color:red;">${itemToLookForForEmail.name}</h2>
+
+                  <i>edemy.com</i>
+                </html>
+              `,
+          },
+        },
+        Subject: {
+          Charset: "UTF-8",
+          Data: "Vásárlás",
+        },
+      },
+    };
+
+    const emailSent = SES.sendEmail(params2).promise();
+    emailSent
+      .then((data) => {
+        console.log("success");
+        //res.json({ ok: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
+    res.json({ok:true})
+  } catch(err){
+    console.log(err)
+  }
 
 };

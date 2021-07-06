@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import toast  from 'react-hot-toast';
@@ -6,14 +6,15 @@ import axios from 'axios';
 import { loadStripe } from "@stripe/stripe-js";
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useMediaQuery, Button, Typography,Grid, ListItem, ListItemAvatar,colors } from '@material-ui/core';
 import { SectionHeader, SwiperImageMultiple, TypedText, IconAlternate } from '../../../../../components/molecules';
 import { HeroShaped } from '../../../../../components/organisms';
 import { Context } from "../../../../../context";
+import RatingModal from "../../../../../components/modal/RatingModal";
+import Rating from '@material-ui/lab/Rating';
+
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -60,18 +61,46 @@ const Hero = props => {
   const { className, item, ...rest } = props;
   const classes = useStyles();
   const [loading,setLoading]=useState(false)
+  const [saved,setSaved]=useState('');
+  const [dummy,setDummy]=useState(0)
 
-  const { state, dispatch } = useContext(Context);
-  const { user } = state;
+  let [commentObj, setCommentObj] = useState({
+    text:'',
+    name:''
+  });
+
+
+const { state, dispatch } = useContext(Context);
+const { user,backendCall } = state;
+
+
+  useEffect(() => {
+    if(user) loadCurrent()
+  }, [dummy]);//saved here
+
+  const loadCurrent= async ()=>{
+    const { data } = await axios.get(`/api/user/${user._id}`);
+    setSaved(data)
+  }
+
+  let conditionalText;
+if(saved && saved.wishlist && saved.wishlist!=undefined){
+  if(saved.wishlist.includes(item._id)){
+    conditionalText='Már elmentve'
+  }else{
+    conditionalText='Elmentem'
+  }
+}
 
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  let data=['onsdf','sdf','sdf','sdf','sdf','sdf','sdf','dsf']
+
+
   const handlePaidEnrollment = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       // check if user is logged in
       if (!user) router.push("/login");
       // check if already enrolled
@@ -97,18 +126,82 @@ const Hero = props => {
       setLoading(false);
     }
   };
+
+
+  const backendCallFalse = () => {
+  dispatch({
+    type: "SET_BACKEND_CALL_FALSE",
+  });
+};
+
+  const handleRatingChange = async (event,name, value) => {
+
+    event.preventDefault()
+    let newValue = value;
+
+    const newRatingObj = { ...commentObj, [name]: event.target.value };
+    console.log(newRatingObj)
+
+    setCommentObj(newRatingObj)
+  };
+
+
+  const sendCommentToBackend = async() => {
+    setTimeout(backendCallFalse,0);
+
+  const { data } = await axios.post(`/api/comments/${item._id}`,{
+    toSend:{...commentObj},
+    user:user,
+  });
+  };
+
+  if(backendCall===true){
+      if(commentObj.text.length>2 && commentObj.name.length>0){
+        sendCommentToBackend();
+        toast.success("siker")
+      }  else if(commentObj.text.length<3 || commentObj.name.length<3){
+        toast.success('Hiba, kitöltötted az összes mezőt?')
+        backendCallFalse();
+      }
+
+    }
+
+
+  const handleAddToWishList = async () => {
+    try {
+      if (!user) router.push("/login");
+      const { data } = await axios.post(`/api/wishlist/${item._id}`);
+      console.log(data)
+      setDummy(dummy+1)
+    } catch (err) {
+      toast.error('Hiba', {
+           duration: 4000,
+    style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'1450px',
+      marginTop:'70px',
+    },
+    iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+    },
+  });
+      console.log(err);
+    }
+  };
+
   let images=item.images
-  console.log(images)
 
   return (
+
     <div className={className} {...rest}>
+
       <HeroShaped
       item={item}
         leftSide={
           <>
-
-
-
           <SectionHeader
 
               title={
@@ -233,15 +326,35 @@ const Hero = props => {
                 variant="contained"
                 className={classes.button2}
                 disabled={loading || !user}
-                onClick={handlePaidEnrollment}
+                onClick={handleAddToWishList}
                 startIcon={<FavoriteIcon/>}
 
               >
-                {user
-                    ? "Elmentem"
-
-                  : "Elmentéshez Jelentkezz be"}
+                {conditionalText}
               </Button>
+
+              <RatingModal  course={item} text={'Kérdezz'} >
+
+            <textarea style={{marginBottom:'10px'}}
+                  value= {commentObj.name}
+                  onChange={(event, value) => {
+                    handleRatingChange(event,'name',event.target.value)}}
+                  className='form-control'
+                  placeholder='Neved hogyan jelenjen meg az értékelésen'
+                  rows={1}
+                  cols={1}>
+            </textarea>
+
+            <textarea style={{marginBottom:'10px'}}
+                  value= {commentObj.text}
+                  onChange={(event, value) => {
+                    handleRatingChange(event,'text',event.target.value)}}
+                  className='form-control'
+                  placeholder='Milyen volt az Oktató és maga az óra'
+                  rows={10}
+                  cols={50}>
+            </textarea>
+        </RatingModal>
 
 
 

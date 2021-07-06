@@ -6,7 +6,6 @@ import {Hero} from './components';
 
 const SingleItemView = ({ item }) => {
 
-const [related, setRelated] = useState([]);
 const useStyles = makeStyles(theme => ({
   pagePaddingTop: {
     paddingTop: theme.spacing(3),
@@ -25,7 +24,6 @@ const useStyles = makeStyles(theme => ({
 }));
 const classes=useStyles()
 
-//access with item.foo
   return (
     <div>
       <Hero className={classes.shape} item={item} />

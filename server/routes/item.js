@@ -23,7 +23,6 @@ import {
   userCourses,
   listCompleted,
   search,
-  ratings,
   invoice
 } from "../controllers/course";
 

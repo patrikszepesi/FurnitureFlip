@@ -7,7 +7,7 @@ import { Context } from "../../context";
 
 
 
-const RatingModal = ({ children,course,text }) => {
+const AnswerModal = ({ children,course,text }) => {
 const [modalVisible, setModalVisible] = useState(false);
 const { state, dispatch } = useContext(Context);
 
@@ -48,9 +48,9 @@ console.log(text)
       shape="round"
       onClick={handleModal}>
 
-      {user
-          ? 'Kérdezz'
-        : ""}
+      {user && text==='válaszolj'
+          ? 'válaszolj'
+        : "Kérdezz"}
       </Button>
       <Modal
         title={text}
@@ -69,4 +69,4 @@ console.log(text)
   );
 };
 
-export default RatingModal;
+export default AnswerModal;

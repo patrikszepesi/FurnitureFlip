@@ -12,7 +12,9 @@ import {
   removeImage,
   create,
   read,
-
+  addToWishlist,
+  readWishlist,
+  removeFromWishlist,
   update,
   updateLesson,
   publishCourse,
@@ -24,8 +26,12 @@ import {
   userCourses,
   listCompleted,
   search,
-  ratings,
-  invoice
+  invoice,
+  getUser,
+  comments,
+  getComments,
+  commentAnswers,
+  sold
 } from "../controllers/course";
 
 
@@ -40,21 +46,34 @@ router.put("/course/:slug", requireSignin, update);
 router.get("/course/:slug", read);
 
 
-// publish unpublish
 router.put("/course/publish/:courseId", requireSignin, publishCourse);
 router.put("/course/unpublish/:courseId", requireSignin, unpublishCourse);
-
-// `/api/course/lesson/${slug}/${course.instructor._id}`,
-router.post("/ratings/:courseId", requireSignin, ratings);
 
 router.put("/course/lesson/:slug/:instructorId", requireSignin, updateLesson);
 
 router.get("/check-enrollment/:courseId", requireSignin, checkEnrollment);
 router.get("/course/invoice/:userId", requireSignin, invoice);
 
-// enrollment
 router.post("/paid-enrollment/:itemId", requireSignin, paidEnrollment);
+router.get("/user/:userId", requireSignin, getUser);
+
 router.get("/stripe-success/:courseId", requireSignin, stripeSuccess);
+
+router.post("/wishlist/:itemId", requireSignin, addToWishlist);
+router.get("/wishlist", requireSignin, readWishlist);
+router.put("/wishlist/:itemId", requireSignin, removeFromWishlist);
+
+router.post("/comments/:itemId", requireSignin, comments);
+router.get("/comments/:itemId", requireSignin, getComments);
+router.post("/comment/answer/:itemId", requireSignin, commentAnswers);
+
+
+router.get("/sold", requireSignin, sold);
+
+
+
+
+
 
 router.get("/user-courses", requireSignin, userCourses);
 router.get("/user/course/:slug", requireSignin, read);

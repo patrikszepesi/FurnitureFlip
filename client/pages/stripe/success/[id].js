@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 const StripeSuccess = () => {
-  
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -14,7 +14,7 @@ const StripeSuccess = () => {
   }, [id]);
 
   console.log(id);
-
+//
   const successRequest = async () => {
     const { data } = await axios.get(`/api/stripe-success/${id}`);
     // console.log("SUCCESS REQ DATA", data);

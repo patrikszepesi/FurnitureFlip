@@ -45,7 +45,9 @@ const userSchema = new Schema(
         course:{type:Object,ref:"Course"},
       },
     ],
+    wishlist: [{ type: ObjectId, ref: "Course" }],
   },
+
   { timestamps: true }
 );
 

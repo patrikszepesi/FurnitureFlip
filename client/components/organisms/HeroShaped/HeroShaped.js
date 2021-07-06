@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{useEffect,useState,useContext} from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider } from '@material-ui/core';
@@ -9,6 +10,10 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useMediaQuery, Button, Typography,Grid, ListItem, ListItemAvatar,colors } from '@material-ui/core';
+import { Context } from "../../../context";
+import AnswerModal from "../../../components/modal/AnswerModal";
+import toast  from 'react-hot-toast';
+
 
 
 
@@ -86,6 +91,77 @@ const useStyles = makeStyles(theme => ({
 const HeroShaped = props => {
   const { leftSide, rightSide, item,className, ...rest } = props;
 
+  let [answerObj, setAnswerObj] = useState({
+    text:'',
+    name:'',
+    commentId:0
+  });
+
+  const { state, dispatch } = useContext(Context);
+  const { user,backendCall } = state;
+
+  const [answers,setAnswers]=useState([]);
+  const [comments,setComments]=useState([]);
+
+
+  const backendCallFalse = () => {
+  dispatch({
+    type: "SET_BACKEND_CALL_FALSE",
+  });
+};
+
+const sendAnswerToBackend = async() => {
+  setTimeout(backendCallFalse,0);
+const { data } = await axios.post(`/api/comment/answer/${item._id}`,{
+  toSend:{...answerObj},
+  });
+};
+
+  const handleAnswerChange = async (event,name, value,id,commentId) => {
+    event.preventDefault()
+    let newValue = value;
+
+    const newAnswerObj = { ...answerObj, [name]: event.target.value, [commentId]:id };
+
+    setAnswerObj(newAnswerObj)
+  };
+
+  if(backendCall===true){
+      if(answerObj.text.length>2 && answerObj.name.length>0){
+        sendAnswerToBackend();
+        toast.success("siker")
+      }  else if(answerObj.text.length<3 || answerObj.name.length<3){
+        toast.success('Hiba, kitöltötted az összes mezőt?')
+        backendCallFalse();
+      }
+    }
+
+
+  useEffect(()=>{
+    loadComments()
+  },[item])
+
+const loadComments = async () => {
+  const { data } = await axios.get(`/api/comments/${item._id}`);
+  setComments(data)
+}
+let commentsToDisplay=[];
+let answersToComments=[]
+let ids=[]
+
+if(comments && comments!=undefined && comments.item!=undefined && comments.item.comments!=undefined){
+  var result = comments.item.comments.map(item => ({ text: item.text, answer: item.answer, id:item._id }));
+  }
+
+let textToSend
+if(user && item.instructor!=undefined){
+  if(user._id==item.instructor._id) textToSend='válaszolj'
+}else {
+  textToSend=''
+}
+console.log(user)
+console.log(item)
+
   const classes = useStyles();
 
   return (
@@ -96,20 +172,44 @@ const HeroShaped = props => {
         >
 
           {leftSide}
-          <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography className={classes.heading}>Olvasd el a termék leírást</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      {item.description}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
+          { result &&  result.map((comment,index) => (
+
+            <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography className={classes.heading}>{comment.text} </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        Válasz : { comment.answer } <hr/> { user && item.instructor!=undefined && user._id==item.instructor._id &&  <AnswerModal  course={item} text={textToSend} >
+
+                        <textarea style={{marginBottom:'10px'}}
+                              value= {answerObj.name}
+                              onChange={(event, value) => {
+                                handleAnswerChange(event,'name',event.target.value,comment.id,'commentId')}}
+                              className='form-control'
+                              placeholder='Neved hogyan jelenjen meg az értékelésen'
+                              rows={1}
+                              cols={1}>
+                        </textarea>
+
+                        <textarea style={{marginBottom:'10px'}}
+                              value= {answerObj.text}
+                              onChange={(event, value) => {
+                                handleAnswerChange(event,'text',event.target.value,comment.id,'commentId')}}
+                              className='form-control'
+                              placeholder='Milyen volt az Oktató és maga az óra'
+                              rows={10}
+                              cols={50}>
+                        </textarea>
+                    </AnswerModal>}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+          ))}
         </Section>
         <div className={clsx('hero-shaped__right-side', classes.heroRightSide)}>
           <div className={clsx('hero-shaped__cover', classes.heroCover)}>
@@ -122,13 +222,14 @@ const HeroShaped = props => {
               <div className={clsx('hero-shaped__image', classes.heroImage)}>
                 {rightSide}
               </div>
+
               <Accordion>
                       <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                       >
-                        <Typography className={classes.heading}>Olvasd el a termék leírást</Typography>
+                        <Typography className={classes.heading}>Termék leírás</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Typography>
@@ -136,6 +237,8 @@ const HeroShaped = props => {
                         </Typography>
                       </AccordionDetails>
                     </Accordion>
+
+
             </div>
 
           </div>
@@ -162,5 +265,4 @@ HeroShaped.propTypes = {
    */
   leftSide: PropTypes.node.isRequired,
 };
-
 export default HeroShaped;

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
-import InstructorRoute from "../../../components/routes/InstructorRoute";
+//import InstructorRoute from "../../../components/routes/InstructorRoute";
 import { Avatar, Tooltip } from "antd";
 import Link from "next/link";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
@@ -10,32 +10,34 @@ import {
   Items,
 } from './components';
 
-const ItemsView = () => {
+const SoldView = () => {
   const [items, setItems] = useState([]);
   const [wishlist,setWishlist]=useState();
 
   useEffect(() => {
-    loadItems();
+    loadCourses();
   }, [wishlist]);
 
-  const loadItems = async () => {
-    const { data } = await axios.get("/api/instructor-courses");
+  const loadCourses = async () => {
+    const { data } = await axios.get("/api/sold");
     setItems(data);
   };
+
 
   const myStyle = { marginTop: "-15px", fontSize: "10px" };
 
   return (
-    <InstructorRoute>
-      <SectionAlternate>
+    <>{items &&   <SectionAlternate>
         <Items
          data={items}
+         onWishListChange={newWishList => setWishlist(newWishList)}
           />
-      </SectionAlternate>
+      </SectionAlternate> }
 
 
-    </InstructorRoute>
+
+    </>
   );
 };
 
-export default ItemsView;
+export default SoldView;

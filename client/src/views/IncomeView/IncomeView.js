@@ -8,6 +8,11 @@ import {
   SyncOutlined,
 } from "@ant-design/icons";
 import { stripeCurrencyFormatter } from "../../../utils/helpers";
+import {
+  Advantages,
+} from './components';
+import { Section } from '../../../components/organisms';
+
 
 const IncomeView = () => {
   const [balance, setBalance] = useState({ pending: [] });
@@ -21,7 +26,32 @@ const IncomeView = () => {
     const { data } = await axios.get("/api/instructor/balance");
     setBalance(data);
   };
-
+  const advantages = [
+    {
+      title: 'Build Recurring Revenue',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      icon: 'fas fa-money-bill-wave',
+    },
+    {
+      title: 'Competitive Differentation',
+      description:
+        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      icon: 'fas fa-trophy',
+    },
+    {
+      title: 'Keep Your Clients Loyal',
+      description:
+        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+      icon: 'fas fa-heart',
+    },
+    {
+      title: 'Automated Sales Process',
+      description:
+        'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      icon: 'fas fa-cog',
+    },
+  ];
   const handlePayoutSettings = async () => {
     try {
       setLoading(true);
@@ -35,47 +65,10 @@ const IncomeView = () => {
   };
 
   return (
-    <InstructorRoute>
-      <div className="container">
-        <div className="row pt-2">
-          <div className="col-md-8 offset-md-2 bg-light p-5">
-            <h2>
-              Revenue report <DollarOutlined className="float-right" />{" "}
-            </h2>
-            <small>
-              You get paid directly from stripe to your bank account every 48
-              hour
-            </small>
-            <hr />
-            {/* {JSON.stringify(balance, null, 4)} */}
-            <h4>
-              Pending balance
-              {balance.pending &&
-                balance.pending.map((bp, i) => (
-                  <span key={i} className="float-right">
-                    {stripeCurrencyFormatter(bp)}
-                  </span>
-                ))}
-            </h4>
-            <small>For last 48 hours</small>
-            <hr />
-            <h4>
-              Payouts{" "}
-              {!loading ? (
-                <SettingOutlined
-                  className="float-right pointer"
-                  onClick={handlePayoutSettings}
-                />
-              ) : (
-                <SyncOutlined spin className="float-right pointer" />
-              )}
-            </h4>
-            <small>
-              Update your stripe account details or view previous payouts.
-            </small>
-          </div>
-        </div>
-      </div>
+    <InstructorRoute >
+    <Section>
+        <Advantages data={advantages} />
+      </Section>
     </InstructorRoute>
   );
 };
