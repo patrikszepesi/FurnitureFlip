@@ -113,21 +113,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 //
-const Search = ({categoryToFilter}) => {
+const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
   const classes = useStyles();
+  console.log(filterObj)
 
   let subCategories=[]
+  let subCategory=''
   let qualities=[]
   let prices=[]
   let items=[]
   let difficulties=[]
 
   if(categoryToFilter==='bútor'){
-     subCategories=['benti bútor','kinti bútor']
+    subCategories=['benti bútor','kinti bútor','bárhol tárolható']
      qualities=['új','alig használt','használt']
-     prices=[1000-8000,8000-20000,20000-50000,50000-100000,100000-200000,200000-350000,350000]
-     items=['ágy','matrac']
+     prices=['1.000-8.000 HUF','8.000-20.000 HUF','20.000-50.000 HUF','50.000-100.000 HUF','100.000-200.000 HUF','200.000-350.000 HUF','350.000+ HUF']
      difficulties=['a']
+  }
+  if(filterObj.subCategory==='benti bútor'){
+    items=['szék','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
+    prices=[{name:'1.000-8.000 HUF',value:[1000,8000]},'8.000-20.000 HUF','20.000-50.000 HUF','50.000-100.000 HUF','100.000-200.000 HUF','200.000-350.000 HUF','350.000+ HUF']
+
   }
 
 
@@ -138,18 +144,13 @@ const Search = ({categoryToFilter}) => {
     defaultMatches: true,
   });
 
-    const handleFilterChange = (name, value) => {
-      let newValue = value;
+    const handleFilterChange = (event,name) => {
 
-      const newFilterObj = { ...filterObj, [name]: newValue };
 
-      // debounce for price change
-      if (name === 'price') {
-        setPrice(newFilterObj.price);
-        debouncedSave(newFilterObj);
-      } else {
+      const newFilterObj = { ...filterObj, [name]: event.target.value };
+      console.log(newFilterObj)
+
         onFilterChange(newFilterObj);
-      }
     };
 
   return (
@@ -174,8 +175,8 @@ const Search = ({categoryToFilter}) => {
               <FormControl className={classes.textField}>
                 <p>Kategória</p>
                 <Select
-                value={'age'}
-                onChange={handleFilterChange}
+                value={filterObj.subCategory}
+                onChange={(e) => handleFilterChange(e, 'subCategory')}
                 input={<BootstrapInput />}
                 >
                   <MenuItem value="">
@@ -191,8 +192,8 @@ const Search = ({categoryToFilter}) => {
               <FormControl className={classes.textField}>
                 <p>Tárgy</p>
                 <Select
-                value={'age'}
-                onChange={handleFilterChange}
+                value={filterObj.item}
+                onChange={(e) => handleFilterChange(e, 'item')}
                 input={<BootstrapInput />}
                 >
                   <MenuItem value="">
@@ -208,15 +209,14 @@ const Search = ({categoryToFilter}) => {
               <FormControl className={classes.textField}>
                 <p>Ár</p>
                 <Select
-                value={'age'}
-                onChange={handleFilterChange}
+                value={filterObj.price}
+                onChange={(e) => handleFilterChange(e, 'price')}
                 input={<BootstrapInput />}
                 >
                   <MenuItem value="">
-                  <em>None</em>
                   </MenuItem>
-                      {prices.map(d => {
-                        return <MenuItem value={d}>{d}</MenuItem>;
+                      {prices.map(p => {
+                        return <MenuItem value={p.value}>{p.name}</MenuItem>;
                     })}
                 </Select>
               </FormControl>
@@ -225,15 +225,15 @@ const Search = ({categoryToFilter}) => {
               <FormControl className={classes.textField}>
                 <p>Minőség</p>
                 <Select
-                value={'age'}
-                onChange={handleFilterChange}
+                value={filterObj.quality}
+                onChange={(e) => handleFilterChange(e, 'quality')}
                 input={<BootstrapInput />}
                 >
                   <MenuItem value="">
                   <em>None</em>
                   </MenuItem>
-                      {qualities.map(d => {
-                        return <MenuItem value={d}>{d}</MenuItem>;
+                      {qualities.map(q => {
+                        return <MenuItem value={q}>{q}</MenuItem>;
                     })}
                 </Select>
               </FormControl>

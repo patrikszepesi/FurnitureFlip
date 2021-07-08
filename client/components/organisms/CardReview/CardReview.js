@@ -84,11 +84,7 @@ const CardReview = props => {
             <List disablePadding className="card-review__list">
               <ListItem className="card-review__list-item">
                 <ListItemAvatar className="card-review__list-item-avatar">
-                  <Avatar
-                    {...authorPhoto}
-                    alt={authorName}
-                    className="card-review__avatar"
-                  />
+                
                 </ListItemAvatar>
                 <ListItemText
                   className="card-review__list-item-text"
@@ -134,7 +130,6 @@ CardReview.propTypes = {
   /**
    * Reviewer photo to show inside the review card.Should be an object with src and srcSet properties
    */
-  authorPhoto: PropTypes.object.isRequired,
   /**
    * Reviewer name to show inside the review card
    */

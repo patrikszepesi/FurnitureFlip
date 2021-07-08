@@ -65,14 +65,12 @@ const Reviews = props => {
       <SectionHeader
         title={
           <span className={classes.textWhite}>
-            Take a look what our customers say
+          Csatlakozz hozzánk
           </span>
         }
         subtitle={
           <span className={classes.textWhite}>
-            Take a quick glance at some of our past projects. If you would like
-            to see some more great work, get in touch with us to take a look at
-            our private portfolio.
+            és támogasd te is évente az xy alapítványt
           </span>
         }
         align="left"
@@ -91,15 +89,13 @@ const Reviews = props => {
               text={item.feedback}
               icon={<Icon size="large" fontIconClass="fas fa-quote-right" />}
               authorName={item.authorName}
-              authorTitle={item.authorOccupation}
-              authorPhoto={item.authorPhoto}
               align="left"
               noBg
               textVariant="h4"
             />
           ))}
         </div>
-      
+
       </div>
     </div>
   );

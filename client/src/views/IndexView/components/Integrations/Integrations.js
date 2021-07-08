@@ -29,13 +29,13 @@ const Integrations = props => {
           <Grid container spacing={isMd ? 4 : 2}>
             <Grid item xs={12} md={6}>
               <SectionHeader
-                title="We love to explore new ways to engage with brands and reach"
-                subtitle="Our mission is to help you to grow your design skills, meet and connect with professional dsigners who share your passions."
+                title="Ha már nem kell valami, add el itt."
+                subtitle="Lehet valakinek pont az a régi fotogép kell ami ott porosodik a polcodon."
                 align="left"
                 label="100+ Integrations"
                 ctaGroup={[
                   <LearnMoreLink
-                    title="See all integrations"
+                    title="Tudj meg többet"
                     href="#"
                     variant="h6"
                   />,
@@ -76,13 +76,13 @@ const Integrations = props => {
             </Grid>
             <Grid item xs={12} md={6} data-aos="fade-up">
               <SectionHeader
-                title="We love to explore new ways to engage with brands and reach"
-                subtitle="Our mission is to help you to grow your design skills, meet and connect with professional dsigners who share your passions."
+                title="Ha vennél valamit, tedd itt"
+                subtitle="Miért vennél egy új könyvet, ha tudsz olcsóbban használtat venni amivel a környezetedet is tudod óvni?"
                 align="left"
                 label="100+ Integrations"
                 ctaGroup={[
                   <LearnMoreLink
-                    title="See all integrations"
+                    title="Tudj meg többet"
                     href="#"
                     variant="h6"
                   />,

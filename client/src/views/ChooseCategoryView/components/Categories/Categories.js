@@ -8,7 +8,6 @@ import { CardCategory } from '../../../../../components/organisms';
 import { useRouter } from "next/router";
 import slugify from "slugify";
 
-//JUST LIKE IN SLUG.JS GET QUERY PARAM FROM ROUTER, AND PUT THAT IN IS A SEARCH PARAM
 
 const useStyles = makeStyles(theme => ({
   typed: {
@@ -21,9 +20,6 @@ const Categories = props => {
   const classes = useStyles();
   const router = useRouter();
 
-  const handleClick = () => {
-    console.log('this is:');
-  }
 
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -39,8 +35,8 @@ const Categories = props => {
       <SectionHeader
         title={
           <>
-            Explore by category <br /> and find the best jobs{' '}
-            {isMd ? null : <br />} for&nbsp;
+            Keress a kategóriák  <br /> közül{' '}
+            {isMd ? null : <br />} &nbsp;
             <TypedText
               component="span"
               variant="h4"
@@ -48,11 +44,10 @@ const Categories = props => {
               className={classes.typed}
               typedProps={{
                 strings: [
-                  'Web Developers.',
-                  'UI/UX Designers.',
-                  'Business Analists.',
-                  'Scrum Masters.',
-                  'Finance & Sales',
+                  'Gyorsan',
+                  'Egyszerűen',
+                  'Hatékonyan',
+
                 ],
                 typeSpeed: 50,
                 loop: true,

@@ -16,18 +16,18 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Supercharge Your Web Product's{' '}
-                <Typography color="secondary" variant="inherit" component="span">UI/UX Design</Typography>
+                Vegyél vagy add el {' '}
+                <Typography color="secondary" variant="inherit" component="span">új vagy használt cuccaidat</Typography>
               </span>
             }
             titleVariant="h3"
-            subtitle="Our mission is to help you to grow your design skills, meet and connect with professional dsigners who share your passions. We help you fulfill your best potential through an engaging lifestyle experience."
+            subtitle="Csak azért mert már nem használod, nem azt jelenti, hogy valaki nem fizetne érte pénzt. Óvd a környezeted, keress pénzt és nyerjen mindenki"
             ctaGroup={[
               <Button color="primary" variant="contained" size="large">
-                Try for free
+                 Miket tudok venni
               </Button>,
               <Button color="secondary" variant="outlined" size="large">
-                See pricings
+                Mi ez?
               </Button>,
             ]}
             disableGutter
@@ -38,7 +38,7 @@ const Hero = props => {
             component="p"
             color="primary"
           >
-            Fully featured 30-day free trial
+            Évente több ezer olyan terméket veszünk amit után egyből ki is dobunk
           </Typography>
         </Section>
       </HeroSimpleBackground>

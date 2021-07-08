@@ -31,18 +31,18 @@ const About = props => {
         title={
           <span>
             <Typography component="span" variant="inherit" color="primary">
-              We love to explore
+              Vegyél vagy Adj
             </Typography>{' '}
-            new ways to engage with brands and reach
+          el bármit egy kattintással
           </span>
         }
-        subtitle="Our mission is to help you to grow your design skills, meet and connect with professional dsigners who share your passions."
+        subtitle="Célunk az újrahasznosítás, és, hogy ne vesszen vészbe semmmilyen termék."
         ctaGroup={[
           <Button color="primary" variant="contained" size="large">
-            Try for free
+            Eladni akarok
           </Button>,
           <Button color="secondary" variant="outlined" size="large">
-            See pricings
+            Venni akarok
           </Button>,
         ]}
         data-aos="fade-up"

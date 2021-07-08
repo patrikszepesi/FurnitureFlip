@@ -477,12 +477,12 @@ export const listCompleted = async (req, res) => {
 
 
 export const search = async (req, res) => {
+  console.log("hit")
   const {
     toSend
   } = req.body;
-  console.log(req.body)
 
-let {subcategory, item, category,price,quality,city}=toSend
+let {subCategory, item, category,price,quality,city}=toSend
 
 console.log(req.body.toSend)
 const handleSearch=async(queryObject)=>{
@@ -491,7 +491,6 @@ const handleSearch=async(queryObject)=>{
    let courses = await Course.find(queryObject)
      .populate("instructor", "_id name")
      .exec();
-console.log(courses)
    return res.json(courses,);
     } catch (err) {
    console.log(err);
@@ -500,8 +499,8 @@ console.log(courses)
 
    let queryObject={};
   if(req.body.toSend){
-    if(subcategory.length>0){
-    queryObject = {...queryObject, subcategory}
+    if( subCategory!= undefined && subCategory.length>0){
+    queryObject = {...queryObject, subCategory}
     }
     if( category!=undefined && category.length>0){
       queryObject={...queryObject,category}
@@ -512,8 +511,9 @@ console.log(courses)
     if(quality.length>0){
       queryObject={...queryObject,quality}
     }
-    if(city.length>0){
-      queryObject={...queryObject,city}
+    if(price[1]>1){
+      queryObject={...queryObject, price:{$gte: price[0],
+       $lte: price[1]}}
     }
 
     console.log(queryObject)

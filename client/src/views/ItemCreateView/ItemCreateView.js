@@ -11,10 +11,9 @@ import { Box, List, ListItem, Grid, Typography } from '@material-ui/core';
 import { SectionAlternate, CardBase } from '../../../components/organisms';
 import { Hero, ItemCreateForm, Security, Notifications, Billing } from './components';
 import InstructorRoute from "../../../components/routes/InstructorRoute";
-import CourseCreateForm from "../../../components/forms/CourseCreateForm";
 import FileUpload from "../../../components/forms/FileUpload";
 
-//
+
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
@@ -110,7 +109,7 @@ const ItemCreateView = (props = {}) => {
       price: ' ',
       uploading: false,
       category:"",
-      categories:['bútor','sporteszköz','ruha','elektronikai','építéshez','gyerek','ékszer','egyéb'],
+      categories:['bútor/otthon','sport/szabadidő','műszaki cikk','ruha','könyv','mama-baba','alkatrész','művészet'],
       subCategory:'',
       item:'',
       email:'',

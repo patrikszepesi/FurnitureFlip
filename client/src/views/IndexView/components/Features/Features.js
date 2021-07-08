@@ -40,8 +40,7 @@ const Features = props => {
     <div className={className} {...rest}>
       <SectionHeader
         data-aos="fade-up"
-        title="We love to explore new ways to engage with brands and reach"
-        subtitle="Our mission is to help you to grow your design skills, meet and connect with professional dsigners who share your passions."
+        title="Céljaink."
       />
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} data-aos="fade-up">
@@ -51,11 +50,11 @@ const Features = props => {
             className={clsx(classes.featureCard, classes.featureCardFirstItem)}
           >
             <DescriptionListIcon
-              title="Supercharge your design skills"
-              subtitle="Connect in spaces designed to bring incredible people together. Learn with them and take your project to new heights."
+              title="Segíteni neked pénzt kereseni"
+              subtitle="Mi nem számolunk fel semmilyen extra kölgséget tőled,nincs hírdetési költség, csak egy kis jutalékot kérünk el tőled"
               icon={
                 <Icon
-                  fontIconClass="fas fa-pen-nib"
+                  fontIconClass="fas fa-hand-holding-usd"
                   size="large"
                   fontIconColor={'white'}
                   className={classes.featureIcon}
@@ -73,11 +72,11 @@ const Features = props => {
             className={clsx(classes.featureCard, classes.featureCardSecondItem)}
           >
             <DescriptionListIcon
-              title="Gain new skiils"
-              subtitle="Connect in spaces designed to bring incredible people together. Learn with them and take your project to new heights."
+              title="Zero Waste"
+              subtitle="Bíztatni az embereket arra, hogy vigyázzanak a környezetre, és, hogy ne vegyenek mindenből újat"
               icon={
                 <Icon
-                  fontIconClass="fas fa-layer-group"
+                  fontIconClass="fas fa-recycle"
                   size="large"
                   fontIconColor={'textPrimary'}
                   className={classes.featureIcon}

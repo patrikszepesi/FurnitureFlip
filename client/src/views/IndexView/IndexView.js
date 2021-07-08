@@ -11,7 +11,6 @@ import {
   Hero,
   Integrations,
   Reviews,
-  Subscription,
 } from './components';
 
 import { integrations, reviews } from './data';
@@ -44,10 +43,10 @@ const IndexView = () => {
     <div>
       <Hero data-aos="fade-up" className={classes.hero} />
       <SectionAlternate className={classes.sectionAlternate}>
-        <About />
+        <Integrations data={integrations} />
       </SectionAlternate>
       <Section>
-        <Integrations data={integrations} />
+        <About />
       </Section>
       <SectionAlternate innerNarrowed>
         <Features />

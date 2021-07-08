@@ -1,52 +1,51 @@
 import { colors } from '@material-ui/core';
-
-export const jobCategories = [
+export const categories = [
   {
     iconColor: colors.blue,
     iconBg: colors.blue,
-    icon: 'fas fa-pen-nib',
-    title: 'Web Design',
+    icon: 'fas fa-couch',
+    title: 'Bútor és Otthon',
   },
   {
     iconColor: colors.purple,
     iconBg: colors.purple,
-    icon: 'fas fa-book-open',
-    title: 'Bútor',
+    icon: 'fas fa-biking',
+    title: 'Sport és szabadidő',
   },
   {
     iconColor: colors.amber,
     iconBg: colors.amber,
-    icon: 'fas fa-camera-retro',
-    title: 'Photography',
+    icon: 'fas fa-tv',
+    title: 'Műszaki cikkek',
   },
   {
     iconColor: colors.indigo,
     iconBg: colors.indigo,
-    icon: 'fas fa-video',
-    title: 'Video Creating',
+    icon: 'fas fa-tshirt',
+    title: 'Ruhák',
   },
   {
     iconColor: colors.pink,
     iconBg: colors.pink,
-    icon: 'fas fa-heartbeat',
-    title: 'Health & Fitness',
+    icon: 'fas fa-book',
+    title: 'Könyvek',
   },
   {
     iconColor: colors.green,
     iconBg: colors.green,
-    icon: 'fas fa-bullhorn',
-    title: 'Marketing',
+    icon: 'fas fa-baby-carriage',
+    title: 'Mama-baba',
   },
   {
     iconColor: colors.deepOrange,
     iconBg: colors.deepOrange,
-    icon: 'fas fa-funnel-dollar',
-    title: 'Finances & Sales',
+    icon: 'fas fa-car',
+    title: 'Alkatrészek',
   },
   {
     iconColor: colors.red,
     iconBg: colors.red,
     icon: 'fas fa-paint-brush',
-    title: 'Graphic Design',
+    title: 'Művészet',
   },
 ];

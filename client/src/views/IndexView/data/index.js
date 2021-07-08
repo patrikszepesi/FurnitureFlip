@@ -27,13 +27,8 @@ export const integrations = [
 
 export const reviews = [
   {
-    authorPhoto: {
-      src: 'https://assets.maccarianagency.com/the-front/photos/people/veronica-adams.jpg',
-      srcSet: 'https://assets.maccarianagency.com/the-front/photos/people/veronica-adams@2x.jpg 2x',
-    },
-    authorName: 'Veronica Adams',
-    authorOccupation: 'Growth Marketer, Crealytics',
+    authorName: 'Neil deGrasse Tyson',
     feedback:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'A Föld mindössze porszem a világegyetemben. Ám egy nagyon értékes porszem, és egyelőre az egyetlen otthonunk..',
   }
 ];

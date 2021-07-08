@@ -8,7 +8,7 @@ import {
   Categories,
 } from './components';
 
-import { partners, jobCategories, jobs, companies, faq } from './data';
+import { categories } from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +27,7 @@ const ChooseCategoryView = () => {
   return (
     <div className={classes.root}>
       <Section>
-        <Categories data={jobCategories} />
+        <Categories data={categories} />
       </Section>
     </div>
   );

@@ -59,7 +59,7 @@ paddingBottom0: {
     paddingBottom: 20,
   },
 }));
-
+//
 
 const CategoryFurnitureView = ({ courses,className,...rest }) => {
 
@@ -68,7 +68,7 @@ const CategoryFurnitureView = ({ courses,className,...rest }) => {
   const [ coursesAfterSearch,setCoursesAfterSearch]=useState([])
 
   const [filterObj, setFilterObj] = useState({
-    subcategory: '',
+    subCategory: '',
     item: '',
     price:'',
     category:'bútor',
@@ -91,7 +91,6 @@ const CategoryFurnitureView = ({ courses,className,...rest }) => {
       setCoursesAfterSearch(data);
       //setCoursesCount(res.data.length);
   };
-  console.log(coursesAfterSearch)
 
   useEffect(() => {
     fetchProperties()
