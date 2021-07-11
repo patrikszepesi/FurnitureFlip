@@ -98,7 +98,7 @@ const TabPanel = props => {
     </Box>
   );
 };
-
+//
 const ItemCreateView = (props = {}) => {
   const [values, setValues] = useState({
       name: "",
@@ -106,13 +106,14 @@ const ItemCreateView = (props = {}) => {
       price: ' ',
       uploading: false,
       category:"",
-      categories:['bútor','sporteszköz','ruha','elektronikai','építéshez','gyerek','ékszer','egyéb'],
+      categories:['bútor/otthon','sport/szabadidő','műszaki cikk','ruha','könyv','mama-baba','alkatrész','művészet'],
       subCategory:'',
       item:'',
       email:'',
       phone:'',
       city:'',
       street:'',
+      quality:'',
       loading: false,
       images:[]
     });
@@ -120,14 +121,12 @@ const ItemCreateView = (props = {}) => {
   const router = useRouter();
   const { slug } = router.query;
   useEffect(() => {
-    loadCourse();
+    loadItem();
   }, [slug]);
-//
-  const loadCourse = async () => {
+
+  const loadItem = async () => {
     const { data } = await axios.get(`/api/course/${slug}`);
-    console.log(data);
     if (data) setValues(data);
-    console.log(values)
     if (data && data.image) setImage(data.image);
   };
 
@@ -140,7 +139,7 @@ const ItemCreateView = (props = {}) => {
     const [loading, setLoading] = useState(false);
 
 
-    // router
+
 
     const handleChange = (e) => {
       setValues({ ...values, [e.target.name]: e.target.value });
@@ -151,14 +150,12 @@ const ItemCreateView = (props = {}) => {
       setPreview(window.URL.createObjectURL(file));
       setUploadButtonText(file.name);
       setValues({ ...values, loading: true });
-      // resize
       Resizer.imageFileResizer(file, 720, 500, "JPEG", 100, 0, async (uri) => {
         try {
           let { data } = await axios.post("/api/course/upload-image", {
             image: uri,
           });
           console.log("IMAGE UPLOADED", data);
-          // set image in the state
           setImage(data);
           setValues({ ...values, loading: false });
         } catch (err) {
@@ -188,7 +185,6 @@ const ItemCreateView = (props = {}) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        // console.log(values);
         const { data } = await axios.put(`/api/course/${values._id}`, {
           ...values,
           image,
@@ -199,7 +195,6 @@ const ItemCreateView = (props = {}) => {
         toast(err.response.data);
       }
     };
-    console.log(values)
 
   return (
     <div className={classes.root}>

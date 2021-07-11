@@ -2,11 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { Context } from "../../../context";
 import InstructorRoute from "../../../components/routes/InstructorRoute";
 import axios from "axios";
-import {
-  DollarOutlined,
-  SettingOutlined,
-  SyncOutlined,
-} from "@ant-design/icons";
 import { stripeCurrencyFormatter } from "../../../utils/helpers";
 import {
   Advantages,
@@ -30,7 +25,7 @@ const IncomeView = () => {
     {
       title: 'Build Recurring Revenue',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        'Jelenlegi bevételek az össes eladott termék után. Beleszámolva a még be nem folyt összeget',
       icon: 'fas fa-money-bill-wave',
     },
     {
@@ -38,18 +33,6 @@ const IncomeView = () => {
       description:
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       icon: 'fas fa-trophy',
-    },
-    {
-      title: 'Keep Your Clients Loyal',
-      description:
-        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      icon: 'fas fa-heart',
-    },
-    {
-      title: 'Automated Sales Process',
-      description:
-        'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      icon: 'fas fa-cog',
     },
   ];
   const handlePayoutSettings = async () => {

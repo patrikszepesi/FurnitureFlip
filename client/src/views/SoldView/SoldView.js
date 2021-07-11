@@ -17,7 +17,7 @@ const SoldView = () => {
   useEffect(() => {
     loadCourses();
   }, [wishlist]);
-
+//
   const loadCourses = async () => {
     const { data } = await axios.get("/api/sold");
     setItems(data);

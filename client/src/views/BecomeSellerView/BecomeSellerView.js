@@ -11,11 +11,12 @@ import { toast } from "react-toastify";
 import UserRoute from "../../../components/routes/UserRoute";
 import { Community } from './components';
 import { Section } from '../../../components/organisms';
+import myImage from '../../../public/assets/rev.svg'
+
 
 
 
 const BecomeSellerView = () => {
-  // state
   const [loading, setLoading] = useState(false);
   const {
     state: { user },

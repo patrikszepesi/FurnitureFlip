@@ -163,21 +163,22 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
             variant="body2"
             color="primary"
             className={classes.menuGroupTitle}
+            onClick={handleClose}
+
           >
             {item.groupTitle}
           </Typography>
         </ListItem>
         {item.pages.map((page, i) => (
-          <ListItem disableGutters key={i} className={classes.menuGroupItem}>
+          <ListItem    disableGutters key={i} className={classes.menuGroupItem}>
             <Typography
               variant="body1"
               component={'a'}
-              href={page.href}
               className={clsx(classes.navLink, 'submenu-item')}
               color="textSecondary"
               onClick={handleClose}
             >
-              {page.title}
+              <span onClick={()=>router.push(page.href)}>{page.title}</span>
             </Typography>
           </ListItem>
         ))}
@@ -186,12 +187,11 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
   };
 
   const LandingPages = () => {
-    const { services, apps, web } = landings.children;
+    const { services, web } = landings.children;
     return (
       <div className={classes.menu}>
         <div className={classes.menuItem}>
           <MenuGroup item={services} />
-          <MenuGroup item={apps} />
         </div>
         <div className={classes.menuItem}>
           <MenuGroup item={web} />
@@ -204,23 +204,16 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
     const {
       career,
       helpCenter,
-      company,
-      contact,
-      blog,
       portfolio,
     } = supportedPages.children;
     return (
       <div className={classes.menu}>
         <div className={classes.menuItem}>
           <MenuGroup item={career} />
-          <MenuGroup item={helpCenter} />
         </div>
         <div className={classes.menuItem}>
-          <MenuGroup item={company} />
-          <MenuGroup item={contact} />
         </div>
         <div className={classes.menuItem}>
-          <MenuGroup item={blog} />
           <MenuGroup item={portfolio} />
         </div>
       </div>
@@ -228,11 +221,16 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
   };
 
   const AccountPages = () => {
-    const { settings } = account.children;
+    const { settings,portfolio } = account.children;
     return (
       <div className={classes.menu}>
         <div className={classes.menuItem}>
           <MenuGroup item={settings} />
+        </div>
+        <div className={classes.menuItem}>
+        </div>
+        <div className={classes.menuItem}>
+          <MenuGroup item={portfolio} />
         </div>
       </div>
     );

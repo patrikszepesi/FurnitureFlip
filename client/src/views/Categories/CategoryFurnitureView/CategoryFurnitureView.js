@@ -71,7 +71,7 @@ const CategoryFurnitureView = ({ courses,className,...rest }) => {
     subCategory: '',
     item: '',
     price:'',
-    category:'bútor',
+    category:'bútor/otthon',
     quality:'',
     city:'',
   });

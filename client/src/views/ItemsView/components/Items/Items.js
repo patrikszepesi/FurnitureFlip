@@ -107,8 +107,8 @@ console.log(data)
       <DescriptionCta
         title="Eladásra bocsátott termékeid"
         primaryCta={
-          <Button variant="outlined" color="primary" size="large">
-            View all
+          <Button onClick={()=>router.push("seller/item/create")} variant="outlined" color="primary" size="large">
+            Eladok mást is
           </Button>
         }
         align={'left'}

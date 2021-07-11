@@ -2,11 +2,10 @@ import TopNav from "../components/TopNav";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
 import "../public/css/styles.css";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "../context";
 import Head from 'next/head';
 import Swiper from 'swiper/bundle';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function MyApp({ Component, pageProps }) {
@@ -26,7 +25,6 @@ function MyApp({ Component, pageProps }) {
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
-      <ToastContainer position="top-center" />
       <Component {...pageProps} />
     </Provider>
   );

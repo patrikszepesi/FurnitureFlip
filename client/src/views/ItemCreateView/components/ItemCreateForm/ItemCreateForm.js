@@ -39,7 +39,7 @@ const BootstrapInput = withStyles((theme) => ({
     fontSize: 16,
     padding: '10px 26px 10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
-    // Use the system font instead of the default Roboto font.
+    // Use the system font instead of the default Roboto font
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -59,7 +59,7 @@ const BootstrapInput = withStyles((theme) => ({
     },
   },
 }))(InputBase);
-
+//
 const ItemCreateForm = props => {
   const { className,handleSubmit,
     handleImage,
@@ -96,8 +96,8 @@ const ItemCreateForm = props => {
   }
   if(values.subCategory==='benti'){
     items=['szék','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
-  }else if(values.subCategory=== 'kinti'){
-    items=['napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi','egyéb','ajtó','tégla','csempe'].sort()
+  }else if(values.subCategory=== 'kinti bútor'){
+    items=['napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi','egyéb','ajtó','tégla','csempe','szék'].sort()
   }else if(values.subCategory==='bárhol tárolható'){
     items=['szék','asztal','kanapé','lámpa','kád','zuhany','ajtó','tégla','csempe','fotel','ágy','evőeszköz','egyéb','garnitúra','napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi'].sort()
   }else if(values.subCategory==='labdarúgás'){

@@ -2,6 +2,7 @@ export { default as Section } from './Section';
 export { default as SectionAlternate } from './SectionAlternate';
 export { default as DescriptionListIcon } from './DescriptionListIcon';
 export { default as CardBase } from './CardBase';
+export { default as CardBaseStripe } from './CardBaseStripe';
 export { default as CardReview } from './CardReview';
 export { default as CardCategory } from './CardCategory';
 export { default as CardJob } from './CardJob';

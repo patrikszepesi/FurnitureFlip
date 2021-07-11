@@ -8,9 +8,9 @@ import { stripeCurrencyFormatter } from "../../../../../utils/helpers";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
 import { Grid, Typography, colors } from '@material-ui/core';
-import { LearnMoreLink } from '../../../../../components/atoms';
+import { LearnMoreLinkPlain } from '../../../../../components/atoms';
 import { SectionHeader, IconAlternate } from '../../../../../components/molecules';
-import { CardBase, DescriptionListIcon } from '../../../../../components/organisms';
+import { CardBaseStripe, DescriptionListIcon } from '../../../../../components/organisms';
 import {
   DollarOutlined,
   SettingOutlined,
@@ -36,8 +36,10 @@ const Advantages = props => {
   }, []);
 
   const sendBalanceRequest = async () => {
+    setLoading(true)
     const { data } = await axios.get("/api/instructor/balance");
     setBalance(data);
+    setLoading(false)
   };
 
   const theme = useTheme();
@@ -61,74 +63,69 @@ const Advantages = props => {
 
 
   return (
-    <div className={className} data-aos="fade-up" {...rest}>
-      <SectionHeader
-        title={
-          <span>
-            TheFront is a Website Kit Platform that Helps you to{' '}
-            <Typography color="secondary" variant="inherit" component="span">
-              Build the Right Website for you Customers
-            </Typography>
-          </span>
-        }
-        subtitle="At TheFront, we go to great lengths to provide you with the best, highest-quality components. In fact, we’re so confident about our kit, we even back our leads with a 95% accuracy guarantee."
-        fadeUp
-      />
-      <h4>
-        Pending balance
-        {balance.pending &&
-          balance.pending.map((bp, i) => (
-            <span key={i} className="float-right">
-              {stripeCurrencyFormatter(bp)}
+
+     <>
+     { !loading &&  balance.pending ? (
+        <div className={className} data-aos="fade-up" {...rest}>
+        <>
+        <SectionHeader
+          title={
+            <span>
+            Itt tudod ellenőrizni és módosítani{' '}
+              <Typography color="secondary" variant="inherit" component="span">
+                pénzügyi adataidat
+              </Typography>
             </span>
+          }
+          subtitle="A biztonsági okok miatt minden értékesített árud bevételét 30 nap után kapod meg"
+          fadeUp
+        />
+
+
+        <Grid  spacing={isLg ? 10 : 2}>
+          {balance.pending.map((bp, index) => (
+            <Grid
+              key={index}
+              item
+              container
+              alignItems="center"
+              direction="column"
+              xs={12}
+              sm={6}
+              data-aos="fade-up"
+            >
+              <CardBaseStripe liftUp variant="outlined">
+                <DescriptionListIcon
+                  title={stripeCurrencyFormatter(bp)}
+                  subtitle={'Jelenlegi bevételek az össes eladott termék után. Beleszámolva a még be nem folyt összeget'}
+                  icon={
+                    <IconAlternate
+                      fontIconClass={'fas fa-money-bill-wave'}
+                      size="medium"
+                      color={colors.blue}
+                    />
+                  }
+                />
+                <LearnMoreLinkPlain
+                  title="Vásárlási és pénzügyi adatok"
+                  variant="body1"
+                  className={classes.learnMoreLink}
+                  color="secondary"
+                  onClick={handlePayoutSettings}
+
+                />
+              </CardBaseStripe>
+            </Grid>
           ))}
-      </h4>
-      <h4>
-        Payouts{" "}
-        {!loading ? (
-          <SettingOutlined
-            className="float-right pointer"
-            onClick={handlePayoutSettings}
-          />
-        ) : (
-          <SyncOutlined spin className="float-right pointer" />
-        )}
-      </h4>
-      <Grid container spacing={isLg ? 10 : 2}>
-        {data.map((item, index) => (
-          <Grid
-            key={index}
-            item
-            container
-            alignItems="center"
-            direction="column"
-            xs={12}
-            sm={6}
-            data-aos="fade-up"
-          >
-            <CardBase liftUp variant="outlined">
-              <DescriptionListIcon
-                title={item.title}
-                subtitle={item.description}
-                icon={
-                  <IconAlternate
-                    fontIconClass={item.icon}
-                    size="medium"
-                    color={colors.blue}
-                  />
-                }
-              />
-              <LearnMoreLink
-                title="Learn more"
-                variant="body1"
-                className={classes.learnMoreLink}
-                color="secondary"
-              />
-            </CardBase>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+        </Grid>
+         </>
+           </div>
+    ): (   <h1> <SyncOutlined spin
+    className="d-flex justify-content-center display-1 text-primary p-5"/></h1>
+     )}
+    </>
+
+
   );
 };
 

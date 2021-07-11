@@ -343,7 +343,16 @@ export const stripeSuccess = async (req, res) => {
     const session = await stripe.checkout.sessions.retrieve(
       user.stripeSession.id
     );
+
+    const courseToUpdateEmail = await Course.findByIdAndUpdate(req.params.courseId, {
+      $set: {buyerEmail: session.customer_details.email}
+    }).exec();
+
+
+
+
     console.log("STRIPE SUCCESS", session.customer_details.email);
+    console.log(session.customer_details)
     //update item field sold to true
     // if session payment status is paid, push course to user's course
     if (session.payment_status === "paid") {
@@ -360,9 +369,6 @@ export const stripeSuccess = async (req, res) => {
 
     try {
 
-      // console.log(email);
-
-      // prepare for email
       const params = {
         Source: process.env.EMAIL_FROM,
         Destination: {
@@ -403,10 +409,11 @@ export const stripeSuccess = async (req, res) => {
               Data: `
                   <html>
                     <h1>Valaki akar tőled venni</h1>
-                    <p>User this code to reset your password</p>
+                    <p>vevő adatai</p>
 
                     <h2 style="color:red;">${course.name}</h2>
-                    <h2 style="color:red;">${course.item}</h2>
+                    <h2 style="color:red;">${session.customer_details.email}</h2>
+
                     <i>edemy.com</i>
                   </html>
                 `,
@@ -497,7 +504,7 @@ const handleSearch=async(queryObject)=>{
     }
  }
 
-   let queryObject={};
+   let queryObject={sold:false};
   if(req.body.toSend){
     if( subCategory!= undefined && subCategory.length>0){
     queryObject = {...queryObject, subCategory}

@@ -15,8 +15,8 @@ const Story = props => {
   return (
     <div className={className} {...rest}>
       <SectionHeader
-        title="Megvásárolt kurzusok"
-        subtitle="Itt fog megjelenni az összes megvásárolt kurzusod"
+        title="Eddig vásárolt tárgyaid"
+        subtitle="Az eladó a megadott emailcímeden fog keresni, amit megadtál a vásárláskor. Ha valami probléma van akkor minket is tudsz keresni vagy az eladót is tudod keresni a megadott elérhetőségein"
         align={isMd ? 'center' : 'left'}
         disableGutter
         subtitleProps={{

@@ -61,11 +61,12 @@ const courseSchema = new mongoose.Schema(
       required:true
     },
     phone:{
-      type:Number,
+      type:String,
       required:true
     },
 
     sold:false,
+    buyerEmail:"String",
 
     images: {
         type: Array,

@@ -52,10 +52,10 @@ export const login = async (req, res) => {
     // check if our db has user with that email
     const user = await User.findOne({ email })
     .exec();
-    if (!user) return res.status(400).send("No user found");
+    if (!user) return res.status(400).send("Nincs ilyen felhasználó");
     // check password
     const match = await comparePassword(password, user.password);
-    if (!match) return res.status(400).send("Wrong password");
+    if (!match) return res.status(400).send("Rossz jelszó vagy felhasználónév");
 
     // create signed jwt, we sign the id of the user with the jwt secret so the next time they try to hit our api we check for this secret in our auth middelware, they must match
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {

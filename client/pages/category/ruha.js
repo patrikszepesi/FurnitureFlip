@@ -1,11 +1,11 @@
 import React from 'react';
-import CategoryView from '../../src/views/Categories/CategoryView';
+import CategoryClothingView from '../../src/views/Categories/CategoryClothingView';
 import Main from '../../src/layouts/Main';
 import WithLayout from '../../src/WithLayout';
-const Colthing = () => {
+const Clothing = () => {
   return (
     <WithLayout
-      component={CategoryView}
+      component={CategoryClothingView}
       layout={Main}
     />
   )

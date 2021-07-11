@@ -13,6 +13,9 @@ import { HeroShaped } from '../../../../../components/organisms';
 import { Context } from "../../../../../context";
 import RatingModal from "../../../../../components/modal/RatingModal";
 import Rating from '@material-ui/lab/Rating';
+import { useRouter } from "next/router";
+import slugify from 'slugify';
+
 
 
 
@@ -63,6 +66,8 @@ const Hero = props => {
   const [loading,setLoading]=useState(false)
   const [saved,setSaved]=useState('');
   const [dummy,setDummy]=useState(0)
+  const router = useRouter();
+
 
   let [commentObj, setCommentObj] = useState({
     text:'',
@@ -101,7 +106,6 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
   const handlePaidEnrollment = async () => {
     setLoading(true);
     try {
-      // check if user is logged in
       if (!user) router.push("/login");
       // check if already enrolled
       const { data } = await axios.post(`/api/paid-enrollment/${item._id}`);
@@ -193,6 +197,7 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
   };
 
   let images=item.images
+  console.log(item)
 
   return (
 
@@ -203,10 +208,8 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
         leftSide={
           <>
           <SectionHeader
-
               title={
                 <>
-
                   <span>
                   {item.quality}
                     <Typography color="secondary" variant="inherit" component="span"> { item.name}</Typography>
@@ -231,7 +234,7 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
                         />
                       </ListItemAvatar>
                       <Typography variant="subtitle1" color="secondary" noWrap>
-                        {item.price + " forintért"}
+                      Ár:  { item.price + "forint"}
                       </Typography>
                     </ListItem>
                     <ListItem disableGutters>
@@ -244,7 +247,7 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
                         />
                       </ListItemAvatar>
                       <Typography variant="subtitle1" color="secondary" noWrap>
-                        {item.quality} { item.item}
+                      minőség:   { item.quality}
                       </Typography>
                     </ListItem>
                     <ListItem disableGutters>
@@ -257,7 +260,7 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
                         />
                       </ListItemAvatar>
                       <Typography variant="subtitle1" color="secondary" noWrap>
-                        {item.name}
+                      Átvehető itt:  { item.city}
                       </Typography>
                     </ListItem>
                     <ListItem disableGutters>
@@ -269,46 +272,15 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
                           color={colors.deepOrange}
                         />
                       </ListItemAvatar>
-                      <Typography variant="subtitle1" color="secondary" noWrap>
-                        {item.name}
-                      </Typography>
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemAvatar className={classes.listItemAvatar}>
-                        <IconAlternate
-                          size="extraSmall"
-                          shape="circle"
-                          fontIconClass="fas fa-check"
-                          color={colors.deepOrange}
-                        />
-                      </ListItemAvatar>
-                      <Typography variant="subtitle1" color="secondary" noWrap>
-                        {item.name}
-                      </Typography>
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemAvatar className={classes.listItemAvatar}>
-                        <IconAlternate
-                          size="extraSmall"
-                          shape="circle"
-                          fontIconClass="fas fa-check"
-                          color={colors.deepOrange}
-                        />
-                      </ListItemAvatar>
-                      <Typography variant="subtitle1" color="secondary" noWrap>
-                        {item.name}
+                      <Typography variant="subtitle1" color="secondary" >
+                      <span onClick={() => router.push(`/category/${slugify(item.category)}`)} >{item.category}</span>
                       </Typography>
                     </ListItem>
                     <div className={classes.root}>
-
-                          </div>
+                    </div>
                   </Grid>
-
-
                 }
-
               </Grid>
-
               <Button
                 variant="contained"
                 className={classes.button}

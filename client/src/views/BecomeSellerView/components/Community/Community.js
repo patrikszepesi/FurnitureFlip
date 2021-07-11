@@ -9,11 +9,16 @@ import {
   Grid,
   colors,
   Typography,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
   Divider,
   Button
 } from '@material-ui/core';
 import { Image } from '../../../../../components/atoms';
-import { SectionHeader } from '../../../../../components/molecules';
+import { SectionHeader,IconAlternate } from '../../../../../components/molecules';
 import { HeroShapedStripe, Section, CardBase } from '../../../../../components/organisms';
 import {
   SettingOutlined,
@@ -21,6 +26,8 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 import axios from 'axios';
+import myImage from '../../../../../public/assets/rev.svg'
+
 
 const useStyles = makeStyles(theme => ({
   appStore: {
@@ -97,6 +104,7 @@ const Community = props => {
   } = useContext(Context);
 
 
+
   const becomeInstructor = () => {
     // console.log("become instructor");
     setLoading(true);
@@ -120,11 +128,11 @@ const Community = props => {
           <SectionHeader
             title={
               <span>
-                Don't listen to what they say{' '}
-                <Typography color="secondary" variant="inherit" component="span">go and see</Typography>
+                Add meg {' '}
+                <Typography color="secondary" variant="inherit" component="span">A szükséges adatokat</Typography>
               </span>
             }
-            subtitle="Travelling with our app is easy. Join the biggest community of travellers."
+            subtitle=" Az eladás után 30 nap múlva érkezik a pénz a számládra Nincs semmilyen rejtett költség. Az eladási ár 90% megy a te megadott bankszámládra, és a maradék 10% pedig a mi jutalékunk"
             ctaGroup={[
               <Button
                 variant="contained"
@@ -148,7 +156,7 @@ const Community = props => {
         rightSide={
           <div className={classes.cover}>
             <Image
-              src="https://assets.maccarianagency.com/the-front/illustrations/city-driver.svg"
+              src={myImage}
               alt="..."
               className={classes.coverImg}
               data-aos="fade-up"
@@ -157,67 +165,7 @@ const Community = props => {
           </div>
         }
       />
-      <Section narrow>
-        <Grid container spacing={isMd ? 4 : 2}>
-          <Grid item xs={12} sm={6} data-aos="fade-up">
-            <Grid container alignItems="flex-start" justify="center">
-              <CardBase className={classes.cardBase} withShadow liftUp>
-                <>
-                <Image
-                  src="https://assets.maccarianagency.com/the-front/illustrations/travelers.svg"
-                  alt="..."
-                  lazy={false}
-                />
-                <div className={classes.dots}>
-                  <span className={classes.dot} />
-                  <span className={classes.dot} />
-                  <span className={clsx(classes.dot, classes.dotHighlighted)} />
-                  <span className={classes.dot} />
-                </div>
-                <Typography variant="h6">TRAVEL TOGETHER</Typography>
-                <Divider className={classes.divider} />
-                </>
-              </CardBase>
-            </Grid>
-          </Grid>
-          <Grid
-            item
-            container
-            alignItems="center"
-            xs={12}
-            sm={6}
-            data-aos="fade-up"
-          >
-            <SectionHeader
-              title={
-                <span>
-                  <Typography color="secondary" variant="inherit" component="span">Now available</Typography> on
-                  Google Play Market and Apple App Store
-                </span>
-              }
-              subtitle="Don't listen to what they say go and see. Travelling with our app is easy. Join the biggest community of travellers."
-              ctaGroup={[
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  icon={loading ? <LoadingOutlined /> : <SettingOutlined />}
-                  onClick={becomeInstructor}
-                  disabled={
-                    (user && user.role && user.role.includes("Instructor")) ||
-                    loading
-                  }
-                >
-                  {loading ? "Loading..." : "Kattins ide, hogy elkezd"}
-                </Button>,
-
-              ]}
-              align={isMd ? 'left' : 'center'}
-              disableGutter
-              titleVariant="h3"
-            />
-          </Grid>
-        </Grid>
-      </Section>
+      
     </div>
   );
 };

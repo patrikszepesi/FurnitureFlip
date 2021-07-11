@@ -5,6 +5,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery, Divider } from '@material-ui/core';
 import { Topbar, Footer, Sidebar } from './components';
 import { Context } from "../../../context";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,6 +15,8 @@ const useStyles = makeStyles(theme => ({
 
 const Main = ({ children, themeToggler, themeMode }) => {
   const classes = useStyles();
+  const router = useRouter();
+
 
   const { state, dispatch } = useContext(Context);
   const { user } = state;
@@ -28,209 +31,103 @@ const Main = ({ children, themeToggler, themeMode }) => {
 
   const pages = {
     landings: {
-      title: 'Landings',
+      title: 'Kategóriák',
       id: 'landing-pages',
       children: {
         services: {
-          groupTitle: 'Services',
+          groupTitle: 'Összes',
           pages: [
             {
-              title: 'Coworking',
-              href: '/coworking',
+              title: 'Sport/szabadidő',
+              href: '/category/sport-es-szabadido',
             },
             {
-              title: 'Rental',
-              href: '/rental',
+              title: 'Bútor/otthon',
+              href: '/category/butor-es-otthon',
             },
             {
-              title: 'Job Listing',
-              href: '/job-listing',
+              title: 'Műszaki cikkek',
+              href: '/category/muszaki-cikkek',
             },
             {
-              title: 'E-Learning',
-              href: '/e-learning',
+              title: 'Ruha',
+              href: '/category/ruha',
             },
             {
-              title: 'E-commerce',
-              href: '/e-commerce',
+              title: 'Könyvek',
+              href: '/category/konyvek',
             },
             {
-              title: 'Expo',
-              href: '/expo',
+              title: 'Mama/baba',
+              href: '/category/mama-baba',
+            },
+            {
+              title: 'Művészet',
+              href: '/category/muveszet',
+            },
+            {
+              title: 'Alkatrészek',
+              href: '/category/alkatreszek',
+            },
+            {
+              title: 'Sport/szabadidő',
+              href: '/category/sport-es-szabadido',
             },
           ],
         },
-        apps: {
-          groupTitle: 'Apps',
-          pages: [
-            {
-              title: 'Desktop App',
-              href: '/desktop-app',
-            },
-            {
-              title: 'Mobile App',
-              href: '/mobile-app',
-            },
-          ],
-        },
+
         web: {
-          groupTitle: 'Web',
+          groupTitle: 'Legfelkapottabb',
           pages: [
-            {
-              title: 'Marketing',
-              href: '/',
-            },
-            {
-              title: 'Overview',
-              href: '/home',
-            },
-            {
-              title: 'Basic',
-              href: '/web-basic',
-            },
-            {
-              title: 'Service',
-              href: '/service',
-            },
-            {
-              title: 'Startup',
-              href: '/startup',
-            },
-            {
-              title: 'Enterprise',
-              href: '/enterprise',
-            },
-            {
-              title: 'Cloud Hosting',
-              href: '/cloud-hosting',
-            },
-            {
-              title: 'Agency',
-              href: '/agency',
-            },
-            {
-              title: 'Design Company',
-              href: '/design-company',
-            },
-            {
-              title: 'Logistics',
-              href: '/logistics',
-            },
+          {
+            title: 'Műszaki cikkek',
+            href: '/category/muszaki-cikkek',
+          },
+          {
+            title: 'Ruha',
+            href: '/category/ruha',
+          },
+          {
+            title: 'Könyvek',
+            href: '/category/konyvek',
+          },
+          {
+            title: 'Sport/szabadidő',
+            href: '/category/sport-es-szabadido',
+          },
           ],
         },
       },
     },
     pages: {
-      title: 'Pages',
+      title: 'Mi ez',
       id: 'supported-pages',
       children: {
         career: {
-          groupTitle: 'Career',
+          groupTitle: 'Általános',
           pages: [
             {
-              title: 'Lising',
+              title: 'ÁSZF',
               href: '/career-listing',
             },
             {
-              title: 'Lising Minimal',
-              href: '/career-listing-minimal',
+              title: ' Hogyan Működik',
+              href: '/what',
             },
-            {
-              title: 'Opening',
-              href: '/career-opening',
-            },
+
           ],
         },
-        helpCenter: {
-          groupTitle: 'Help center',
-          pages: [
-            {
-              title: 'Overview',
-              href: '/help-center',
-            },
-            {
-              title: 'Article',
-              href: '/help-center-article',
-            },
-          ],
-        },
-        company: {
-          groupTitle: 'Company',
-          pages: [
-            {
-              title: 'About',
-              href: '/about',
-            },
-            {
-              title: 'About (Cover)',
-              href: '/about-side-cover',
-            },
-            {
-              title: 'Pricing',
-              href: '/pricing',
-            },
-            {
-              title: 'Terms',
-              href: '/company-terms',
-            },
-          ],
-        },
-        contact: {
-          groupTitle: 'Contact',
-          pages: [
-            {
-              title: 'Reach View',
-              href: '/contact-page',
-            },
-            {
-              title: 'Sidebar Map',
-              href: '/contact-sidebar-map',
-            },
-            {
-              title: 'Cover',
-              href: '/contact-page-cover',
-            },
-          ],
-        },
-        blog: {
+
+        portfolio: {
           groupTitle: 'Blog',
           pages: [
             {
-              title: 'Newsroom',
-              href: '/blog-newsroom',
+              title: 'Zero Waste',
+              href: '/zero-waste',
             },
             {
-              title: 'Reach View',
-              href: '/blog-reach-view',
-            },
-            {
-              title: 'Search',
-              href: '/blog-search',
-            },
-            {
-              title: 'Article',
-              href: '/blog-article',
-            },
-          ],
-        },
-        portfolio: {
-          groupTitle: 'Portfolio',
-          pages: [
-            {
-              title: 'Basic',
-              href: '/portfolio-page',
-            },
-            {
-              title: 'Masonry',
-              href: '/portfolio-masonry',
-            },
-            {
-              title: 'Grid View',
-              href: '/portfolio-grid',
-            },
-            {
-              title: 'Parallax Effect',
-              href: '/agency',
+              title: 'Érdekesség',
+              href: '/facts',
             },
           ],
         },
@@ -243,27 +140,54 @@ const Main = ({ children, themeToggler, themeMode }) => {
       id: 'account',
       children: {
         settings: {
-          groupTitle: user? 'Termékek': "mizu",
+          groupTitle: user? 'Termékek': "Profilod",
           pages: [
+          {
+            title: user?  'Eddig vettem': '',
+            href: user ? '/user': '',
+          },
+
             {
-              title: 'Eddig eladtam',
-              href: '/user',
+              title: user?  'Eddig eladtam': 'Bejelentkezés',
+              href: user ? '/seller/sold': '/login',
             },
             {
-              title: 'Jelenlegi hírdetéseim ',
-              href: '/user',
+              title: user? 'Jelenlegi hírdetéseim ': 'Regisztráció',
+              href: user? '/seller': '/register',
             },
             {
-              title: 'Számláim',
-              href: '/invoice',
+              title: user? 'Számláim': "Elfelejtett jelszó",
+              href:user? '/invoice':'/forgot-password',
             },
             {
-              title: 'Bevételeim',
-              href: '/seller/revenue',
+              title: user? 'Bevételeim' :' ',
+              href: user? '/seller/revenue': ' ',
             },
+
+          ],
+
+        },
+        portfolio: {
+          groupTitle: 'Blog',
+          pages: [
+          {
+            title: user?  'Eladok valamit': '',
+            href: user ? '/seller/item/create': '',
+          },
+          {
+            title: user?  'Veszek valamit': '',
+            href: user ? '/categories': '',
+          },
+          {
+            title: user? 'Elmentett termékek' :' ',
+            href: user? '/user/wishlist': ' ',
+          },
+          {
+            title: user? 'Legyél eladó' :' ',
+            href: user? '/user/become-seller': ' ',
+          },
           ],
         },
-
 
       },
     },

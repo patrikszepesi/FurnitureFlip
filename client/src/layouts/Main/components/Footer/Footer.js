@@ -129,12 +129,11 @@ const Footer = props => {
   };
 
   const LandingPages = () => {
-    const { services, apps, web } = landings.children;
+    const { services, web } = landings.children;
     return (
       <div className={classes.menu}>
         <div>
           <MenuGroup item={services} />
-          <MenuGroup item={apps} />
         </div>
         <div>
           <MenuGroup item={web} />
@@ -146,24 +145,16 @@ const Footer = props => {
   const SupportedPages = () => {
     const {
       career,
-      helpCenter,
-      company,
-      contact,
-      blog,
       portfolio,
     } = supportedPages.children;
     return (
       <div className={classes.menu}>
         <div>
           <MenuGroup item={career} />
-          <MenuGroup item={helpCenter} />
         </div>
         <div>
-          <MenuGroup item={company} />
-          <MenuGroup item={contact} />
         </div>
         <div>
-          <MenuGroup item={blog} />
           <MenuGroup item={portfolio} />
         </div>
       </div>
@@ -176,7 +167,7 @@ const Footer = props => {
       <div className={classes.menu}>
         <div>
           <MenuGroup item={settings} />
-          
+
         </div>
       </div>
     );

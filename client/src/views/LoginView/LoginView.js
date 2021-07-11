@@ -1,16 +1,16 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
-import Link from "next/link";
 import { Context } from "../../../context";
 import { useRouter } from "next/router";
 import { makeStyles } from '@material-ui/core/styles';
 import { Image } from '../../../components/atoms';
-import { LearnMoreLink } from '../../../components/atoms';
+import { LearnMoreLinkPlain } from '../../../components/atoms';
 import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 
@@ -77,7 +77,6 @@ const LoginView = () => {
         email,
         password,
       });
-      // console.log("LOGIN RESPONSE", data);
       dispatch({
         type: "LOGIN",
         payload: data,
@@ -88,13 +87,27 @@ const LoginView = () => {
       router.push("/user");
       // setLoading(false);
     } catch (err) {
-      toast(err.response.data);
+      toast.error(err.response.data, {
+         duration: 4000,
+  style: {
+    border: '5px solid #E1C699',
+    padding: '16px',
+    color: '#713200',
+    minWidth:'800px',
+    marginTop:'70px',
+  },
+  iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+  },
+});
       setLoading(false);
     }
   };
 
   return (
     <>
+     <Toaster />
     <div className={classes.root}>
       <HeroShapedAuth
         leftSide={
@@ -104,12 +117,13 @@ const LoginView = () => {
               subtitle={
                 <span>
                   Nincs még fiókod?{' '}
-                  <Link href="/register">
-                  <LearnMoreLink
+
+                  <LearnMoreLinkPlain
+                    onClick={()=>{router.push("/register")}}
                     title="Regisztrálj."
                     typographyProps={{ variant: 'h6' }}
                   />
-                    </Link>
+
                 </span>
               }
               titleProps={{
@@ -170,9 +184,9 @@ const LoginView = () => {
                       align="center"
                     >
                       Elfelejtetted a jelszavad?{' '}
-                      <LearnMoreLink
+                      <LearnMoreLinkPlain
                         title="Jelszó visszaállítása"
-                        href="/forgot-password"
+                        onClick={()=>{router.push("/forgot-password")}}
                       />
                     </Typography>
                   </Grid>
@@ -183,7 +197,7 @@ const LoginView = () => {
         }
         rightSide={
           <Image
-            src="https://images.unsplash.com/photo-1526657782461-9fe13402a841?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fG9wZW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+            src="https://images.unsplash.com/photo-1572196284554-4e321b0e7e0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=934&q=80"
             className={classes.image}
             lazy={false}
           />
@@ -196,51 +210,3 @@ const LoginView = () => {
 };
 
 export default LoginView;
-
-
-
-
-/*  <h1 className="jumbotron text-center bg-primary square">Login</h1>
-
-  <div className="container col-md-4 offset-md-4 pb-5">
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        className="form-control mb-4 p-4"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter email"
-        required
-      />
-
-      <input
-        type="password"
-        className="form-control mb-4 p-4"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter password"
-        required
-      />
-
-      <button
-        type="submit"
-        className="btn btn-block btn-primary"
-        disabled={!email || !password || loading}
-      >
-        {loading ? <SyncOutlined spin /> : "Submit"}
-      </button>
-    </form>
-
-    <p className="text-center pt-3">
-      Not yet registered?{" "}
-      <Link href="/register">
-        <a>Register</a>
-      </Link>
-    </p>
-
-    <p className="text-center">
-      <Link href="/forgot-password">
-        <a className="text-danger">Forgot password</a>
-      </Link>
-    </p>
-  </div>*/

@@ -1,17 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 import { SyncOutlined } from "@ant-design/icons";
-import Link from "next/link";
 import { Context } from "../../../context";
 import { useRouter } from "next/router";
 import { makeStyles } from '@material-ui/core/styles';
 import { Image } from '../../../components/atoms';
-import { LearnMoreLink } from '../../../components/atoms';
+import { LearnMoreLinkPlain } from '../../../components/atoms';
 import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
-import registerImage from '../../../public/assets/3.png'
+import registerImage from '../../../public/assets/reg.jpg'
 
 
 
@@ -75,19 +74,45 @@ const RegisterView = () => {
         password,
       });
       // console.log("REGISTER RESPONSE", data);
-      toast("Registration successful. Please login.");
-      setName("");
+      toast("sikere regisztráció, jelentkezz be!", {
+         duration: 4000,
+    style: {
+    border: '5px solid #E1C699',
+    padding: '16px',
+    color: '#713200',
+    minWidth:'800px',
+    marginTop:'70px',
+    },
+    iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+    },
+    });      setName("");
       setEmail("");
       setPassword("");
       setLoading(false);
     } catch (err) {
-      toast(err.response.data);
-      setLoading(false);
+      toast.error(err.response.data, {
+         duration: 4000,
+    style: {
+    border: '5px solid #E1C699',
+    padding: '16px',
+    color: '#713200',
+    minWidth:'800px',
+    marginTop:'70px',
+    },
+    iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+    },
+    });
+          setLoading(false);
     }
   };
 
   return (
     <>
+    <Toaster />
     <div className={classes.root}>
       <HeroShapedAuth
       item={'hello'}
@@ -98,12 +123,11 @@ const RegisterView = () => {
               subtitle={
                 <span>
                   Van már fiókod?{' '}
-                  <Link href="/login">
-                  <LearnMoreLink
+                  <LearnMoreLinkPlain
+                    onClick={()=>{router.push("/login")}}
                     title="Jelentkezz be."
                     typographyProps={{ variant: 'h6' }}
                   />
-                    </Link>
                 </span>
               }
               titleProps={{
@@ -176,9 +200,9 @@ const RegisterView = () => {
                       align="center"
                     >
                       Elfelejtetted a jelszavad?{' '}
-                      <LearnMoreLink
+                      <LearnMoreLinkPlain
                         title="Jelszó visszaállítása"
-                        href="/forgot-password"
+                        onClick={()=>{router.push("/forgot-password")}}
                       />
                     </Typography>
                   </Grid>
@@ -201,51 +225,3 @@ const RegisterView = () => {
 };
 
 export default RegisterView;
-
-/*  <h1 className="jumbotron text-center bg-primary square">Register</h1>
-
-  <div className="container col-md-4 offset-md-4 pb-5">
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="form-control mb-4 p-4"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Enter name"
-        required
-      />
-
-      <input
-        type="email"
-        className="form-control mb-4 p-4"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter email"
-        required
-      />
-
-      <input
-        type="password"
-        className="form-control mb-4 p-4"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter password"
-        required
-      />
-
-      <button
-        type="submit"
-        className="btn btn-block btn-primary"
-        disabled={!name || !email || !password || loading}
-      >
-        {loading ? <SyncOutlined spin /> : "Submit"}
-      </button>
-    </form>
-
-    <p className="text-center p-3">
-      Already registered?{" "}
-      <Link href="/login">
-        <a>Login</a>
-      </Link>
-    </p>
-  </div>*/

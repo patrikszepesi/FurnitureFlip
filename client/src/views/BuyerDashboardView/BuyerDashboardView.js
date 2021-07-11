@@ -3,7 +3,6 @@ import { Context } from "../../../context";
 import UserRoute from "../../../components/routes/UserRoute";
 import axios from "axios";
 import { Avatar } from "antd";
-import Link from "next/link";
 import { SyncOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,7 +11,7 @@ import { Image } from '../../../components/atoms';
 import { Section } from '../../../components/organisms';
 import { Contact, Locations, Story, MyCourses } from './components';
 import { SectionHeader } from '../../../components/molecules';
-import myImage from '../../../public/assets/undraw_Image_upload_re_w7pm.svg'
+import myImage from '../../../public/assets/undraw_Successful_purchase_re_mpig.svg'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -145,8 +144,8 @@ const BuyerDashboardView = () => {
               <div>
                 <div className={classes.coverContent}>
                   <SectionHeader
-                    title="Tanulj a legjobbaktól"
-                    subtitle="Vagy... Ha jó vagy valamiben akkor készítsd el a saját kurzusodat és tedd fel ide"
+                    title="Online vásárlás"
+                    subtitle="egyszerűen"
                     align="left"
                     titleVariant="h3"
                   />

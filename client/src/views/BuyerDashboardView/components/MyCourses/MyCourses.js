@@ -74,7 +74,7 @@ const MyCourses = props => {
 console.log(courses)
   return (
     <div className={className} {...rest}>
-      
+
       <Grid container spacing={isMd ? 2 : 1}>
         {courses && courses.length>0 && courses.map((course, index) => (
           <Grid item xs={10} key={index} data-aos="fade-up">
@@ -92,7 +92,7 @@ console.log(courses)
                     <a className={classes.a}><ListItemText
                        className={classes.listItemText}
                        primary={course.name}
-                       secondary={course.name}
+                       secondary={"Ár:" + course.price + "forint"}
                        primaryTypographyProps={{
                          className: classes.title,
                          variant: 'h6',
@@ -108,7 +108,8 @@ console.log(courses)
 
 
               </ListItem>
-              <p>{'Oktató:            ' +  course.instructor.name}</p>
+              <p>{'Eladó emailcíme : ' +  course.email} </p>
+              <p>{'Eladó telefonszáma : ' +  course.phone} </p>
             </CardBase>
           </Grid>
         ))}

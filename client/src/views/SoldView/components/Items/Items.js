@@ -68,7 +68,6 @@ const Items = props => {
   const { state, dispatch } = useContext(Context);
   const { user } = state;
 
-  console.log(data)
 
 
   const BlogMediaContent = props => (
@@ -99,9 +98,7 @@ const Items = props => {
         align="center"
       >
         <i>
-        <Button  onClick={() => handleRemove(props.tags)} className={classes.button} variant="outlined" color="primary" size="large">
-          Törlés a kedvencek közül
-        </Button>
+        <h6>Mielőbb írj a vevőnek itt: <a href={"mailto:" +data[0].buyerEmail }>{data[0].buyerEmail}</a></h6>
         <Button  onClick={() => router.push(`/item/${props.tags}`)} className={classes.button} variant="outlined" color="primary" size="large">
            Megtekntés
         </Button>
@@ -109,15 +106,15 @@ const Items = props => {
       </Typography>
     </div>
   );
-//
+
   return (
     <div className={className} {...rest}>
       <DescriptionCta
         title="Általad eladott termékek"
-        subtitle="írj nekik"
+        subtitle="Emailben elküldtük neked a vevő emailcímét. Írj neki minél előbb, hogy megkaphassa a vásárolt termékét. Az itt megjelenő tárgyakért már fizetett a vevő. Biztonsági okok miatt a pénzt 30 nap után juttatjuk el a számládra"
         primaryCta={
-          <Button variant="outlined" color="primary" size="large">
-            Ide valami
+          <Button onClick={()=>router.push("/seller/item/create")} variant="outlined" color="primary" size="large">
+            Eladok még valamit
           </Button>
         }
         align={'left'}

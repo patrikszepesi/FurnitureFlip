@@ -2,15 +2,15 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
-import Link from "next/link";
 import { Context } from "../../../context";
 import { useRouter } from "next/router";
 import { makeStyles } from '@material-ui/core/styles';
 import { Image } from '../../../components/atoms';
-import { LearnMoreLink } from '../../../components/atoms';
+import { LearnMoreLinkPlain } from '../../../components/atoms';
 import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,6 +50,7 @@ const ForgotPasswordView = () => {
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
+
 
 
   const {
@@ -107,7 +108,7 @@ const ForgotPasswordView = () => {
           <div className={classes.formContainer}>
             <SectionHeader
               title="Elfelejtett jelszó"
-              
+
               titleProps={{
                 variant: 'h3',
               }}
@@ -118,7 +119,7 @@ const ForgotPasswordView = () => {
                   <Grid item xs={12}>
                     <TextField
                       placeholder="E-mail"
-                      label="E-mail *"
+                      label="E-mail"
                       variant="outlined"
                       size="medium"
                       name="email"
@@ -176,10 +177,10 @@ const ForgotPasswordView = () => {
                       color="textSecondary"
                       align="center"
                     >
-                      Elfelejtetted a jelszavad?{' '}
-                      <LearnMoreLink
-                        title="Jelszó visszaállítása"
-                        href="/forgot-password"
+
+                      <LearnMoreLinkPlain
+                        title="  Vissza a bejelentkezéshez"
+                        onClick={() => router.push(`/login`)}
                       />
                     </Typography>
                   </Grid>
@@ -190,7 +191,7 @@ const ForgotPasswordView = () => {
         }
         rightSide={
           <Image
-            src="https://images.unsplash.com/photo-1526657782461-9fe13402a841?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fG9wZW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+            src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdyZWVufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
             className={classes.image}
             lazy={false}
           />
