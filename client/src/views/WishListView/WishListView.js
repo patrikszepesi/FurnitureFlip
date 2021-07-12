@@ -28,7 +28,8 @@ const WishListView = () => {
   const myStyle = { marginTop: "-15px", fontSize: "10px" };
 
   return (
-    <>{items &&   <SectionAlternate>
+    <>
+    {items && <SectionAlternate>
         <Items
          data={items}
          onWishListChange={newWishList => setWishlist(newWishList)}

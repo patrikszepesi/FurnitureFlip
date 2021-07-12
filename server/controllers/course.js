@@ -116,7 +116,8 @@ export const create = async (req, res) => {
 };
 
 export const read = async (req, res) => {
-  console.log("READ WAS HIT, THIS IS WHAT YOU WANT")
+  console.log("READ WAS HIT, THIS IS WHAT YOU WANT!")
+  console.log(req.params)
   try {
     const course = await Course.findOne({ _id: req.params.slug })
       .populate("instructor", "_id name")
@@ -127,11 +128,28 @@ export const read = async (req, res) => {
   }
 };
 
+export const ownerGetData = async (req, res) => {
+  console.log("hit")
 
-//
+  try {
+    const course = await Course.findOne({ _id: req.params.slug })
+      .populate("instructor", "_id name")
+      .exec();
+
+
+      if (req.user._id != course.instructor._id) {
+        return res.sendStatus(403); //return res.json('404')
+      }else {
+        res.json(course);
+
+      }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
 export const update = async (req, res) => {
-  console.log("mi a szar")
   console.log(req.params)
   try {
     const { slug } = req.params;
@@ -156,39 +174,6 @@ export const update = async (req, res) => {
 
 
 
-export const updateLesson = async (req, res) => {
-  try {
-    // console.log("UPDATE LESSON", req.body);
-    const { slug } = req.params;
-    const { _id, title, content, video, free_preview,chapter,counter } = req.body;
-    console.log(req.body)
-    const course = await Course.findOne({ slug }).select("instructor").exec();
-
-    if (course.instructor._id != req.user._id) {
-      return res.status(400).send("Unauthorized");
-    }
-
-    const updated = await Course.updateOne(
-      { "lessons._id": _id },
-      {
-        $set: {
-          "lessons.$.chapter":chapter,
-          "lessons.$.counter":counter,
-          "lessons.$.title": title,
-          "lessons.$.content": content,
-          "lessons.$.video": video,
-          "lessons.$.free_preview": free_preview,
-        },
-      },
-      { new: true }
-    ).exec();
-    // console.log("updated", updated);
-    res.json({ ok: true });
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send("Update lesson failed");
-  }
-};
 
 export const publishCourse = async (req, res) => {
   try {

@@ -26,7 +26,7 @@ const UserRoute = ({ children, showNav = true }) => {
       router.push("/login");
     }
   };
-
+//
   return (
     <>
       {!ok ? (
@@ -35,10 +35,10 @@ const UserRoute = ({ children, showNav = true }) => {
           className="d-flex justify-content-center display-1 text-primary p-5"
         />
       ) : (
-        <div className="container-fluid">
-          <div className="row">
+        <div >
+          <div >
 
-            <div className="col-md-10">{children}</div>
+            <div >{children}</div>
           </div>
         </div>
       )}

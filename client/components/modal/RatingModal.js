@@ -13,11 +13,6 @@ const { state, dispatch } = useContext(Context);
 
 const { user,backendCall } = state;
 
-console.log(text)
-
-
-
-
 
 
   //let history = useHistory();

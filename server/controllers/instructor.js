@@ -57,7 +57,7 @@ export const getAccountStatus = async (req, res) => {
     console.log(err);
   }
 };
-
+//
 export const currentInstructor = async (req, res) => {
   try {
     let user = await User.findById(req.user._id).select("-password").exec();
@@ -73,6 +73,7 @@ export const currentInstructor = async (req, res) => {
 };
 
 export const instructorCourses = async (req, res) => {
+  console.log("mlél")
   try {
     const courses = await Course.find({ instructor: req.user._id })
       .sort({ createdAt: -1 })

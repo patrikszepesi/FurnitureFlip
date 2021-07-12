@@ -8,6 +8,8 @@ import { CardProduct } from '../../../../../components/organisms';
 import { useRouter } from "next/router";
 import { Context } from "../../../../../context";
 import axios from 'axios';
+import UserRoute from "../../../../../components/routes/UserRoute";
+
 
 
 
@@ -108,6 +110,7 @@ const Items = props => {
   );
 
   return (
+    <UserRoute>
     <div className={className} {...rest}>
       <DescriptionCta
         title="Általad eladott termékek"
@@ -150,6 +153,7 @@ const Items = props => {
         ))}
       </Grid>
     </div>
+    </UserRoute>
   );
 };
 

@@ -69,23 +69,7 @@ const useStyles = makeStyles(theme => ({
 const subPages = [
   {
     id: 'general',
-    href: '/account/?pid=general',
-    title: 'General',
-  },
-  {
-    id: 'security',
-    href: '/account/?pid=security',
-    title: 'Security',
-  },
-  {
-    id: 'notifications',
-    href: '/account/?pid=notifications',
-    title: 'Notifications',
-  },
-  {
-    id: 'billing',
-    href: '/account/?pid=billing',
-    title: 'Billing Information',
+    title: 'Adatok módosítása',
   },
 ];
 
@@ -98,7 +82,7 @@ const TabPanel = props => {
     </Box>
   );
 };
-//
+
 const ItemCreateView = (props = {}) => {
   const [values, setValues] = useState({
       name: "",
@@ -121,14 +105,19 @@ const ItemCreateView = (props = {}) => {
   const router = useRouter();
   const { slug } = router.query;
   useEffect(() => {
-    loadItem();
+  if(slug) loadItem();
   }, [slug]);
 
   const loadItem = async () => {
-    const { data } = await axios.get(`/api/course/${slug}`);
+    const { data } = await axios.get(`/api/course-owner/${slug}`);
+    if(data==String(404)){
+      router.push("/")
+    }
     if (data) setValues(data);
     if (data && data.image) setImage(data.image);
   };
+
+
 
   const classes = useStyles();
   let pageId =  'general';
@@ -168,7 +157,6 @@ const ItemCreateView = (props = {}) => {
 
     const handleImageRemove = async () => {
       try {
-        // console.log(values);
         setValues({ ...values, loading: true });
         const res = await axios.post("/api/course/remove-image", { image });
         setImage({});
@@ -190,13 +178,14 @@ const ItemCreateView = (props = {}) => {
           image,
         });
         toast("Great! Now you can start adding lessons");
-        router.push("/instructor");
+        router.push("/");
       } catch (err) {
         toast(err.response.data);
       }
     };
 
   return (
+    <InstructorRoute>
     <div className={classes.root}>
       <Hero />
       <SectionAlternate className={classes.section}>
@@ -262,6 +251,7 @@ const ItemCreateView = (props = {}) => {
         </Grid>
       </SectionAlternate>
     </div>
+    </InstructorRoute>
   );
 };
 

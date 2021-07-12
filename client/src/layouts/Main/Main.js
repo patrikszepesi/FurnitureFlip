@@ -111,8 +111,12 @@ const Main = ({ children, themeToggler, themeMode }) => {
               href: '/career-listing',
             },
             {
-              title: ' Hogyan Működik',
+              title: ' Hogyan Működik, Eladóknak',
               href: '/what',
+            },
+            {
+              title: ' Hogyan Működik, Vevőknek',
+              href: '/for-buyers',
             },
 
           ],

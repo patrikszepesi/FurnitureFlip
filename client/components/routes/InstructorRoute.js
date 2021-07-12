@@ -25,7 +25,7 @@ const InstructorRoute = ({ children }) => {
       router.push("/");
     }
   };
-
+//
   return (
     <>
       {!ok ? (

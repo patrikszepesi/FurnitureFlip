@@ -81,7 +81,7 @@ const { user,backendCall } = state;
 
   useEffect(() => {
     if(user) loadCurrent()
-  }, [dummy]);//saved here
+  }, [dummy]);//saved here, update wishlist
 
   const loadCurrent= async ()=>{
     const { data } = await axios.get(`/api/user/${user._id}`);
@@ -107,7 +107,6 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
     setLoading(true);
     try {
       if (!user) router.push("/login");
-      // check if already enrolled
       const { data } = await axios.post(`/api/paid-enrollment/${item._id}`);
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
       stripe.redirectToCheckout({ sessionId: data });
@@ -149,6 +148,12 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
     setCommentObj(newRatingObj)
   };
 
+let sold;
+if(item.sold){
+  sold="Eladva"
+}else{
+  sold=""
+}
 
   const sendCommentToBackend = async() => {
     setTimeout(backendCallFalse,0);
@@ -175,7 +180,6 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
     try {
       if (!user) router.push("/login");
       const { data } = await axios.post(`/api/wishlist/${item._id}`);
-      console.log(data)
       setDummy(dummy+1)
     } catch (err) {
       toast.error('Hiba', {
@@ -202,144 +206,145 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
   return (
 
     <div className={className} {...rest}>
+    {item && item.sold ? <h1>Ezt a terméket már eladta az eladó</h1>:<HeroShaped
+    item={item}
+      leftSide={
+        <>
+        <SectionHeader
+            title={
+              <>
+                <span>
+                {item.quality}
+                  <Typography color="secondary" variant="inherit" component="span"> { item.name}</Typography>
 
-      <HeroShaped
-      item={item}
-        leftSide={
-          <>
-          <SectionHeader
-              title={
-                <>
-                  <span>
-                  {item.quality}
-                    <Typography color="secondary" variant="inherit" component="span"> { item.name}</Typography>
-
-                  </span>
-
-                </>
-              }
-              align="left"
-              disableGutter
-            />
-          <Grid container spacing={0}>
-                { item &&
-                  <Grid item xs={6} key={item._id} data-aos="fade-up">
-                    <ListItem disableGutters>
-                      <ListItemAvatar className={classes.listItemAvatar}>
-                        <IconAlternate
-                          size="extraSmall"
-                          shape="circle"
-                          fontIconClass="fas fa-check"
-                          color={colors.deepOrange}
-                        />
-                      </ListItemAvatar>
-                      <Typography variant="subtitle1" color="secondary" noWrap>
-                      Ár:  { item.price + "forint"}
-                      </Typography>
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemAvatar className={classes.listItemAvatar}>
-                        <IconAlternate
-                          size="extraSmall"
-                          shape="circle"
-                          fontIconClass="fas fa-check"
-                          color={colors.deepOrange}
-                        />
-                      </ListItemAvatar>
-                      <Typography variant="subtitle1" color="secondary" noWrap>
-                      minőség:   { item.quality}
-                      </Typography>
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemAvatar className={classes.listItemAvatar}>
-                        <IconAlternate
-                          size="extraSmall"
-                          shape="circle"
-                          fontIconClass="fas fa-check"
-                          color={colors.deepOrange}
-                        />
-                      </ListItemAvatar>
-                      <Typography variant="subtitle1" color="secondary" noWrap>
-                      Átvehető itt:  { item.city}
-                      </Typography>
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemAvatar className={classes.listItemAvatar}>
-                        <IconAlternate
-                          size="extraSmall"
-                          shape="circle"
-                          fontIconClass="fas fa-check"
-                          color={colors.deepOrange}
-                        />
-                      </ListItemAvatar>
-                      <Typography variant="subtitle1" color="secondary" >
-                      <span onClick={() => router.push(`/category/${slugify(item.category)}`)} >{item.category}</span>
-                      </Typography>
-                    </ListItem>
-                    <div className={classes.root}>
-                    </div>
-                  </Grid>
-                }
-              </Grid>
-              <Button
-                variant="contained"
-                className={classes.button}
-                disabled={loading || !user}
-                onClick={handlePaidEnrollment}
-                startIcon={<ShoppingCartRoundedIcon/>}
-
-              >
-                {user
-                    ? "Megveszem"
-
-                  : "Jelentkezz be"}
-              </Button>
-              <Button
-                variant="contained"
-                className={classes.button2}
-                disabled={loading || !user}
-                onClick={handleAddToWishList}
-                startIcon={<FavoriteIcon/>}
-
-              >
-                {conditionalText}
-              </Button>
-
-              <RatingModal  course={item} text={'Kérdezz'} >
-
-            <textarea style={{marginBottom:'10px'}}
-                  value= {commentObj.name}
-                  onChange={(event, value) => {
-                    handleRatingChange(event,'name',event.target.value)}}
-                  className='form-control'
-                  placeholder='Neved hogyan jelenjen meg az értékelésen'
-                  rows={1}
-                  cols={1}>
-            </textarea>
-
-            <textarea style={{marginBottom:'10px'}}
-                  value= {commentObj.text}
-                  onChange={(event, value) => {
-                    handleRatingChange(event,'text',event.target.value)}}
-                  className='form-control'
-                  placeholder='Milyen volt az Oktató és maga az óra'
-                  rows={10}
-                  cols={50}>
-            </textarea>
-        </RatingModal>
-
-
+                </span>
 
               </>
-
-        }
-        rightSide={
-          <SwiperImageMultiple
-            navigationButtonStyle={classes.swiperNavButton}
-            items={images}
+            }
+            align="left"
+            disableGutter
           />
-        }
-      />
+          {sold}
+        <Grid container spacing={0}>
+              { item &&
+                <Grid item xs={6} key={item._id} data-aos="fade-up">
+                  <ListItem disableGutters>
+                    <ListItemAvatar className={classes.listItemAvatar}>
+                      <IconAlternate
+                        size="extraSmall"
+                        shape="circle"
+                        fontIconClass="fas fa-check"
+                        color={colors.deepOrange}
+                      />
+                    </ListItemAvatar>
+                    <Typography variant="subtitle1" color="secondary" noWrap>
+                    Ár:  { item.price + "forint"}
+                    </Typography>
+                  </ListItem>
+                  <ListItem disableGutters>
+                    <ListItemAvatar className={classes.listItemAvatar}>
+                      <IconAlternate
+                        size="extraSmall"
+                        shape="circle"
+                        fontIconClass="fas fa-check"
+                        color={colors.deepOrange}
+                      />
+                    </ListItemAvatar>
+                    <Typography variant="subtitle1" color="secondary" noWrap>
+                    minőség:   { item.quality}
+                    </Typography>
+                  </ListItem>
+                  <ListItem disableGutters>
+                    <ListItemAvatar className={classes.listItemAvatar}>
+                      <IconAlternate
+                        size="extraSmall"
+                        shape="circle"
+                        fontIconClass="fas fa-check"
+                        color={colors.deepOrange}
+                      />
+                    </ListItemAvatar>
+                    <Typography variant="subtitle1" color="secondary" noWrap>
+                    Átvehető itt:  { item.city}
+                    </Typography>
+                  </ListItem>
+                  <ListItem disableGutters>
+                    <ListItemAvatar className={classes.listItemAvatar}>
+                      <IconAlternate
+                        size="extraSmall"
+                        shape="circle"
+                        fontIconClass="fas fa-check"
+                        color={colors.deepOrange}
+                      />
+                    </ListItemAvatar>
+                    <Typography variant="subtitle1" color="secondary" >
+                    <span onClick={() => router.push(`/category/${slugify(item.category)}`)} >{item.category}</span>
+                    </Typography>
+                  </ListItem>
+                  <div className={classes.root}>
+                  </div>
+                </Grid>
+              }
+            </Grid>
+            <Button
+              variant="contained"
+              className={classes.button}
+              disabled={loading || !user ||item.sold}
+              onClick={handlePaidEnrollment}
+              startIcon={<ShoppingCartRoundedIcon/>}
+
+            >
+              {user
+                  ? "Megveszem"
+
+                : "Jelentkezz be"}
+            </Button>
+            <Button
+              variant="contained"
+              className={classes.button2}
+              disabled={loading || !user}
+              onClick={handleAddToWishList}
+              startIcon={<FavoriteIcon/>}
+
+            >
+              {conditionalText}
+            </Button>
+
+            <RatingModal  course={item} text={'Kérdezz'} >
+
+          <textarea style={{marginBottom:'10px'}}
+                value= {commentObj.name}
+                onChange={(event, value) => {
+                  handleRatingChange(event,'name',event.target.value)}}
+                className='form-control'
+                placeholder='Neved hogyan jelenjen meg az értékelésen'
+                rows={1}
+                cols={1}>
+          </textarea>
+
+          <textarea style={{marginBottom:'10px'}}
+                value= {commentObj.text}
+                onChange={(event, value) => {
+                  handleRatingChange(event,'text',event.target.value)}}
+                className='form-control'
+                placeholder='Milyen volt az Oktató és maga az óra'
+                rows={10}
+                cols={50}>
+          </textarea>
+      </RatingModal>
+
+
+
+            </>
+
+      }
+      rightSide={
+        <SwiperImageMultiple
+          navigationButtonStyle={classes.swiperNavButton}
+          items={images}
+        />
+      }
+    />}
+
     </div>
   );
 };

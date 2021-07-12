@@ -1,28 +1,46 @@
+
+import sport from '../../../../public/assets/biking-solid.svg'
+import { colors } from '@material-ui/core';
+
+
 export const integrations = [
   {
-    logo: 'https://assets.maccarianagency.com/the-front/logos/slack.svg',
-    name: 'Slack',
+    iconColor: colors.blue,
+    iconBg: colors.blue,
+    icon: 'fas fa-couch',
+    title: 'Bútor és Otthon',
   },
   {
-    logo: 'https://assets.maccarianagency.com/the-front/logos/mailchimp.svg',
-    name: 'Mailchimp',
+    iconColor: colors.purple,
+    iconBg: colors.purple,
+    icon: 'fas fa-biking',
+    title: 'Sport és szabadidő',
   },
   {
-    logo: 'https://assets.maccarianagency.com/the-front/logos/dropbox.svg',
-    name: 'Dropbox',
+    iconColor: colors.amber,
+    iconBg: colors.amber,
+    icon: 'fas fa-tv',
+    title: 'Műszaki cikkek',
   },
   {
-    logo: 'https://assets.maccarianagency.com/the-front/logos/google-drive.svg',
-    name: 'Google Drive',
+    iconColor: colors.indigo,
+    iconBg: colors.indigo,
+    icon: 'fas fa-tshirt',
+    title: 'Ruhák',
   },
   {
-    logo: 'https://assets.maccarianagency.com/the-front/logos/google-ad-manager.svg',
-    name: 'Google Ad Manager',
+    iconColor: colors.pink,
+    iconBg: colors.pink,
+    icon: 'fas fa-book',
+    title: 'Könyvek',
   },
   {
-    logo: 'https://assets.maccarianagency.com/the-front/logos/atlassian.svg',
-    name: 'Atlassian',
+    iconColor: colors.green,
+    iconBg: colors.green,
+    icon: 'fas fa-baby-carriage',
+    title: 'Mama-baba',
   },
+  
 ];
 
 export const reviews = [

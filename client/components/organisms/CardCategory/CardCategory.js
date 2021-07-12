@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
     width: '100%',
+    margin:'10'
   },
 }));
 

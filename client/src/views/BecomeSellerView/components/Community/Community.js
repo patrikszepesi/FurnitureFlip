@@ -27,6 +27,8 @@ import {
 } from "@ant-design/icons";
 import axios from 'axios';
 import myImage from '../../../../../public/assets/rev.svg'
+import UserRoute from "../../../../../components/routes/UserRoute";
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -122,6 +124,7 @@ const Community = props => {
   };
 
   return (
+    <UserRoute>
     <div className={className} {...rest}>
       <HeroShapedStripe
         leftSide={
@@ -165,8 +168,9 @@ const Community = props => {
           </div>
         }
       />
-      
+
     </div>
+    </UserRoute>
   );
 };
 //

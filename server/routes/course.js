@@ -16,7 +16,6 @@ import {
   readWishlist,
   removeFromWishlist,
   update,
-  updateLesson,
   publishCourse,
   unpublishCourse,
   courses,
@@ -31,7 +30,8 @@ import {
   comments,
   getComments,
   commentAnswers,
-  sold
+  sold,
+  ownerGetData
 } from "../controllers/course";
 
 
@@ -41,15 +41,16 @@ router.get("/courses", courses);
 router.post("/course/upload-image", uploadImage);
 router.post("/course/remove-image", removeImage);
 // course
+router.get("/course-owner/:slug", requireSignin,ownerGetData);
 router.post("/course", requireSignin, isInstructor, create);
 router.put("/course/:slug", requireSignin, update);
 router.get("/course/:slug", read);
 
 
+
 router.put("/course/publish/:courseId", requireSignin, publishCourse);
 router.put("/course/unpublish/:courseId", requireSignin, unpublishCourse);
 
-router.put("/course/lesson/:slug/:instructorId", requireSignin, updateLesson);
 
 router.get("/check-enrollment/:courseId", requireSignin, checkEnrollment);
 router.get("/course/invoice/:userId", requireSignin, invoice);
