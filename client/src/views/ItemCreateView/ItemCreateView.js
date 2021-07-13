@@ -2,19 +2,26 @@ import React from 'react';
 import { useState } from "react";
 import axios from "axios";
 import Resizer from "react-image-file-resizer";
-import { toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from "next/router";
 import clsx from 'clsx';
 import { parse } from 'query-string';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, List, ListItem, Grid, Typography } from '@material-ui/core';
 import { SectionAlternate, CardBase } from '../../../components/organisms';
-import { Hero, ItemCreateForm, Security, Notifications, Billing } from './components';
+import { Hero, ItemCreateForm  } from './components';
 import InstructorRoute from "../../../components/routes/InstructorRoute";
 import FileUpload from "../../../components/forms/FileUpload";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const useStyles = makeStyles(theme => ({
+  rootForSpinner: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    }},
+
   root: {
     height: '100%',
     width: '100%',
@@ -70,23 +77,7 @@ const useStyles = makeStyles(theme => ({
 const subPages = [
   {
     id: 'general',
-    href: '/account/?pid=general',
-    title: 'General',
-  },
-  {
-    id: 'security',
-    href: '/account/?pid=security',
-    title: 'Security',
-  },
-  {
-    id: 'notifications',
-    href: '/account/?pid=notifications',
-    title: 'Notifications',
-  },
-  {
-    id: 'billing',
-    href: '/account/?pid=billing',
-    title: 'Billing Information',
+    title: 'Adatok megadása',
   },
 ];
 
@@ -179,8 +170,21 @@ const ItemCreateView = (props = {}) => {
           ...values,
           image,
         });
-        toast("Great! Now you can start adding lessons");
-        router.push("/instructor");
+        toast("Minden kész", {
+           duration: 4000,
+      style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'800px',
+      marginTop:'70px',
+      },
+      iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+      },
+      })
+        router.push("/seller");
       } catch (err) {
         toast(err.response.data);
       }
@@ -188,6 +192,7 @@ const ItemCreateView = (props = {}) => {
 
   return (
     <InstructorRoute>
+    <Toaster />
     <div className={classes.root}>
       <Hero />
       <SectionAlternate className={classes.section}>
@@ -222,31 +227,27 @@ const ItemCreateView = (props = {}) => {
           <Grid item xs={12} md={9}>
             <CardBase withShadow align="left">
               <TabPanel value={pageId} index={'general'}>
-              <h3>Termék adatai</h3>
-              <FileUpload
-                  values={values}
-                  setValues={setValues}
-                  setLoading={setLoading}
-                />
-                <ItemCreateForm
-                  handleSubmit={handleSubmit}
-                  handleImage={handleImage}
-                  handleChange={handleChange}
-                  values={values}
-                  setValues={setValues}
-                  preview={preview}
-                  uploadButtonText={uploadButtonText}
-                  handleImageRemove={handleImageRemove} />
+                <h3>Termék adatai</h3>
+              {loading ? (<div className={classes.rootForSpinner}>
+                <CircularProgress />
+                </div>): (
+                <>
+                <FileUpload
+                    values={values}
+                    setValues={setValues}
+                    setLoading={setLoading}
+                  />
+                    </>)}
+                    <ItemCreateForm
+                      handleSubmit={handleSubmit}
+                      handleImage={handleImage}
+                      handleChange={handleChange}
+                      values={values}
+                      setValues={setValues}
+                      preview={preview}
+                      uploadButtonText={uploadButtonText}
+                      handleImageRemove={handleImageRemove} />
 
-              </TabPanel>
-              <TabPanel value={pageId} index={'security'}>
-                <Security />
-              </TabPanel>
-              <TabPanel value={pageId} index={'notifications'}>
-                <Notifications />
-              </TabPanel>
-              <TabPanel value={pageId} index={'billing'}>
-                <Billing />
               </TabPanel>
             </CardBase>
           </Grid>

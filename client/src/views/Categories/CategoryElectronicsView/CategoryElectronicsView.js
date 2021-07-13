@@ -71,7 +71,7 @@ const CategoryElectronicsView = ({ courses,className,...rest }) => {
     subCategory: '',
     item: '',
     price:'',
-    category:'műszaki cikkek',
+    category:'műszaki cikk',
     quality:'',
     city:'',
   });

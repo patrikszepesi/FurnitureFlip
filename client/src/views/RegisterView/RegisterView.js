@@ -11,7 +11,7 @@ import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
 import registerImage from '../../../public/assets/reg.jpg'
-
+//
 
 
 
@@ -73,8 +73,7 @@ const RegisterView = () => {
         email,
         password,
       });
-      // console.log("REGISTER RESPONSE", data);
-      toast("sikere regisztráció, jelentkezz be!", {
+      toast("Sikeres regisztráció, jelentkezz be!", {
          duration: 4000,
     style: {
     border: '5px solid #E1C699',
@@ -164,7 +163,7 @@ const RegisterView = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
-                      placeholder="Password"
+                      placeholder="Jelszó"
                       label="Jelszó *"
                       variant="outlined"
                       size="medium"

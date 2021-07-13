@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 import { SyncOutlined } from "@ant-design/icons";
 import { Context } from "../../../context";
 import { useRouter } from "next/router";
@@ -70,18 +70,43 @@ const ForgotPasswordView = () => {
     try {
       const { data } = await axios.post("/api/forgot-password", { email });
       setSuccess(true);
-      toast("Check your email for the secret code");
+      toast("Nézd meg a kódot amit az emailcímedre küldtünk", {
+         duration: 4000,
+    style: {
+    border: '5px solid #E1C699',
+    padding: '16px',
+    color: '#713200',
+    minWidth:'800px',
+    marginTop:'70px',
+    },
+    iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+    },
+    });
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      toast(err.response.data);
+      toast(err.response.data, {
+         duration: 4000,
+    style: {
+    border: '5px solid #E1C699',
+    padding: '16px',
+    color: '#713200',
+    minWidth:'800px',
+    marginTop:'70px',
+    },
+    iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+    },
+    });
     }
   };
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
     // console.log(email, code, newPassword);
-    // return;
     try {
       setLoading(true);
       const { data } = await axios.post("/api/reset-password", {
@@ -93,15 +118,42 @@ const ForgotPasswordView = () => {
       setCode("");
       setNewPassword("");
       setLoading(false);
-      toast("Great! Now you can login with your new password");
+      toast("Siker, jelentkezz be az új jelszavaddal", {
+         duration: 4000,
+    style: {
+    border: '5px solid #E1C699',
+    padding: '16px',
+    color: '#713200',
+    minWidth:'800px',
+    marginTop:'70px',
+    },
+    iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+    },
+    });
     } catch (err) {
       setLoading(false);
-      toast(err.response.data);
+      toast(err.response.data, {
+         duration: 4000,
+    style: {
+    border: '5px solid #E1C699',
+    padding: '16px',
+    color: '#713200',
+    minWidth:'800px',
+    marginTop:'70px',
+    },
+    iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+    },
+    });
     }
   };
 
   return (
     <>
+    <Toaster />
     <div className={classes.root}>
       <HeroShapedAuth
         leftSide={
@@ -138,8 +190,9 @@ const ForgotPasswordView = () => {
                         className="form-control mb-4 p-4"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                        placeholder="Enter secret code"
+                        placeholder="Emailben küldött kód"
                         required
+                        label="Kód"
                       />
 
                       <input
@@ -147,19 +200,14 @@ const ForgotPasswordView = () => {
                         className="form-control mb-4 p-4"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        placeholder="New Password"
+                        placeholder="Új jelszó"
                         required
+                        label="Jelszó"
                       />
                     </>
                   )}
                   </Grid>
-                  <Grid item xs={12}>
-                    <i>
-                      <Typography variant="subtitle2">
-                        *Kötelező mezők
-                      </Typography>
-                    </i>
-                  </Grid>
+
                   <Grid item xs={12}>
                     <Button
                       size="large"
@@ -168,7 +216,7 @@ const ForgotPasswordView = () => {
                       color="primary"
                       fullWidth
                     >
-                      Bejelentkezés
+                      Új jelszó mentése
                     </Button>
                   </Grid>
                   <Grid item xs={12}>

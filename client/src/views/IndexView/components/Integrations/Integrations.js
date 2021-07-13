@@ -93,6 +93,7 @@ const Integrations = props => {
                     title="Tudj meg többet"
                     onClick={()=>router.push("/for-buyers")}
                     variant="h6"
+
                   />,
                 ]}
                 disableGutter

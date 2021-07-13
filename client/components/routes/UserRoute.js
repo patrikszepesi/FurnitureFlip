@@ -3,6 +3,19 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { SyncOutlined } from "@ant-design/icons";
 import UserNav from "../nav/UserNav";
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+
 
 //this wraps several routes, and so the wrapped elemtns(children ) get passed down and we do stuff with it
 const UserRoute = ({ children, showNav = true }) => {
@@ -10,6 +23,8 @@ const UserRoute = ({ children, showNav = true }) => {
   const [ok, setOk] = useState(false);
   // router
   const router = useRouter();
+  const classes = useStyles();
+
 
   useEffect(() => {
     fetchUser();
@@ -30,10 +45,9 @@ const UserRoute = ({ children, showNav = true }) => {
   return (
     <>
       {!ok ? (
-        <SyncOutlined
-          spin
-          className="d-flex justify-content-center display-1 text-primary p-5"
-        />
+        <div className={classes.root}>
+          <LinearProgress />
+        </div>
       ) : (
         <div >
           <div >

@@ -69,10 +69,6 @@ const Main = ({ children, themeToggler, themeMode }) => {
               title: 'Alkatrészek',
               href: '/category/alkatreszek',
             },
-            {
-              title: 'Sport/szabadidő',
-              href: '/category/sport-es-szabadido',
-            },
           ],
         },
 
@@ -108,7 +104,7 @@ const Main = ({ children, themeToggler, themeMode }) => {
           pages: [
             {
               title: 'ÁSZF',
-              href: '/career-listing',
+              href: '/aszf',
             },
             {
               title: ' Hogyan Működik, Eladóknak',
@@ -123,15 +119,15 @@ const Main = ({ children, themeToggler, themeMode }) => {
         },
 
         portfolio: {
-          groupTitle: 'Blog',
+          groupTitle: 'ZeroWaste',
           pages: [
             {
               title: 'Zero Waste',
               href: '/zero-waste',
             },
             {
-              title: 'Érdekesség',
-              href: '/facts',
+              title: 'Partnereink',
+              href: '/partners',
             },
           ],
         },
@@ -167,12 +163,15 @@ const Main = ({ children, themeToggler, themeMode }) => {
               title: user? 'Bevételeim' :' ',
               href: user? '/seller/revenue': ' ',
             },
-
+            {
+              title: user? 'Bevételeim' :' ',
+              href: user? '/seller/revenue': ' ',
+            },
           ],
 
         },
         portfolio: {
-          groupTitle: 'Blog',
+          groupTitle: user? 'Profil': '',
           pages: [
           {
             title: user?  'Eladok valamit': '',

@@ -7,8 +7,6 @@ const FileUpload = ({ values, setValues, setLoading }) => {
   const [imageLength, setImageLength] = useState(0);
 
   const fileUploadAndResize = e => {
-    // console.log(e.target.files);
-    // resize check if MORE THAN X FILES , destructure premium user, if premium then limit is 20 if not premum then limit is 7
 
     let files = e.target.files;
     let allUploadedFiles = values.images;
@@ -32,9 +30,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
                 "/api/course/upload-image",
                 { image: uri, imageLength: files.length }, //uri is the based 64 resized image, access this by req.body.image in server//
                 {
-                  // headers: {
-                  //   authtoken: user ? user.token : ''
-                  // }
+
                 }
               )
               .then(res => {

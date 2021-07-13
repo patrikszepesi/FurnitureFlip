@@ -17,9 +17,6 @@ import { useRouter } from "next/router";
 import slugify from 'slugify';
 
 
-
-
-
 const useStyles = makeStyles(theme => ({
   root: {
       width: '100%!important',

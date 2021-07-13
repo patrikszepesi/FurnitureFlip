@@ -40,7 +40,6 @@ export default function WithLayout({ component: Component, layout: Layout, item:
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-    console.log(Item)
 
     AOS.init({
       once: true,

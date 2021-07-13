@@ -65,7 +65,7 @@ const LoginView = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (user !== null) router.push("/");
+    if (user !== null) router.push("/user");
   }, [user]);
 
   const handleSubmit = async (e) => {

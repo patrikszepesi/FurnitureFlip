@@ -65,7 +65,7 @@ router.get("/wishlist", requireSignin, readWishlist);
 router.put("/wishlist/:itemId", requireSignin, removeFromWishlist);
 
 router.post("/comments/:itemId", requireSignin, comments);
-router.get("/comments/:itemId", requireSignin, getComments);
+router.get("/comments/:itemId", getComments);
 router.post("/comment/answer/:itemId", requireSignin, commentAnswers);
 
 

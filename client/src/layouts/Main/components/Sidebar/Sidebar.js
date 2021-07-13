@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Drawer } from '@material-ui/core';
 
+
 import { SidebarNav } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 
 const Sidebar = props => {
   const { pages, open, variant, onClose, className, ...rest } = props;
-
   const classes = useStyles();
 
   return (

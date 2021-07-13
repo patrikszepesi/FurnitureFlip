@@ -73,7 +73,7 @@ const Features = props => {
           >
             <DescriptionListIcon
               title="Zero Waste"
-              subtitle="Bíztatni az embereket arra, hogy vigyázzanak a környezetre, és, hogy ne vegyenek mindenből újat"
+              subtitle="Bíztatni az embereket arra, hogy vigyázzanak a környezetre, és, hogy ne vegyenek mindenből újat. Ezért is ajánljuk fel az összes bevételünk 5%-át zöld tevékenységekre"
               icon={
                 <Icon
                   fontIconClass="fas fa-recycle"

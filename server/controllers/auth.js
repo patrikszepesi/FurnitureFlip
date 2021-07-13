@@ -18,11 +18,11 @@ export const register = async (req, res) => {
     // console.log(req.body);
     const { name, email, password } = req.body;
     // validation
-    if (!name) return res.status(400).send("Name is required");
+    if (!name) return res.status(400).send("Név mező kötelező");
     if (!password || password.length < 6) {
       return res
         .status(400)
-        .send("Password is required and should be min 6 characters long");
+        .send("Jelszó kötelező és minimum 6 karakterből kell, hogy álljon");
     }
     let userExist = await User.findOne({ email }).exec();
     if (userExist) return res.status(400).send("Email is taken");
@@ -104,7 +104,7 @@ export const forgotPassword = async (req, res) => {
       { email },
       { passwordResetCode: shortCode }
     );
-    if (!user) return res.status(400).send("User not found");
+    if (!user) return res.status(400).send("Nincs ilyen felhasználó");
 
     // prepare for email
     const params = {

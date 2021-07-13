@@ -1,7 +1,6 @@
 import React, { useState,useContext } from 'react';
 import clsx from 'clsx';
 import axios from 'axios';
-import { toast } from "react-toastify";
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from "next/router";
@@ -132,7 +131,6 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
     dispatch({ type: "LOGOUT" });
     window.localStorage.removeItem("user");
     const { data } = await axios.get("/api/logout");
-    toast(data.message);
     router.push("/login");
   };
 
@@ -271,6 +269,7 @@ let button;
    }
 
    let registerButton;
+
 
    if (user ) {
       registerButton = <Button

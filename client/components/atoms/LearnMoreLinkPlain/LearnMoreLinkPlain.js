@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, IconButton } from '@material-ui/core';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import { useRouter } from "next/router";
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,6 +44,8 @@ const LearnMoreLinkPlain = props => {
   } = props;
 
   const classes = useStyles();
+  const router = useRouter();
+
 
   const children = (
     <>
@@ -66,7 +70,6 @@ const LearnMoreLinkPlain = props => {
 
   return (
     <a
-      href={href}
       className={clsx('learn-more-link', classes.root, className)}
       {...rest}
     >

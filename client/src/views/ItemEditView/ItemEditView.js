@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Resizer from "react-image-file-resizer";
-import { toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from "next/router";
 import clsx from 'clsx';
 import { parse } from 'query-string';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, List, ListItem, Grid, Typography } from '@material-ui/core';
 import { SectionAlternate, CardBase } from '../../../components/organisms';
-import { Hero, ItemUpdateForm, Security, Notifications, Billing } from './components';
+import { Hero, ItemUpdateForm } from './components';
 import InstructorRoute from "../../../components/routes/InstructorRoute";
 import FileUpload from "../../../components/forms/FileUpload";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,6 +20,12 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
   },
+  rootForSpinner: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    }},
+
   section: {
     '& .section-alternate__content': {
       paddingTop: 0,
@@ -128,8 +136,6 @@ const ItemCreateView = (props = {}) => {
     const [loading, setLoading] = useState(false);
 
 
-
-
     const handleChange = (e) => {
       setValues({ ...values, [e.target.name]: e.target.value });
     };
@@ -177,8 +183,21 @@ const ItemCreateView = (props = {}) => {
           ...values,
           image,
         });
-        toast("Great! Now you can start adding lessons");
-        router.push("/");
+        toast("A termék adatainak módosítása megtörtént", {
+           duration: 4000,
+      style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'800px',
+      marginTop:'70px',
+      },
+      iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+      },
+      })
+        router.push("/seller");
       } catch (err) {
         toast(err.response.data);
       }
@@ -186,6 +205,7 @@ const ItemCreateView = (props = {}) => {
 
   return (
     <InstructorRoute>
+    <Toaster />
     <div className={classes.root}>
       <Hero />
       <SectionAlternate className={classes.section}>
@@ -221,11 +241,13 @@ const ItemCreateView = (props = {}) => {
             <CardBase withShadow align="left">
               <TabPanel value={pageId} index={'general'}>
               <h3>Termék adatai</h3>
-              <FileUpload
-                  values={values}
-                  setValues={setValues}
-                  setLoading={setLoading}
-                />
+              {loading? (<div className={classes.rootForSpinner}>
+                <CircularProgress />
+                </div>):(<FileUpload
+                    values={values}
+                    setValues={setValues}
+                    setLoading={setLoading}
+                  />)}
                 <ItemUpdateForm
                   handleSubmit={handleSubmit}
                   handleImage={handleImage}
@@ -235,16 +257,6 @@ const ItemCreateView = (props = {}) => {
                   preview={preview}
                   uploadButtonText={uploadButtonText}
                   handleImageRemove={handleImageRemove} />
-
-              </TabPanel>
-              <TabPanel value={pageId} index={'security'}>
-                <Security />
-              </TabPanel>
-              <TabPanel value={pageId} index={'notifications'}>
-                <Notifications />
-              </TabPanel>
-              <TabPanel value={pageId} index={'billing'}>
-                <Billing />
               </TabPanel>
             </CardBase>
           </Grid>

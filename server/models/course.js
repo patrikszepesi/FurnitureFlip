@@ -65,8 +65,11 @@ const courseSchema = new mongoose.Schema(
       required:true
     },
 
-    sold:false,
-    buyerEmail:"String",
+    sold:{
+      type: Boolean,
+    default: false,
+    },    
+  buyerEmail:"String",
 
     images: {
         type: Array,

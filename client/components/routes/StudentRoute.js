@@ -2,12 +2,27 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { SyncOutlined } from "@ant-design/icons";
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+
 
 const StudentRoute = ({ children, showNav = true }) => {
   // state
   const [ok, setOk] = useState(false);
   // router
   const router = useRouter();
+  const classes = useStyles();
+
 
   useEffect(() => {
     fetchUser();
@@ -28,10 +43,9 @@ const StudentRoute = ({ children, showNav = true }) => {
   return (
     <>
       {!ok ? (
-        <SyncOutlined
-          spin
-          className="d-flex justify-content-center display-1 text-primary p-5"
-        />
+        <div className={classes.root}>
+          <LinearProgress />
+        </div>
       ) : (
         <div className="container-fluid">{children}</div>
       )}

@@ -53,7 +53,7 @@ const ForBuyersView = props => {
   const items= [
       {
         icon: 'fas fa-user-check',
-        title: 'Ellenőrzött vevők',
+        title: 'Ellenőrzött eladók',
         subtitle:
           'Az összes eladó ellenőrzött, ami azt jelenti, hogy a személyazonosságát megerősítette',
       },

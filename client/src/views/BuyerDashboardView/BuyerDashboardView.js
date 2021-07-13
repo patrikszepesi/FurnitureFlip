@@ -3,7 +3,7 @@ import { Context } from "../../../context";
 import UserRoute from "../../../components/routes/UserRoute";
 import axios from "axios";
 import { Avatar } from "antd";
-import { SyncOutlined, PlayCircleOutlined } from "@ant-design/icons";
+import { PlayCircleOutlined } from "@ant-design/icons";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider } from '@material-ui/core';
@@ -12,8 +12,16 @@ import { Section } from '../../../components/organisms';
 import { Contact, Locations, Story, MyCourses } from './components';
 import { SectionHeader } from '../../../components/molecules';
 import myImage from '../../../public/assets/undraw_Successful_purchase_re_mpig.svg'
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 const useStyles = makeStyles(theme => ({
+  rootForLoading: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
   root: {
     height: '100%',
     width: '100%',
@@ -132,10 +140,9 @@ const BuyerDashboardView = () => {
   return (
     <UserRoute>
       {loading && (
-        <SyncOutlined
-          spin
-          className="d-flex justify-content-center display-1 text-danger p-5"
-        />
+        <div className={classes.rootForLoading}>
+          <LinearProgress />
+        </div>
       )}
       <div className={classes.root}>
         <Section className={clsx(classes.pagePaddingTop, classes.section)}>
