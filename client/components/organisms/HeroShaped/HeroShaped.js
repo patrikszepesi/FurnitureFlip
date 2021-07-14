@@ -12,7 +12,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useMediaQuery, Button, Typography,Grid, ListItem, ListItemAvatar,colors } from '@material-ui/core';
 import { Context } from "../../../context";
 import AnswerModal from "../../../components/modal/AnswerModal";
-import toast  from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 
@@ -98,7 +99,7 @@ const HeroShaped = props => {
   });
 
   const { state, dispatch } = useContext(Context);
-  const { user,backendCall } = state;
+  const { user,backendCallAnswer } = state;
 
   const [answers,setAnswers]=useState([]);
   const [comments,setComments]=useState([]);
@@ -106,7 +107,7 @@ const HeroShaped = props => {
 
   const backendCallFalse = () => {
   dispatch({
-    type: "SET_BACKEND_CALL_FALSE",
+    type: "SET_BACKEND_CALL_ANSWER_FALSE",
   });
 };
 
@@ -125,13 +126,39 @@ const { data } = await axios.post(`/api/comment/answer/${item._id}`,{
 
     setAnswerObj(newAnswerObj)
   };
-
-  if(backendCall===true){
-      if(answerObj.text.length>2 && answerObj.name.length>0){
+//
+  if(backendCallAnswer===true){
+      if(answerObj.text.length>2 ){
         sendAnswerToBackend();
-        toast.success("siker")
-      }  else if(answerObj.text.length<3 || answerObj.name.length<3){
-        toast.success('Hiba, kitöltötted az összes mezőt?')
+        toast("Siker!Hamarosan látni fogod a válaszodat", {
+           duration: 4000,
+      style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'800px',
+      marginTop:'70px',
+      },
+      iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+      },
+      });
+    }  else if(answerObj.text.length<3 ){
+        toast("Hiba, kitöltötted az összes mezőt shaped?", {
+           duration: 4000,
+      style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'800px',
+      marginTop:'70px',
+      },
+      iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+      },
+      });
         backendCallFalse();
       }
     }
@@ -165,6 +192,8 @@ console.log(item)
   const classes = useStyles();
 
   return (
+    <>
+    <Toaster />
     <div className={clsx(classes.root, 'hero-shaped', className)} {...rest}>
       <div className={clsx('hero-shaped__wrapper', classes.hero)}>
         <Section
@@ -185,23 +214,12 @@ console.log(item)
                     <AccordionDetails>
                       <Typography>
                         Válasz : { comment.answer } <hr/> { user && item.instructor!=undefined && user._id==item.instructor._id &&  <AnswerModal  course={item} text={textToSend} >
-
-                        <textarea style={{marginBottom:'10px'}}
-                              value= {answerObj.name}
-                              onChange={(event, value) => {
-                                handleAnswerChange(event,'name',event.target.value,comment.id,'commentId')}}
-                              className='form-control'
-                              placeholder='Neved hogyan jelenjen meg az értékelésen'
-                              rows={1}
-                              cols={1}>
-                        </textarea>
-
                         <textarea style={{marginBottom:'10px'}}
                               value= {answerObj.text}
                               onChange={(event, value) => {
                                 handleAnswerChange(event,'text',event.target.value,comment.id,'commentId')}}
                               className='form-control'
-                              placeholder='Milyen volt az Oktató és maga az óra'
+                              placeholder='Írd ide a válaszodat a kérdésre'
                               rows={10}
                               cols={50}>
                         </textarea>
@@ -248,9 +266,10 @@ console.log(item)
 
       <Divider />
     </div>
+    </>
   );
 };
-
+//
 HeroShaped.propTypes = {
   /**
    * External classes

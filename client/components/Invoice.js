@@ -9,8 +9,8 @@ const Invoice = ({ order }) => (
         ~ {new Date().toLocaleString()} ~
       </Text>
       <Text style={styles.title}>Számla</Text>
-      <Text style={styles.author}>MoveIn</Text>
-    
+      <Text style={styles.author}>FurFlip</Text>
+
       <Text style={styles.text}>
         <Text>
           Számla letöltése: {'               '}
@@ -18,7 +18,7 @@ const Invoice = ({ order }) => (
         </Text>
         {'\n'}
         <Text>
-          Vásárlás időpontja: {'         '}
+          Vásárlás dátuma: {'         '}
           {order.time}
         </Text>
         {'\n'}
@@ -29,7 +29,7 @@ const Invoice = ({ order }) => (
         {'\n'}
         <Text>
           Összesen fizetett: {'       '}
-          {order.course.price}
+          {order.course.price} Forint
         </Text>
       </Text>
 

@@ -5,7 +5,8 @@ import { useRouter, userRouter } from "next/router";
 // initial state
 const intialState = {
   user: null,
-  backendCall:false
+  backendCall:false,
+  backendCallAnswer:false
 };
 
 // create context
@@ -23,8 +24,14 @@ const rootReducer = (state, action) => {
     case "SET_BACKEND_CALL_TRUE":
       return { ...state, backendCall: true };
 
+    case "SET_BACKEND_CALL_ANSWER_TRUE":
+      return { ...state, backendCallAnswer: true };
+
     case "SET_BACKEND_CALL_FALSE":
       return { ...state, backendCall: false };
+
+    case "SET_BACKEND_CALL_ANSWER_FALSE":
+      return { ...state, backendCallAnswer: false };
 
     default:
       return state;

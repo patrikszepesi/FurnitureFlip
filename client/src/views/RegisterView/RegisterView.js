@@ -11,7 +11,7 @@ import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
 import registerImage from '../../../public/assets/reg.jpg'
-//
+
 
 
 
@@ -91,7 +91,7 @@ const RegisterView = () => {
       setPassword("");
       setLoading(false);
     } catch (err) {
-      toast.error(err.response.data, {
+      toast(err.response.data, {
          duration: 4000,
     style: {
     border: '5px solid #E1C699',

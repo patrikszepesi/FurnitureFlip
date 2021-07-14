@@ -1,7 +1,7 @@
 import React, { useState,useContext,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import toast  from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { loadStripe } from "@stripe/stripe-js";
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
@@ -151,7 +151,7 @@ if(item.sold){
 }else{
   sold=""
 }
-
+//
   const sendCommentToBackend = async() => {
     setTimeout(backendCallFalse,0);
 
@@ -162,13 +162,39 @@ if(item.sold){
   };
 
   if(backendCall===true){
-      if(commentObj.text.length>2 && commentObj.name.length>0){
+      if(commentObj.text.length>2){
         sendCommentToBackend();
-        toast.success("siker")
-      }  else if(commentObj.text.length<3 || commentObj.name.length<3){
-        toast.success('Hiba, kitöltötted az összes mezőt?')
-        backendCallFalse();
-      }
+        toast("Siker!Hamarosan látni fogod a kérdésedet", {
+           duration: 4000,
+      style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'800px',
+      marginTop:'70px',
+      },
+      iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+      },
+      });
+      } else if(commentObj.text.length<2 ){
+        toast("Hiba, kitöltötted az összes mezőt?", {
+           duration: 4000,
+      style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'800px',
+      marginTop:'70px',
+      },
+      iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+      },
+      });
+       backendCallFalse();
+       }
 
     }
 
@@ -201,7 +227,8 @@ if(item.sold){
   console.log(item)
 
   return (
-
+    <>
+    <Toaster />
     <div className={className} {...rest}>
     {item && item.sold ? <h1>Ezt a terméket már eladta az eladó</h1>:<HeroShaped
     item={item}
@@ -309,30 +336,17 @@ if(item.sold){
             <RatingModal  course={item} text={'Kérdezz'} >
 
           <textarea style={{marginBottom:'10px'}}
-                value= {commentObj.name}
-                onChange={(event, value) => {
-                  handleRatingChange(event,'name',event.target.value)}}
-                className='form-control'
-                placeholder='Neved hogyan jelenjen meg az értékelésen'
-                rows={1}
-                cols={1}>
-          </textarea>
-
-          <textarea style={{marginBottom:'10px'}}
                 value= {commentObj.text}
                 onChange={(event, value) => {
                   handleRatingChange(event,'text',event.target.value)}}
                 className='form-control'
-                placeholder='Milyen volt az Oktató és maga az óra'
+                placeholder='Írd ide a kérdésed'
                 rows={10}
                 cols={50}>
           </textarea>
-      </RatingModal>
-
-
+          </RatingModal>
 
             </>
-
       }
       rightSide={
         <SwiperImageMultiple
@@ -343,6 +357,7 @@ if(item.sold){
     />}
 
     </div>
+    </>
   );
 };
 

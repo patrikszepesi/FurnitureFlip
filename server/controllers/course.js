@@ -225,30 +225,15 @@ export const courses = async (req, res) => {
 };
 
 export const invoice = async (req, res) => {
-  console.log("hi fuck fuck fuckt")
-  console.log(req.params.userId)
-  console.log("yellow")
-
-  // let courseIds=req.params.courses.split(',')
 
   try{
-     var foo= await User.findOne({_id:req.params.userId}).select('purchases -_id')
+     var userPurchases= await User.findOne({_id:req.params.userId}).select('purchases -_id')
 
    }catch(err){
      console.log(err)
    }
-  //console.log(req.params.userId)
-  // var classes=[];
-  // for(let i=0;i<courseIds.length;i++){
-  //   try{
-  //     var foo= await Course.find({_id:courseIds[i]})
-  //     classes.push(foo)
-  //   }catch(err){
-  //     console.log(err)
-  //   }
-  // }
-  console.log(foo)
-  res.json(foo)
+
+  res.json(userPurchases)
 };
 
 export const checkEnrollment = async (req, res) => {
@@ -289,7 +274,7 @@ export const paidEnrollment = async (req, res) => {
         {
           name: course.name,
           amount: Math.round(course.price.toFixed(2) * 100),
-          currency: "usd",
+          currency: "huf",
           quantity: 1,
         },
       ],
@@ -366,18 +351,19 @@ export const stripeSuccess = async (req, res) => {
               Data: `
                   <html>
                     <h1>Vásárlás megerősítése</h1>
-                    <p>User this code to reset your password</p>
+                    <p>A vásárló hamarosan kapcsolatba fog lépni veled. Amennyiben ez 5 napon belül nem történik meg, írj nekünk vagy az eladónak</p>
 
-                    <h2 style="color:red;">${course.email}</h2>
-                    <h2 style="color:red;">${course.phone}</h2>
-                    <i>edemy.com</i>
+                    <p>Eladó adatai:</p>
+                    <h2 style="color:blue;">Emailcíme :   ${ course.email}</h2>
+                    <h2> Telefonszáma : ${ course.phone}</h2>
+                    <i>FurFlip.com</i>
                   </html>
                 `,
             },
           },
           Subject: {
             Charset: "UTF-8",
-            Data: "Vásárlás",
+            Data: "Vásárlás megerősítése",
           },
         },
       };
@@ -393,20 +379,24 @@ export const stripeSuccess = async (req, res) => {
               Charset: "UTF-8",
               Data: `
                   <html>
-                    <h1>Valaki akar tőled venni</h1>
-                    <p>vevő adatai</p>
+                    <h1>Valaki megvette az egyik tárgyadat</h1>
+                    <p>A vevő már kifizette a terméket, a pénzt xy napon utaljuk neked, ha sikeresen átvette tőled a vevő a tárgyat</p>
 
-                    <h2 style="color:red;">${course.name}</h2>
-                    <h2 style="color:red;">${session.customer_details.email}</h2>
+                    <p>Tárgy amit megvettek tőled:</p>
+                    <h2 style="color:blue;">${course.name}</h2>
 
-                    <i>edemy.com</i>
+                    <p>Írj vissza a vevőnek minél előbb, hogy a tárgyat hol és mikor tudja átvenni</p>
+                    <p>Vevő emailcíme:</p>
+                    <h2 style="color:blue;">${session.customer_details.email}</h2>
+
+                    <i>FurFlip.com</i>
                   </html>
                 `,
             },
           },
           Subject: {
             Charset: "UTF-8",
-            Data: "Vásárlás",
+            Data: "Valaki megvette az egyik tárgyadat",
           },
         },
       };
@@ -592,18 +582,19 @@ export const comments = async (req, res) => {
               Data: `
                   <html>
                     <h1>Valaki kérdezett valamit az egyik termékedről</h1>
-                    <p>Válaszolj neki</p>
+                    <p>Jelentkezz be, kattins az alábbi linkre és válaszolj a potenciális vevő kérdésre</p>
+                    <i>www.sell.com/item/${itemWithQuestion._id}</i>
 
                     <h2 style="color:red;">${itemWithQuestion.name}</h2>
                     <h2 style="color:red;">${itemWithQuestion.item}</h2>
-                    <i>edemy.com</i>
+                    <i>FurFlip.com</i>
                   </html>
                 `,
             },
           },
           Subject: {
             Charset: "UTF-8",
-            Data: "Vásárlás",
+            Data: "Valaki kérdezett valamit az egyik termékedről",
           },
         },
       };
@@ -680,18 +671,19 @@ export const commentAnswers = async (req, res) => {
             Data: `
                 <html>
                   <h1>Válaszoltak a kérdésedre</h1>
-                  <p>Amit ezzel a tárggyal kapcsolatban kérdeztél</p>
+                  <p>Az eladó válaszolt a kérdésedre</p>
 
-                  <h2 style="color:red;">${itemToLookForForEmail.name}</h2>
+                  <p>Termék neve?</p>
+                  <h2 style="color:blue;">${itemToLookForForEmail.name}</h2>
 
-                  <i>edemy.com</i>
+                  <i>FurFlip.com</i>
                 </html>
               `,
           },
         },
         Subject: {
           Charset: "UTF-8",
-          Data: "Vásárlás",
+          Data: "Válasz a kérdésre",
         },
       },
     };

@@ -1,9 +1,9 @@
 import  { useState,useContext } from "react";
 import { Modal, Button } from "antd";
-import { toast } from "react-toastify";
 import { StarOutlined } from "@ant-design/icons";
 import { useRouter } from 'next/router'
 import { Context } from "../../context";
+
 
 
 
@@ -16,12 +16,6 @@ const { user,backendCall } = state;
 
 
 
-
-
-
-  //let history = useHistory();
-  //let { slug } = useParams();
-
   const handleModal = () => {
     // if (user && user.token) {
       setModalVisible(true);
@@ -33,9 +27,9 @@ const { user,backendCall } = state;
     // }
   };//
 
-  const backendCallTrue = () => {
+  const backendCallAnswerTrue = () => {
     dispatch({
-      type: "SET_BACKEND_CALL_TRUE",
+      type: "SET_BACKEND_CALL_ANSWER_TRUE",
     });
   };
 
@@ -57,8 +51,7 @@ const { user,backendCall } = state;
         visible={modalVisible}
         onOk={() => {
           setModalVisible(false);
-
-          backendCallTrue();
+          backendCallAnswerTrue();
         }}
         onCancel={() => setModalVisible(false)}
       >

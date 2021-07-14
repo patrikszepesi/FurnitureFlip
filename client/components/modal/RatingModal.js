@@ -15,9 +15,6 @@ const { user,backendCall } = state;
 
 
 
-  //let history = useHistory();
-  //let { slug } = useParams();
-
   const handleModal = () => {
     // if (user && user.token) {
       setModalVisible(true);

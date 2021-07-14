@@ -157,14 +157,10 @@ const Main = ({ children, themeToggler, themeMode }) => {
             },
             {
               title: user? 'Számláim': "Elfelejtett jelszó",
-              href:user? '/invoice':'/forgot-password',
+              href:user? '/history':'/forgot-password',
             },
             {
-              title: user? 'Bevételeim' :' ',
-              href: user? '/seller/revenue': ' ',
-            },
-            {
-              title: user? 'Bevételeim' :' ',
+              title: user? 'Pénzügyi adataid' :' ',
               href: user? '/seller/revenue': ' ',
             },
           ],

@@ -110,89 +110,90 @@ const CategoryBabyView = ({ courses,className,...rest }) => {
              subtitle=""
              fadeUp
            />
-           <Grid container spacing={isMd ? 4 : 2}>
-             {coursesAfterSearch.map((item, index) => (
-               <Grid key={index} item xs={12} sm={12} md={3} data-aos="fade-up">
-                 <CardProduct
-                   className={classes.cardProduct}
-                   withShadow
-                   liftUp
-                   mediaContent={
-                     <>
-                       <Image
-                         src={item.images[0].Location}
-                         alt={item.title}
-                         lazyProps={{ width: '100%', height: '100%' }}
-                         className={classes.image}
-                       />
-                       <div className={classes.courseCardPrice}>
-                         <Typography
-                           variant="body1"
-                           color="primary"
-                           className={classes.fontWeight700}
-                         >
-                           {item.price}
-                         </Typography>
-                       </div>
-                     </>
-                   }
-                   cardContent={
-                     <Grid container spacing={1}>
-                       <Grid item  onClick={() => router.push(`/item/${slugify(item._id.toLowerCase())}`)} xs={12}>
-                         <Typography
-                           variant="h6"
-                           color="textPrimary"
-                           align="left"
-                           className={classes.fontWeight700}
-                         >
-                           {item.name}
-                         </Typography>
-                       </Grid>
-                       <Grid item xs={12}>
-                         <Typography
-                           variant="body1"
-                           color="textSecondary"
-                           align="left"
-                         >
-                           {item.quality}
-                         </Typography>
-                       </Grid>
-                       <Grid item container justify="space-between" xs={12}>
+           {coursesAfterSearch.length < 1 ? ( <SectionHeader
+              subtitle="Nem találtunk ilyen terméket, esetleg próbáld meg más keresési paraméterekkel"
+              fadeUp
+            />):( <Grid container spacing={isMd ? 4 : 2}>
+              {coursesAfterSearch.map((item, index) => (
+                <Grid key={index} item xs={12} sm={12} md={3} data-aos="fade-up">
+                  <CardProduct
+                    className={classes.cardProduct}
+                    withShadow
+                    liftUp
+                    mediaContent={
+                      <>
+                        <Image
+                          src={item.images[0].Location}
+                          alt={item.title}
+                          lazyProps={{ width: '100%', height: '100%' }}
+                          className={classes.image}
+                        />
+                        <div className={classes.courseCardPrice}>
+                          <Typography
+                            variant="body1"
+                            color="primary"
+                            className={classes.fontWeight700}
+                          >
+                            {item.price} Forint
+                          </Typography>
+                        </div>
+                      </>
+                    }
+                    cardContent={
+                      <Grid container spacing={1}>
+                        <Grid item  onClick={() => router.push(`/item/${slugify(item._id.toLowerCase())}`)} xs={12}>
+                          <Typography
+                            variant="h6"
+                            color="textPrimary"
+                            align="left"
+                            className={classes.fontWeight700}
+                          >
+                            {item.name}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Typography
+                            variant="body1"
+                            color="textSecondary"
+                            align="left"
+                          >
+                            {item.quality}
+                          </Typography>
+                        </Grid>
+                        <Grid item container justify="space-between" xs={12}>
 
-                         <Grid
-                           item
-                           container
-                           alignItems="center"
-                           justify="flex-end"
-                           xs={6}
-                         >
+                          <Grid
+                            item
+                            container
+                            alignItems="center"
+                            justify="flex-end"
+                            xs={6}
+                          >
 
-                           <Typography
-                             component="span"
-                             variant="body1"
-                             className={classes.fontWeight700}
-                           >
-                             {item.location}
-                           </Typography>
+                            <Typography
+                              component="span"
+                              variant="body1"
+                              className={classes.fontWeight700}
+                            >
+                              {item.location}
+                            </Typography>
 
-                         </Grid>
-                       </Grid>
-                       <Grid item xs={12}>
-                         <LearnMoreLink
-                           title="Megnézem"
-                           variant="body1"
-                           item={item._id}
-                           color="primary"
-                         />
-                       </Grid>
-                     </Grid>
-                   }
-                 />
-               </Grid>
-             ))}
-           </Grid>
-
-
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <LearnMoreLink
+                            title="Megnézem"
+                            variant="body1"
+                            item={item._id}
+                            color="primary"
+                          />
+                        </Grid>
+                      </Grid>
+                    }
+                  />
+                </Grid>
+              ))}
+            </Grid>)}
            <Section className="paddingBottom0">
              <Divider />
            </Section>

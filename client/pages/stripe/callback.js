@@ -1,13 +1,25 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../../context";
-import { SyncOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+}));
 
 const StripeCallback = () => {
   const {
     state: { user },
     dispatch,
   } = useContext(Context);
+  const classes = useStyles();
+
 
   useEffect(() => {
     if (user) {
@@ -18,16 +30,15 @@ const StripeCallback = () => {
           payload: res.data,
         });
         window.localStorage.setItem("user", JSON.stringify(res.data));
-        window.location.href = "/instructor";
+        window.location.href = "/user";
       });
     }
   }, [user]);
 
   return (
-    <SyncOutlined
-      spin
-      className="d-flex justify-content-center display-1 text-danger p-5"
-    />
+    <div className={classes.root}>
+      <CircularProgress />
+    </div>
   );
 };
 

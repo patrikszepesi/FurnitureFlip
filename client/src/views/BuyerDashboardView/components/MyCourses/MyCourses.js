@@ -58,8 +58,6 @@ const useStyles = makeStyles(theme => ({
   a :{
 
     color: '#000000'
-
-
   },
 }));
 
@@ -71,13 +69,12 @@ const MyCourses = props => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-console.log(courses)
   return (
     <div className={className} {...rest}>
 
       <Grid container spacing={isMd ? 2 : 1}>
         {courses && courses.length>0 && courses.map((course, index) => (
-          <Grid item xs={10} key={index} data-aos="fade-up">
+          <Grid item xs={16} key={index} data-aos="fade-up">
             <CardBase className={classes.cardBase} liftUp>
 
               <ListItem disableGutters className={classes.listItem}>
@@ -86,13 +83,13 @@ console.log(courses)
                   <Avatar src={course.images[0].Location} className={classes.avatar} />
                 </ListItemAvatar>
                 <Link
-                    href={`/user/course/${course.slug}`}
+                    href={`/item/${course._id}`}
                     className="pointer">
 
                     <a className={classes.a}><ListItemText
                        className={classes.listItemText}
                        primary={course.name}
-                       secondary={"Ár:" + course.price + "forint"}
+                       secondary={"Ár : " +  course.price + " forint"}
                        primaryTypographyProps={{
                          className: classes.title,
                          variant: 'h6',
@@ -110,6 +107,7 @@ console.log(courses)
               </ListItem>
               <p>{'Eladó emailcíme : ' +  course.email} </p>
               <p>{'Eladó telefonszáma : ' +  course.phone} </p>
+              <p>{'Átvehető itt : ' +  course.city + ", " } {course.street}</p>
             </CardBase>
           </Grid>
         ))}

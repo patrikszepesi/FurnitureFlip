@@ -14,10 +14,17 @@ import { CardBaseStripe, DescriptionListIcon } from '../../../../../components/o
 import {
   DollarOutlined,
   SettingOutlined,
-  SyncOutlined,
 } from "@ant-design/icons";
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
   learnMoreLink: {
     marginTop: theme.spacing(2),
     color: theme.palette.secondary.main,
@@ -120,8 +127,9 @@ const Advantages = props => {
         </Grid>
          </>
            </div>
-    ): (   <h1> <SyncOutlined spin
-    className="d-flex justify-content-center display-1 text-primary p-5"/></h1>
+    ): (   <h1>   <div className={classes.root}>
+        <LinearProgress />
+      </div></h1>
      )}
     </>
 
@@ -130,7 +138,7 @@ const Advantages = props => {
 };
 
 Advantages.propTypes = {
-  /**
+  /** //
    * External classes
    */
   className: PropTypes.string,
