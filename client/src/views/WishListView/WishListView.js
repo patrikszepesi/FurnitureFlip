@@ -13,7 +13,6 @@ import {
 const WishListView = () => {
   const [items, setItems] = useState([]);
   const [wishlist,setWishlist]=useState();
-  console.log(wishlist,'wishy')
 
   useEffect(() => {
     loadCourses();

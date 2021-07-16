@@ -1,7 +1,7 @@
 import { CloudSyncOutlined } from "@ant-design/icons";
 import UserRoute from "../../components/routes/UserRoute";
 import { makeStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import CircularProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
