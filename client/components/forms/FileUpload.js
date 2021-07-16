@@ -2,19 +2,39 @@ import React, { useState } from 'react';
 import Resizer from 'react-image-file-resizer';
 import axios from 'axios';
 import { Avatar, Badge } from 'antd';
-//
+import toast, { Toaster } from 'react-hot-toast';
+
 const FileUpload = ({ values, setValues, setLoading }) => {
   const [imageLength, setImageLength] = useState(0);
+
+  console.log(values.images)
 
   const fileUploadAndResize = e => {
 
     let files = e.target.files;
     let allUploadedFiles = values.images;
 
-
     if (files) {
       setImageLength(files.length);
       setLoading(true);
+      if(files.length + values.images.length >6){
+        toast("Hiba, maximum 6 darab képet tudsz feltölteni!", {
+           duration: 4000,
+      style: {
+      border: '5px solid #E1C699',
+      padding: '16px',
+      color: '#713200',
+      minWidth:'800px',
+      marginTop:'70px',
+      },
+      iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+      },
+      });
+        setLoading(false)
+        return;
+      }
       for (let i = 0; i < files.length; i++) {
         Resizer.imageFileResizer(
           files[i],
@@ -51,10 +71,8 @@ const FileUpload = ({ values, setValues, setLoading }) => {
       }
     }
   };
-console.log(values)
   const handleImageRemove = image => {
     setLoading(true);
-    console.log("removing")
     axios
       .post(
         "/api/course/remove-image",
@@ -82,7 +100,7 @@ console.log(values)
 
   return (
     <>
-
+    <Toaster />
       <div className="row">
         {values.images &&
           values.images.map(image => (
@@ -102,6 +120,7 @@ console.log(values)
           ))}
       </div>
       <div className="row">
+
         <label className="btn btn-primary btn-raised mt-3">
           Képek kiválasztása
           <input
@@ -110,10 +129,11 @@ console.log(values)
             hidden
             accept="images/*"
             onChange={fileUploadAndResize}
-
           />
         </label>
+
       </div>
+        <small>(maximum 6 darab kép)</small>
     </>
   );
 };

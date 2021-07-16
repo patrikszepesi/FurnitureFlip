@@ -116,8 +116,8 @@ const Items = props => {
         title="Általad eladott termékek"
         subtitle="Emailben elküldtük neked a vevő emailcímét. Írj neki minél előbb, hogy megkaphassa a vásárolt termékét. Az itt megjelenő tárgyakért már fizetett a vevő. Biztonsági okok miatt a pénzt 30 nap után juttatjuk el a számládra"
         primaryCta={
-          <Button onClick={()=>router.push("/seller/item/create")} variant="outlined" color="primary" size="large">
-            Eladok még valamit
+          <Button onClick={()=>router.push("/seller/revenue")} variant="outlined" color="primary" size="large">
+            Pénzügyi adataiam és kifizetéseim
           </Button>
         }
         align={'left'}

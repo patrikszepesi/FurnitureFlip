@@ -6,10 +6,28 @@ import { Provider } from "../context";
 import Head from 'next/head';
 import Swiper from 'swiper/bundle';
 import toast, { Toaster } from 'react-hot-toast';
+import Script from "next/script";
+
 
 
 function MyApp({ Component, pageProps }) {
   return (
+    <>
+    <Script
+       strategy="lazyOnload"
+       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+     />
+
+     <Script strategy="lazyOnload">
+       {`
+           window.dataLayer = window.dataLayer || [];
+           function gtag(){dataLayer.push(arguments);}
+           gtag('js', new Date());
+           gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+             page_path: window.location.pathname,
+           });
+               `}
+     </Script>
     <Provider>
     <Head>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -27,7 +45,9 @@ function MyApp({ Component, pageProps }) {
   </body>
       <Component {...pageProps} />
     </Provider>
+    </>
   );
+
 }
 
 export default MyApp;

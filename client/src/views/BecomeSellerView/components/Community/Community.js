@@ -27,6 +27,7 @@ import {
 } from "@ant-design/icons";
 import axios from 'axios';
 import myImage from '../../../../../public/assets/rev.svg'
+import { useRouter } from "next/router";
 import UserRoute from "../../../../../components/routes/UserRoute";
 
 
@@ -94,6 +95,8 @@ const useStyles = makeStyles(theme => ({
 const Community = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
+  const router = useRouter();
+
 
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -126,48 +129,89 @@ const Community = props => {
   return (
     <UserRoute>
     <div className={className} {...rest}>
-      <HeroShapedStripe
-        leftSide={
-          <SectionHeader
-            title={
-              <span>
-                Add meg {' '}
-                <Typography color="secondary" variant="inherit" component="span">A szükséges adatokat</Typography>
-              </span>
-            }
-            subtitle=" Az eladás után 30 nap múlva érkezik a pénz a számládra Nincs semmilyen rejtett költség. Az eladási ár 90% megy a te megadott bankszámládra, és a maradék 10% pedig a mi jutalékunk"
-            ctaGroup={[
-              <Button
-                variant="contained"
-                className={classes.button}
-                icon={loading ? <LoadingOutlined /> : <SettingOutlined />}
-                onClick={becomeInstructor}
-                disabled={
-                  (user && user.role && user.role.includes("Instructor")) ||
-                  loading
-                }
-              >
-                {loading ? "Loading..." : "Kattins ide, hogy elkezd"}
-              </Button>
-            ]}
-            align="left"
-            disableGutter
+    {user && user.role && user.role.includes("Instructor")?(<HeroShapedStripe
+      leftSide={
+        <SectionHeader
+          title={
+            <span>
+            Már beállítottad, hogy  {' '}
+              <Typography color="secondary" variant="inherit" component="span">eladó lehess</Typography>
+            </span>
+          }
+          subtitle=" "
+          ctaGroup={[
+            <Button
+              variant="contained"
+              className={classes.button}
+              icon={loading ? <LoadingOutlined /> : <SettingOutlined />}
+              onClick={()=> router.push("/seller/revenue")}
+              disabled={
+                loading
+              }
+            >
+              {loading ? "Loading..." : "Pénzügyi adatok megtekíntése"}
+            </Button>
+          ]}
+          align="left"
+          disableGutter
+          data-aos="fade-up"
+          titleVariant="h3"
+        />
+      }
+      rightSide={
+        <div className={classes.cover}>
+          <Image
+            src={myImage}
+            alt="..."
+            className={classes.coverImg}
             data-aos="fade-up"
-            titleVariant="h3"
+            lazy={false}
           />
-        }
-        rightSide={
-          <div className={classes.cover}>
-            <Image
-              src={myImage}
-              alt="..."
-              className={classes.coverImg}
-              data-aos="fade-up"
-              lazy={false}
-            />
-          </div>
-        }
-      />
+        </div>
+      }
+    />):(<HeroShapedStripe
+      leftSide={
+        <SectionHeader
+          title={
+            <span>
+            Legyél te is eladó,  add meg {' '}
+              <Typography color="secondary" variant="inherit" component="span">a szükséges adatokat</Typography>
+            </span>
+          }
+          subtitle=" Az eladás után 30 nap múlva érkezik a pénz a számládra Nincs semmilyen rejtett költség. Az eladási ár 90% megy a te megadott bankszámládra, és a maradék 10% pedig a mi jutalékunk"
+          ctaGroup={[
+            <Button
+              variant="contained"
+              className={classes.button}
+              icon={loading ? <LoadingOutlined /> : <SettingOutlined />}
+              onClick={becomeInstructor}
+              disabled={
+                (user && user.role && user.role.includes("Instructor")) ||
+                loading
+              }
+            >
+              {loading ? "Loading..." : "Kattins ide, hogy elkezd"}
+            </Button>
+          ]}
+          align="left"
+          disableGutter
+          data-aos="fade-up"
+          titleVariant="h3"
+        />
+      }
+      rightSide={
+        <div className={classes.cover}>
+          <Image
+            src={myImage}
+            alt="..."
+            className={classes.coverImg}
+            data-aos="fade-up"
+            lazy={false}
+          />
+        </div>
+      }
+    />)}
+
 
     </div>
     </UserRoute>

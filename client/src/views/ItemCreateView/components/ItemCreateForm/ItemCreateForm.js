@@ -94,7 +94,7 @@ const ItemCreateForm = props => {
   }else if(values.category==='művészet'){
     subCategories=['festmény','design','szobor'].sort()
   }
-  if(values.subCategory==='benti'){
+  if(values.subCategory==='benti bútor'){
     items=['szék','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
   }else if(values.subCategory=== 'kinti bútor'){
     items=['napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi','egyéb','ajtó','tégla','csempe','szék'].sort()

@@ -381,6 +381,9 @@ export const stripeSuccess = async (req, res) => {
                   <html>
                     <h1>Valaki megvette az egyik tárgyadat</h1>
                     <p>A vevő már kifizette a terméket, a pénzt xy napon utaljuk neked, ha sikeresen átvette tőled a vevő a tárgyat</p>
+                    <p>Befolyt össze megtekíntése</p>
+                    <i>www.furflip.com/seller/revenue</i>
+
 
                     <p>Tárgy amit megvettek tőled:</p>
                     <h2 style="color:blue;">${course.name}</h2>
