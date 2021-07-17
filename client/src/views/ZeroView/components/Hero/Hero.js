@@ -77,7 +77,7 @@ const Hero = props => {
         <Section narrow>
           <>
           <SectionHeader
-            title="Mi az a Zero Waste?"
+            title="Mi az a Zero Waste? Érdekes dolgok"
             subtitle="A zero waste szó szerinti jelentése nulla hulladék. A hulladékmentes életmódra utal. A szemléletmód alapelve, hogy újrahasznosítás, tehát utólagos hulladékgazdálkodás helyett inkább a preventív gondolkodásmódot válasszuk."
             titleProps={{
               className: clsx(classes.textWhite, classes.fontWeightBold),
