@@ -9,38 +9,49 @@ export const integrations = [
     iconBg: colors.blue,
     icon: 'fas fa-couch',
     title: 'Bútor és Otthon',
+    redirect:'butor-es-otthon'
   },
   {
     iconColor: colors.purple,
     iconBg: colors.purple,
     icon: 'fas fa-biking',
     title: 'Sport és szabadidő',
+    redirect:'sport-es-szabadido'
+
   },
   {
     iconColor: colors.amber,
     iconBg: colors.amber,
     icon: 'fas fa-tv',
     title: 'Műszaki cikkek',
+    redirect:'muszaki-cikkek'
+
   },
   {
     iconColor: colors.indigo,
     iconBg: colors.indigo,
     icon: 'fas fa-tshirt',
     title: 'Ruhák',
+    redirect:'ruha'
+
   },
   {
     iconColor: colors.pink,
     iconBg: colors.pink,
     icon: 'fas fa-book',
     title: 'Könyvek',
+    redirect:'konyvek'
+
   },
   {
     iconColor: colors.green,
     iconBg: colors.green,
     icon: 'fas fa-baby-carriage',
     title: 'Mama-baba',
+    redirect:'mama-baba'
+
   },
-  
+
 ];
 
 export const reviews = [

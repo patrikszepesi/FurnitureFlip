@@ -186,8 +186,6 @@ if(user && item.instructor!=undefined){
 }else {
   textToSend=''
 }
-console.log(user)
-console.log(item)
 
   const classes = useStyles();
 

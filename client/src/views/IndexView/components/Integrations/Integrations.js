@@ -69,7 +69,7 @@ const Integrations = props => {
                 {data.map((item, index) => (
                   <Tooltip title={item.title}>
                   <Grid item xs={4} key={index}>
-                    <CardBase withShadow liftUp>
+                    <CardBase onClick={()=>router.push(`/category/${item.redirect}`)} withShadow liftUp>
                       <IconAlternate
                       fontIconClass={item.icon}
                       size="medium"

@@ -269,11 +269,11 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
     <SectionHeader
         title={
           <span>
-            Válaszd ki mit{' '}
-            <Typography color="secondary" variant="inherit" component="span">keresel</Typography>
+            Válaszd ki mit keresel{' '}
+            <Typography color="secondary" variant="inherit" component="span">és vedd meg egy kattintással</Typography>
           </span>
         }
-        subtitle="és vedd meg egy kattintással"
+        subtitle= {categoryToFilter}
         fadeUp
       />
       <Section className={classes.heroWrapper}>

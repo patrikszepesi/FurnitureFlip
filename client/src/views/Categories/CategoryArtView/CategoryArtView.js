@@ -95,7 +95,7 @@ const CategoryArtView = ({ courses,className,...rest }) => {
   useEffect(() => {
     fetchProperties()
   }, [filterObj /*currentPage*/]);
-
+//
    return (
     <>
 

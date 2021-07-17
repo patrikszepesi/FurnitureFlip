@@ -191,6 +191,7 @@ const ItemCreateView = (props = {}) => {
     };
 
   return (
+    <>
     <InstructorRoute>
     <Toaster />
     <div className={classes.root}>
@@ -255,6 +256,7 @@ const ItemCreateView = (props = {}) => {
       </SectionAlternate>
     </div>
     </InstructorRoute>
+    </>
   );
 };
 

@@ -224,7 +224,6 @@ if(item.sold){
   };
 
   let images=item.images
-  console.log(item)
 
   return (
     <>
@@ -261,7 +260,7 @@ if(item.sold){
                         color={colors.deepOrange}
                       />
                     </ListItemAvatar>
-                    <Typography variant="subtitle1" color="secondary" noWrap>
+                    <Typography variant="subtitle1" color="secondary" >
                     Ár:  { item.price + "forint"}
                     </Typography>
                   </ListItem>
@@ -274,7 +273,7 @@ if(item.sold){
                         color={colors.deepOrange}
                       />
                     </ListItemAvatar>
-                    <Typography variant="subtitle1" color="secondary" noWrap>
+                    <Typography variant="subtitle1" color="secondary" >
                     minőség:   { item.quality}
                     </Typography>
                   </ListItem>
@@ -287,7 +286,7 @@ if(item.sold){
                         color={colors.deepOrange}
                       />
                     </ListItemAvatar>
-                    <Typography variant="subtitle1" color="secondary" noWrap>
+                    <Typography variant="subtitle1" color="secondary" >
                     Átvehető itt:  { item.city}
                     </Typography>
                   </ListItem>
@@ -301,7 +300,7 @@ if(item.sold){
                       />
                     </ListItemAvatar>
                     <Typography variant="subtitle1" color="secondary" >
-                    <span onClick={() => router.push(`/category/${slugify(item.category)}`)} >{item.category}</span>
+                    <span onClick={() => router.push(`/category/${slugify(item.category)}`)} > Termék: { item.item}</span>
                     </Typography>
                   </ListItem>
                   <div className={classes.root}>
