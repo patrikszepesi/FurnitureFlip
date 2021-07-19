@@ -10,7 +10,7 @@ import { LearnMoreLinkPlain } from '../../../components/atoms';
 import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
-import registerImage from '../../../public/assets/reg.jpg'
+import registerSvg from '../../../public/assets/register.svg';
 
 
 
@@ -212,7 +212,7 @@ const RegisterView = () => {
         }
         rightSide={
           <Image
-            src={registerImage}
+            src={registerSvg}
             className={classes.image}
             lazy={false}
           />

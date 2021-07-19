@@ -163,9 +163,6 @@ const PartnerView = () => {
           />
         </div>
       </Parallax>
-      <Section id="agency-reviews">
-        <Reviews data={reviews} />
-      </Section>
       <Divider />
       <Section>
         <Contact />

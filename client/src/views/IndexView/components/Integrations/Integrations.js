@@ -64,7 +64,7 @@ const Integrations = props => {
             direction={isMd ? 'row' : 'column-reverse'}
           >
             <Grid item xs={12} md={6} data-aos="fade-up">
-            <h2>Legfelkapottabb kategóriák</h2>
+            <h2 color="primary">Legfelkapottabb kategóriák</h2>
               <Grid container spacing={2}>
                 {data.map((item, index) => (
                   <Tooltip title={item.title}>

@@ -10,6 +10,7 @@ import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
 import toast, { Toaster } from 'react-hot-toast';
+import loginSvg from '../../../public/assets/login.svg';
 
 
 
@@ -70,7 +71,6 @@ const LoginView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.table({ name, email, password });
     try {
       setLoading(true);
       const { data } = await axios.post(`/api/login`, {
@@ -197,7 +197,7 @@ const LoginView = () => {
         }
         rightSide={
           <Image
-            src="https://images.unsplash.com/photo-1572196284554-4e321b0e7e0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=934&q=80"
+            src={loginSvg}
             className={classes.image}
             lazy={false}
           />

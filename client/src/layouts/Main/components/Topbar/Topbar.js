@@ -4,6 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from "next/router";
+import logo from '../../../../../public/assets/FlipIt.svg'
 
 import {
   Toolbar,
@@ -91,16 +92,23 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.dark,
   },
   logoContainer: {
-    width: 100,
-    height: 28,
+    width: 200,
+    height: 56,
     [theme.breakpoints.up('md')]: {
       width: 120,
       height: 32,
     },
   },
   logoImage: {
-    width: '100%',
-    height: '100%',
+    width: '150%',
+    height: '150%',
+    [theme.breakpoints.up('sm')]: {
+
+      width: '200%',
+      height: '300%',
+    },
+
+
   },
   menu: {
     display: 'flex',
@@ -305,11 +313,11 @@ let button;
   return (
     <Toolbar disableGutters className={classes.toolbar} {...rest}>
       <div className={classes.logoContainer}>
-        <a href="/" title="thefront">
+        <a href="/" title="FlipIt">
           <Image
             className={classes.logoImage}
-            src={themeMode === 'light' ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg' : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'}
-            alt="thefront"
+            src={themeMode === 'light' ? logo : logo}
+            alt="FlipIt"
             lazy={false}
           />
         </a>
@@ -363,7 +371,6 @@ let button;
               </Popover>
             </div>
           ))}
-
           <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
             {button}
           </ListItem>

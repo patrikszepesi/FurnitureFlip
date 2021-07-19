@@ -10,12 +10,13 @@ const Contact = props => {
   return (
     <div className={clsx('jarallax', className)} {...rest}>
       <SectionHeader
-        title="Have a project to discuss?"
-        subtitle="We work on everything from physical products to digital experiences and are looking forward to hearing from you."
+        title="Támogatnál minket?"
         ctaGroup={[
+          <a class="mailto" href="mailto:contact@test.com">
           <Button variant="contained" color="primary" size="large">
-            Contact us
-          </Button>,
+            Írj nekünk
+          </Button>
+          </a>
         ]}
         data-aos="fade-up"
       />

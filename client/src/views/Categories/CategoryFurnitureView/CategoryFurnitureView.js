@@ -101,7 +101,7 @@ const CategoryFurnitureView = ({ courses,className,...rest }) => {
 
     <Search
       filterObj={filterObj}
-      categoryToFilter={'bútor'}
+      categoryToFilter={'bútor/otthon'}
       onFilterChange={newFilterObj => setFilterObj(newFilterObj)}
        />
 

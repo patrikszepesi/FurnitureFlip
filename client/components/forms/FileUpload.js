@@ -7,7 +7,6 @@ import toast, { Toaster } from 'react-hot-toast';
 const FileUpload = ({ values, setValues, setLoading }) => {
   const [imageLength, setImageLength] = useState(0);
 
-  console.log(values.images)
 
   const fileUploadAndResize = e => {
 

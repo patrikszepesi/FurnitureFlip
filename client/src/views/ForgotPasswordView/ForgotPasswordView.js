@@ -10,6 +10,8 @@ import { LearnMoreLinkPlain } from '../../../components/atoms';
 import { SectionHeader } from '../../../components/molecules';
 import { HeroShapedAuth } from '../../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
+import forgotP from '../../../public/assets/forgotpassword.svg';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -239,7 +241,7 @@ const ForgotPasswordView = () => {
         }
         rightSide={
           <Image
-            src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdyZWVufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+            src={forgotP}
             className={classes.image}
             lazy={false}
           />

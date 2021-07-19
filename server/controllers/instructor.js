@@ -71,14 +71,13 @@ export const currentInstructor = async (req, res) => {
     console.log(err);
   }
 };
-
+//
 export const instructorCourses = async (req, res) => {
-  console.log("mlél")
   try {
-    const courses = await Course.find({ instructor: req.user._id })
+    const items = await Course.find({ instructor: req.user._id, sold:false })
       .sort({ createdAt: -1 })
       .exec();
-    res.json(courses);
+    res.json(items);
   } catch (err) {
     console.log(err);
   }

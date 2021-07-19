@@ -140,7 +140,7 @@ const CategoryArtView = ({ courses,className,...rest }) => {
                       </>
                     }
                     cardContent={
-                      <Grid container spacing={1}>
+                      <Grid container spacing={1}>z
                         <Grid item  onClick={() => router.push(`/item/${slugify(item._id.toLowerCase())}`)} xs={12}>
                           <Typography
                             variant="h6"

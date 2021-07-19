@@ -7,7 +7,7 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "next start",
-    "clear-all": "rimraf ./.cache ./.next ./node_modules ./package-lock.json" 
+    "clear-all": "rimraf ./.cache ./.next ./node_modules ./package-lock.json"
   },
   "browserslist": [
     ">0.2%",
@@ -51,6 +51,7 @@
     "react-lazy-load-image-component": "^1.5.1",
     "react-markdown": "^5.0.3",
     "react-player": "^2.9.0",
+    "react-responsive-carousel": "^3.2.19",
     "react-responsive-modal": "^6.0.1",
     "react-star-ratings": "^2.3.0",
     "react-syntax-highlighter": "^15.4.3",

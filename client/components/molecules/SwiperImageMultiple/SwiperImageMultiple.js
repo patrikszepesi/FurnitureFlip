@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     position: 'absolute',
     width: 88,
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    top: theme.spacing(50),
+    left: theme.spacing(10),
     zIndex: 4,
     '& .swiper-button-prev, & .swiper-button-next': {
       width: theme.spacing(3),
@@ -75,7 +75,7 @@ const SwiperImageMultiple = props => {
         nextEl: '.swiper-container .swiper-button-next',
         prevEl: '.swiper-container .swiper-button-prev',
       },
-      autoplay:{ delay: 3000 },
+      // autoplay:{ delay: 5000 },
     });
   });
 

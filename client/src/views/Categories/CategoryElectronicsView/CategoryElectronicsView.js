@@ -101,7 +101,7 @@ const CategoryElectronicsView = ({ courses,className,...rest }) => {
 
     <Search
       filterObj={filterObj}
-      categoryToFilter={'bútor'}
+      categoryToFilter={'műszaki cikk'}
       onFilterChange={newFilterObj => setFilterObj(newFilterObj)}
        />
 
@@ -134,7 +134,7 @@ const CategoryElectronicsView = ({ courses,className,...rest }) => {
                             color="primary"
                             className={classes.fontWeight700}
                           >
-                            {item.price} Forint 
+                            {item.price} Forint
                           </Typography>
                         </div>
                       </>

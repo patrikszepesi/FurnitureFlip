@@ -124,7 +124,7 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
   let items=[]
   let difficulties=[]
 
-  if(categoryToFilter==='bútor'){
+  if(categoryToFilter==='bútor/otthon'){
     subCategories=['benti bútor','kinti bútor','bárhol tárolható']
     prices=[{name:'1.000-8.000 HUF',value:[1000,8000]},{name:'8.000-20.000 HUF',value:[8000,20000]},{name:'20.000-50.000 HUF',value:[20000,50000]},{name:'50.000-100.000 HUF',value:[50000,100000]},{name:'100.000-200.000 HUF',value:[100000,200000]},{name:'200.000-350.000 HUF',value:[200000,350000]},{name:'350.000+ HUF',value:[350000,10000000000]}]
   }else if(categoryToFilter==='sport/szabadidő'){
@@ -273,7 +273,7 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
             <Typography color="secondary" variant="inherit" component="span">és vedd meg egy kattintással</Typography>
           </span>
         }
-        subtitle= {categoryToFilter}
+        subtitle= {'Kategória : ' + categoryToFilter}
         fadeUp
       />
       <Section className={classes.heroWrapper}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleItemView from '../../src/views/SingleItemView';
+import SingleItemView from '../../src/views/SingleItemView0';
 import Main from '../../src/layouts/Main';
 import WithLayout from '../../src/WithLayout';
 import { useRouter } from "next/router";

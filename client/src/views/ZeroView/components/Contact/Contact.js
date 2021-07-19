@@ -70,8 +70,8 @@ const Contact = props => {
   return (
     <div className={className} {...rest}>
       <SectionHeader
-        title="Have a project to discuss? Contact us."
-        subtitle="Keep track of what's happening with your data, change permissions, and run reports against your data anywhere in the world. Keep track of what's happening with your data, change permissions."
+        title="Kérdésed van?"
+        subtitle="Írj nekünk"
         subtitleProps={{
           variant: 'body1',
           color: 'textPrimary',
@@ -160,71 +160,6 @@ const Contact = props => {
           />
         </ListItem>
       </List>
-      <div className={classes.form}>
-        <Grid container spacing={isMd ? 4 : 2}>
-          <Grid item xs={12} data-aos="fade-up">
-            <Typography
-              variant="subtitle1"
-              color="textPrimary"
-              className={classes.inputTitle}
-            >
-              Full name
-            </Typography>
-            <TextField
-              placeholder="Your full name"
-              variant="outlined"
-              size="medium"
-              name="fullname"
-              fullWidth
-              type="text"
-            />
-          </Grid>
-          <Grid item xs={12} data-aos="fade-up">
-            <Typography
-              variant="subtitle1"
-              color="textPrimary"
-              className={classes.inputTitle}
-            >
-              E-mail
-            </Typography>
-            <TextField
-              placeholder="Your e-mail address"
-              variant="outlined"
-              size="medium"
-              name="email"
-              fullWidth
-              type="email"
-            />
-          </Grid>
-          <Grid item xs={12} data-aos="fade-up">
-            <Typography
-              variant="subtitle1"
-              color="textPrimary"
-              className={classes.inputTitle}
-            >
-              Message
-            </Typography>
-            <TextField
-              placeholder="Your question about our services"
-              variant="outlined"
-              name="message"
-              fullWidth
-              multiline
-              rows={4}
-            />
-          </Grid>
-          <Grid item container justify="center" xs={12}>
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              size="large"
-            >
-              Send a request
-            </Button>
-          </Grid>
-        </Grid>
-      </div>
     </div>
   );
 };

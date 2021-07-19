@@ -6,7 +6,6 @@ import axios from 'axios';
 import { loadStripe } from "@stripe/stripe-js";
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useMediaQuery, Button, Typography,Grid, ListItem, ListItemAvatar,colors } from '@material-ui/core';
 import { SectionHeader, SwiperImageMultiple, TypedText, IconAlternate } from '../../../../../components/molecules';
 import { HeroShaped } from '../../../../../components/organisms';
@@ -66,11 +65,6 @@ const Hero = props => {
   const router = useRouter();
 
 
-  let [commentObj, setCommentObj] = useState({
-    text:'',
-    name:''
-  });
-
 
 const { state, dispatch } = useContext(Context);
 const { user,backendCall } = state;
@@ -128,22 +122,7 @@ if(saved && saved.wishlist && saved.wishlist!=undefined){
   };
 
 
-  const backendCallFalse = () => {
-  dispatch({
-    type: "SET_BACKEND_CALL_FALSE",
-  });
-};
 
-  const handleRatingChange = async (event,name, value) => {
-
-    event.preventDefault()
-    let newValue = value;
-
-    const newRatingObj = { ...commentObj, [name]: event.target.value };
-    console.log(newRatingObj)
-
-    setCommentObj(newRatingObj)
-  };
 
 let sold;
 if(item.sold){
@@ -151,52 +130,7 @@ if(item.sold){
 }else{
   sold=""
 }
-//
-  const sendCommentToBackend = async() => {
-    setTimeout(backendCallFalse,0);
 
-  const { data } = await axios.post(`/api/comments/${item._id}`,{
-    toSend:{...commentObj},
-    user:user,
-  });
-  };
-
-  if(backendCall===true){
-      if(commentObj.text.length>2){
-        sendCommentToBackend();
-        toast("Siker!Hamarosan látni fogod a kérdésedet", {
-           duration: 4000,
-      style: {
-      border: '5px solid #E1C699',
-      padding: '16px',
-      color: '#713200',
-      minWidth:'800px',
-      marginTop:'70px',
-      },
-      iconTheme: {
-      primary: '#713200',
-      secondary: '#FFFAEE',
-      },
-      });
-      } else if(commentObj.text.length<2 ){
-        toast("Hiba, kitöltötted az összes mezőt?", {
-           duration: 4000,
-      style: {
-      border: '5px solid #E1C699',
-      padding: '16px',
-      color: '#713200',
-      minWidth:'800px',
-      marginTop:'70px',
-      },
-      iconTheme: {
-      primary: '#713200',
-      secondary: '#FFFAEE',
-      },
-      });
-       backendCallFalse();
-       }
-
-    }
 
 
   const handleAddToWishList = async () => {

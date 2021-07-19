@@ -21,8 +21,11 @@ const useStyles = makeStyles(theme => ({
     },
   },
   sectionContainer: {
-    backgroundColor: theme.palette.primary.dark,
-    borderRadius: '0 0 100% 0',
+    backgroundColor: theme.palette.secondary.dark,
+    borderRadius: '0 0 50% 0',
+    [theme.breakpoints.up('sm')]: {
+      borderRadius: '0 0 90% 0',
+    },
   },
   textWhite: {
     color: 'white',
@@ -77,7 +80,7 @@ const Hero = props => {
         <Section narrow>
           <>
           <SectionHeader
-            title="Mi az a Zero Waste? Érdekes dolgok"
+            title="Zero Waste"
             subtitle="A zero waste szó szerinti jelentése nulla hulladék. A hulladékmentes életmódra utal. A szemléletmód alapelve, hogy újrahasznosítás, tehát utólagos hulladékgazdálkodás helyett inkább a preventív gondolkodásmódot válasszuk."
             titleProps={{
               className: clsx(classes.textWhite, classes.fontWeightBold),
