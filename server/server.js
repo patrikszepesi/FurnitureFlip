@@ -7,8 +7,6 @@ module.exports=require('./index.js');
 //12.check invocie at stripe
 //13. test payment settings
 //14.email format for questions answers and sold verify brought
-//15.stripe nicer look
-//business email
 //design for landing page
 //invoice download format
 
@@ -23,3 +21,4 @@ module.exports=require('./index.js');
 //customize toast message colors
 //form dialog instead of modals
 //tekerj lelejbb ha kerdesed van with icon
+//conditional page if you havent sold bought etc

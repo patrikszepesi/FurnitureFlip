@@ -1,5 +1,5 @@
 import User from "../models/user";
-import Course from "../models/course";
+import Item from "../models/item";
 import queryString from "query-string";
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
@@ -72,9 +72,9 @@ export const currentInstructor = async (req, res) => {
   }
 };
 //
-export const instructorCourses = async (req, res) => {
+export const instructorItems = async (req, res) => {
   try {
-    const items = await Course.find({ instructor: req.user._id, sold:false })
+    const items = await Item.find({ instructor: req.user._id, sold:false })
       .sort({ createdAt: -1 })
       .exec();
     res.json(items);
@@ -85,7 +85,7 @@ export const instructorCourses = async (req, res) => {
 
 export const studentCount = async (req, res) => {
   try {
-    const users = await User.find({ courses: req.body.courseId })
+    const users = await User.find({ items: req.body.itemId })
       .select("_id")
       .exec();
     res.json(users);

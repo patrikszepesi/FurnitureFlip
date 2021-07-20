@@ -16,14 +16,13 @@ import {
   readWishlist,
   removeFromWishlist,
   update,
-  publishCourse,
-  unpublishCourse,
-  courses,
+  publishItem,
+  unpublishItem,
+  items,
   checkEnrollment,
   paidEnrollment,
   stripeSuccess,
-  userCourses,
-  listCompleted,
+  userItems,
   search,
   invoice,
   getUser,
@@ -32,11 +31,11 @@ import {
   commentAnswers,
   sold,
   ownerGetData
-} from "../controllers/course";
+} from "../controllers/item";
 
 
 
-router.get("/courses", courses);
+router.get("/courses", items);
 // image
 router.post("/course/upload-image", uploadImage);
 router.post("/course/remove-image", removeImage);
@@ -48,8 +47,8 @@ router.get("/course/:slug", read);
 
 
 
-router.put("/course/publish/:courseId", requireSignin, publishCourse);
-router.put("/course/unpublish/:courseId", requireSignin, unpublishCourse);
+router.put("/course/publish/:courseId", requireSignin, publishItem);
+router.put("/course/unpublish/:courseId", requireSignin, unpublishItem);
 
 
 router.get("/check-enrollment/:courseId", requireSignin, checkEnrollment);
@@ -76,11 +75,9 @@ router.get("/sold", requireSignin, sold);
 
 
 
-router.get("/user-courses", requireSignin, userCourses);
+router.get("/user-courses", requireSignin, userItems);
 router.get("/user/course/:slug", requireSignin, read);
 
-// mark completed
-router.post("/list-completed", requireSignin, listCompleted);
 router.post("/search/filters", search);
 
 

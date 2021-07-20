@@ -1,7 +1,6 @@
 import AWS from "aws-sdk";
 import { nanoid } from "nanoid";
-import Course from "../models/course";
-import Completed from "../models/completed";
+import Item from "../models/item";
 import slugify from "slugify";
 import { readFileSync } from "fs";
 import User from "../models/user";
@@ -20,7 +19,6 @@ const S3 = new AWS.S3(awsConfig);
 const SES = new AWS.SES(awsConfig);
 
 export const uploadImage = async (req, res) => {
-  // console.log(req.body);
   try {
     const { image } = req.body;
     if (!image) return res.status(400).send("No image");
@@ -49,7 +47,6 @@ export const uploadImage = async (req, res) => {
         console.log(err);
         return res.sendStatus(400);
       }
-      console.log(data);
       res.send(data);
     });
   } catch (err) {
@@ -62,7 +59,6 @@ export const getUser = async(req,res)=>{
     const currentUser = await User.findOne({
       _id: req.params.userId,
     }).select('wishlist -_id ').exec()
-    console.log(currentUser)
     res.json(currentUser);
 
   }catch (err){
@@ -94,53 +90,50 @@ export const removeImage = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-  // console.log("CREATE COURSE", req.body);
   // return;
   try {
-    const alreadyExist = await Course.findOne({
+    const alreadyExist = await Item.findOne({
       slug: slugify(req.body.name.toLowerCase()),
     });
     if (alreadyExist) return res.status(400).send("Title is taken");
 
-    const course = await new Course({
+    const item = await new Item({
       slug: slugify(req.body.name),
       instructor: req.user._id,
       ...req.body,
     }).save();
 
-    res.json(course);
+    res.json(item);
   } catch (err) {
     console.log(err);
-    return res.status(400).send("Course create failed. Try again.");
+    return res.status(400).send("Item create failed. Try again.");
   }
 };
 
 export const read = async (req, res) => {
-  console.log("READ WAS HIT, THIS IS WHAT YOU WANT!")
-  console.log(req.params)
+
   try {
-    const course = await Course.findOne({ _id: req.params.slug })
+    const item = await Item.findOne({ _id: req.params.slug })
       .populate("instructor", "_id name")
       .exec();
-    res.json(course);
+    res.json(item);
   } catch (err) {
     console.log(err);
   }
 };
 
 export const ownerGetData = async (req, res) => {
-  console.log("hit")
 
   try {
-    const course = await Course.findOne({ _id: req.params.slug })
+    const item = await Item.findOne({ _id: req.params.slug })
       .populate("instructor", "_id name")
       .exec();
 
 
-      if (req.user._id != course.instructor._id) {
+      if (req.user._id != item.instructor._id) {
         return res.sendStatus(403); //return res.json('404')
       }else {
-        res.json(course);
+        res.json(item);
 
       }
   } catch (err) {
@@ -150,20 +143,17 @@ export const ownerGetData = async (req, res) => {
 
 
 export const update = async (req, res) => {
-  console.log(req.params)
   try {
     const { slug } = req.params;
     // console.log(slug);
-    const course = await Course.findOne({ _id:slug }).exec();
-     console.log("COURSE FOUND => ", course);
-    if (req.user._id != course.instructor) {
+    const item = await Item.findOne({ _id:slug }).exec();
+    if (req.user._id != item.instructor) {
       return res.status(400).send("Unauthorized");
     }
 
-    const updated = await Course.findOneAndUpdate({ _id:slug }, req.body, {
+    const updated = await Item.findOneAndUpdate({ _id:slug }, req.body, {
       new: true,
     }).exec();
-    console.log(updated)
 
     res.json(updated);
   } catch (err) {
@@ -175,50 +165,50 @@ export const update = async (req, res) => {
 
 
 
-export const publishCourse = async (req, res) => {
+export const publishItem = async (req, res) => {
   try {
-    const { courseId } = req.params;
-    const course = await Course.findById(courseId).select("instructor").exec();
+    const { itemId } = req.params;
+    const item = await Item.findById(itemId).select("instructor").exec();
 
-    if (course.instructor._id != req.user._id) {
+    if (item.instructor._id != req.user._id) {
       return res.status(400).send("Unauthorized");
     }
 
-    const updated = await Course.findByIdAndUpdate(
-      courseId,
+    const updated = await Item.findByIdAndUpdate(
+      itemId,
       { published: true },
       { new: true }
     ).exec();
     res.json(updated);
   } catch (err) {
     console.log(err);
-    return res.status(400).send("Publish course failed");
+    return res.status(400).send("Publish item failed");
   }
 };
 
-export const unpublishCourse = async (req, res) => {
+export const unpublishItem = async (req, res) => {
   try {
-    const { courseId } = req.params;
-    const course = await Course.findById(courseId).select("instructor").exec();
+    const { itemId } = req.params;
+    const item = await Item.findById(itemId).select("instructor").exec();
 
-    if (course.instructor._id != req.user._id) {
+    if (item.instructor._id != req.user._id) {
       return res.status(400).send("Unauthorized");
     }
 
-    const updated = await Course.findByIdAndUpdate(
-      courseId,
+    const updated = await Item.findByIdAndUpdate(
+      itemId,
       { published: false },
       { new: true }
     ).exec();
     res.json(updated);
   } catch (err) {
     console.log(err);
-    return res.status(400).send("Unpublish course failed");
+    return res.status(400).send("Unpublish item failed");
   }
 };
 
-export const courses = async (req, res) => {
-  const all = await Course.find({ published: true })
+export const items = async (req, res) => {
+  const all = await Item.find({ published: true })
     .populate("instructor", "_id name")
     .exec();
   res.json(all);
@@ -237,18 +227,18 @@ export const invoice = async (req, res) => {
 };
 
 export const checkEnrollment = async (req, res) => {
-  const { courseId } = req.params;
-  // find courses of the currently logged in user
+  const { itemId } = req.params;
+  // find items of the currently logged in user
   const user = await User.findById(req.user._id).exec();
-  // check if course id is found in user courses array
+  // check if item id is found in user items array
   let ids = [];
-  let length = user.courses && user.courses.length;
+  let length = user.items && user.items.length;
   for (let i = 0; i < length; i++) {
-    ids.push(user.courses[i].toString());
+    ids.push(user.items[i].toString());
   }
   res.json({
-    status: ids.includes(courseId),
-    course: await Course.findById(courseId).exec(),
+    status: ids.includes(itemId),
+    item: await Item.findById(itemId).exec(),
   });
 };
 
@@ -257,13 +247,13 @@ export const checkEnrollment = async (req, res) => {
 export const paidEnrollment = async (req, res) => {
 
   try {
-    const course = await Course.findById(req.params.itemId)
+    const item = await Item.findById(req.params.itemId)
       .populate("instructor")
       .exec();
 
-    // if (!course.paid) return;
+    // if (!item.paid) return;
     // application fee 30%
-    const fee = (course.price * 30) / 100;
+    const fee = (item.price * 30) / 100;
     // create stripe session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -272,8 +262,8 @@ export const paidEnrollment = async (req, res) => {
       // purchase details
       line_items: [
         {
-          name: course.name,
-          amount: Math.round(course.price.toFixed(2) * 100),
+          name: item.name,
+          amount: Math.round(item.price.toFixed(2) * 100),
           currency: "huf",
           quantity: 1,
         },
@@ -282,14 +272,13 @@ export const paidEnrollment = async (req, res) => {
       payment_intent_data: {
         application_fee_amount: Math.round(fee.toFixed(2) * 100),
         transfer_data: {
-          destination: course.instructor.stripe_account_id,
+          destination: item.instructor.stripe_account_id,
         },
       },
       // redirect url after successful payment
-      success_url: `${process.env.STRIPE_SUCCESS_URL}/${course._id}`,
+      success_url: `${process.env.STRIPE_SUCCESS_URL}/${item._id}`,
       cancel_url: process.env.STRIPE_CANCEL_URL,
     });
-    console.log("SESSION ID => ", session);
 
     await User.findByIdAndUpdate(req.user._id, {
       stripeSession: session,
@@ -303,8 +292,8 @@ export const paidEnrollment = async (req, res) => {
 //
 export const stripeSuccess = async (req, res) => {
   try {
-    // find course
-    const course = await Course.findById(req.params.courseId).exec();
+    // find item
+    const item = await Item.findById(req.params.itemId).exec();
     // get user from db to get stripe session id
     const user = await User.findById(req.user._id).exec();
     // if no stripe session return
@@ -314,26 +303,25 @@ export const stripeSuccess = async (req, res) => {
       user.stripeSession.id
     );
 
-    const courseToUpdateEmail = await Course.findByIdAndUpdate(req.params.courseId, {
+    const itemToUpdateEmail = await Item.findByIdAndUpdate(req.params.itemId, {
       $set: {buyerEmail: session.customer_details.email}
     }).exec();
 
 
 
 
-    console.log("STRIPE SUCCESS", session.customer_details.email);
-    console.log(session.customer_details)
+
     //update item field sold to true
-    // if session payment status is paid, push course to user's course
+    // if session payment status is paid, push item to user's item
     if (session.payment_status === "paid") {
       await User.findByIdAndUpdate(user._id, {
-        $push: {purchases: {time:Date.now(), courseId: course._id, course:course } },
-        $addToSet: { courses: course._id },//add purchase date and course id
+        $push: {purchases: {time:Date.now(), itemId: item._id, item:item } },
+        $addToSet: { items: item._id },//add purchase date and item id
         $set: { stripeSession: {} },
       }).exec();
     }
 
-    const item = await Course.findByIdAndUpdate(req.params.courseId,{
+    const itemToUpdate = await Item.findByIdAndUpdate(req.params.itemId,{
       $set:{sold:true}
     }).exec();
 
@@ -354,8 +342,8 @@ export const stripeSuccess = async (req, res) => {
                     <p>A vásárló hamarosan kapcsolatba fog lépni veled. Amennyiben ez 5 napon belül nem történik meg, írj nekünk vagy az eladónak</p>
 
                     <p>Eladó adatai:</p>
-                    <h2 style="color:blue;">Emailcíme :   ${ course.email}</h2>
-                    <h2> Telefonszáma : ${ course.phone}</h2>
+                    <h2 style="color:blue;">Emailcíme :   ${ item.email}</h2>
+                    <h2> Telefonszáma : ${ item.phone}</h2>
                     <i>FurFlip.com</i>
                   </html>
                 `,
@@ -371,7 +359,7 @@ export const stripeSuccess = async (req, res) => {
       const params2 = {
         Source: process.env.EMAIL_FROM,
         Destination: {
-          ToAddresses: [course.email],
+          ToAddresses: [item.email],
         },
         Message: {
           Body: {
@@ -386,7 +374,7 @@ export const stripeSuccess = async (req, res) => {
 
 
                     <p>Tárgy amit megvettek tőled:</p>
-                    <h2 style="color:blue;">${course.name}</h2>
+                    <h2 style="color:blue;">${item.name}</h2>
 
                     <p>Írj vissza a vevőnek minél előbb, hogy a tárgyat hol és mikor tudja átvenni</p>
                     <p>Vevő emailcíme:</p>
@@ -430,53 +418,38 @@ export const stripeSuccess = async (req, res) => {
 
 
 
-    res.json({ success: true, course });
+    res.json({ success: true, item });
   } catch (err) {
     console.log("STRIPE SUCCESS ERR", err);
     res.json({ success: false });
   }
 };
 
-export const userCourses = async (req, res) => {
+export const userItems = async (req, res) => {
   const user = await User.findById(req.user._id).exec();
-  const courses = await Course.find({ _id: { $in: user.courses } })
+  const items = await Item.find({ _id: { $in: user.items } })
     .populate("instructor", "_id name")
     .exec();
-  res.json(courses);
+  res.json(items);
 };
 
 
-
-export const listCompleted = async (req, res) => {
-  try {
-    const list = await Completed.findOne({
-      user: req.user._id,
-      course: req.body.courseId,
-    }).exec();
-    list && res.json(list.lessons);
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 
 
 export const search = async (req, res) => {
-  console.log("hit")
   const {
     toSend
   } = req.body;
 
 let {subCategory, item, category,price,quality,city}=toSend
 
-console.log(req.body.toSend)
 const handleSearch=async(queryObject)=>{
-  console.log("hit")
  try {
-   let courses = await Course.find(queryObject)
+   let items = await Item.find(queryObject)
      .populate("instructor", "_id name")
      .exec();
-   return res.json(courses,);
+   return res.json(items,);
     } catch (err) {
    console.log(err);
     }
@@ -501,7 +474,6 @@ const handleSearch=async(queryObject)=>{
        $lte: price[1]}}
     }
 
-    console.log(queryObject)
   }
    handleSearch(queryObject)
 
@@ -533,11 +505,9 @@ export const readWishlist = async (req, res) => {
 };
 
 export const sold = async (req, res) => {
-  console.log(req.user)
   try{
-    const soldItems = await Course.find({instructor: req.user._id,sold:true })
+    const soldItems = await Item.find({instructor: req.user._id,sold:true })
       .exec();
-      console.log(soldItems)
     res.json(soldItems);
   } catch (err){
     console.log(err)
@@ -545,8 +515,6 @@ export const sold = async (req, res) => {
 };
 
 export const removeFromWishlist = async (req, res) => {
-  console.log(req.params)
-  console.log(req.user)
   const { itemId } = req.params;
   const user = await User.findOneAndUpdate(
     { _id: req.user._id },
@@ -563,9 +531,9 @@ export const comments = async (req, res) => {
     try{
       const user = await User.findOne({ email: req.body.user.email }).exec();//i dont think i need this, double check
 
-      let itemWithQuestion = await Course.findById(req.params.itemId)
+      let itemWithQuestion = await Item.findById(req.params.itemId)
 
-      let commentAdded = await Course.findByIdAndUpdate(
+      let commentAdded = await Item.findByIdAndUpdate(
         req.params.itemId,
         {
           $push: {comments: {name,text, postedBy: req.body.user._id } },
@@ -612,7 +580,6 @@ export const comments = async (req, res) => {
           console.log(err);
         });
 
-      console.log("ratingAdded", commentAdded);
 
 
       res.json(commentAdded);
@@ -629,11 +596,10 @@ export const comments = async (req, res) => {
 export const getComments = async (req, res) => {
 
   try{
-    const item = await Course.findOne({ _id: req.params.itemId })
+    const item = await Item.findOne({ _id: req.params.itemId })
     .select("comments -_id")
     .exec();
     res.json({item})
-    console.log(item)
   } catch(err){
     console.log(error)
   }
@@ -642,11 +608,11 @@ export const getComments = async (req, res) => {
 export const commentAnswers = async (req, res) => {
   //send email to the person who asked the question
   try{
-    const item=await Course.findOneAndUpdate( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } }, {$set:{'comments.$.answer':req.body.toSend.text}} )
+    const item=await Item.findOneAndUpdate( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } }, {$set:{'comments.$.answer':req.body.toSend.text}} )
 
 
-     const itemToLookFor = await Course.findOne( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } } ).select('comments').exec();
-     const itemToLookForForEmail = await Course.findOne( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } } ).exec();
+     const itemToLookFor = await Item.findOne( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } } ).select('comments').exec();
+     const itemToLookForForEmail = await Item.findOne( { comments: { $elemMatch: { _id: req.body.toSend.commentId } } } ).exec();
 
 
 
@@ -660,7 +626,6 @@ export const commentAnswers = async (req, res) => {
     }
 
     const userWhoAskedQuestion = await User.findOne({_id:needId.postedBy}).select("email -_id")
-    console.log(userWhoAskedQuestion)
 
     const params2 = {
       Source: process.env.EMAIL_FROM,

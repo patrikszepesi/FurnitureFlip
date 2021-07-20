@@ -4,7 +4,7 @@ const moment = require('moment');
 const { ObjectId } = mongoose.Schema;
 
 
-const courseSchema = new mongoose.Schema(
+const itemSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -68,7 +68,7 @@ const courseSchema = new mongoose.Schema(
     sold:{
       type: Boolean,
     default: false,
-    },    
+    },
   buyerEmail:"String",
 
     images: {
@@ -87,4 +87,4 @@ const courseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Course", courseSchema);
+export default mongoose.model("Item", itemSchema);
