@@ -37,50 +37,13 @@ const BecomeSellerView = () => {
         setLoading(false);
       });
   };
-   const community = [
-  {
-    authorPhoto: {
-      src: 'https://assets.maccarianagency.com/the-front/photos/people/veronica-adams.jpg',
-      srcSet: 'https://assets.maccarianagency.com/the-front/photos/people/veronica-adams@2x.jpg 2x',
-    },
-  },
-  {
-    authorPhoto: {
-      src: 'https://assets.maccarianagency.com/the-front/photos/people/akachi-luccini.jpg',
-      srcSet: 'https://assets.maccarianagency.com/the-front/photos/people/akachi-luccini@2x.jpg 2x',
-    },
-  },
-  {
-    authorPhoto: {
-      src: 'https://assets.maccarianagency.com/the-front/photos/people/jack-smith.jpg',
-      srcSet: 'https://assets.maccarianagency.com/the-front/photos/people/jack-smith@2x.jpg 2x',
-    },
-  },
-  {
-    authorPhoto: {
-      src: 'https://assets.maccarianagency.com/the-front/photos/people/alex-johnson.jpg',
-      srcSet: 'https://assets.maccarianagency.com/the-front/photos/people/alex-johnson@2x.jpg 2x',
-    },
-  },
-  {
-    authorPhoto: {
-      src: 'https://assets.maccarianagency.com/the-front/photos/people/valeria-kogan.jpg',
-      srcSet: 'https://assets.maccarianagency.com/the-front/photos/people/valeria-kogan@2x.jpg 2x',
-    },
-  },
-  {
-    authorPhoto: {
-      src: 'https://assets.maccarianagency.com/the-front/photos/people/kate-segelson.jpg',
-      srcSet: 'https://assets.maccarianagency.com/the-front/photos/people/kate-segelson@2x.jpg 2x',
-    },
-  },
-];
+
 
   return (
     <>
 
     <Section>
-        <Community data={community} />
+        <Community  />
       </Section>
 
 

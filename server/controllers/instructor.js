@@ -10,6 +10,7 @@ export const makeInstructor = async (req, res) => {
     // 2. if user dont have stripe_account_id yet, then create new
     if (!user.stripe_account_id) {
       const account = await stripe.accounts.create({ type: "express" });
+
       // console.log('ACCOUNT => ', account.id)
       user.stripe_account_id = account.id;
       user.save();
@@ -29,7 +30,7 @@ export const makeInstructor = async (req, res) => {
     // 5. then send the account link as response to fronend
     res.send(`${accountLink.url}?${queryString.stringify(accountLink)}`);
   } catch (err) {
-    console.log("MAKE INSTRUCTOR ERR ", err);
+    console.log("Onboarding seller ERR ", err);
   }
 };
 
@@ -83,16 +84,7 @@ export const instructorItems = async (req, res) => {
   }
 };
 
-export const studentCount = async (req, res) => {
-  try {
-    const users = await User.find({ items: req.body.itemId })
-      .select("_id")
-      .exec();
-    res.json(users);
-  } catch (err) {
-    console.log(err);
-  }
-};
+
 
 export const instructorBalance = async (req, res) => {
   try {

@@ -67,7 +67,7 @@ const WhatView = props => {
         icon: 'fas fa-hand-holding-usd',
         title: 'Adj el bármit',
         subtitle:
-          'Kínálj fel annyi terméket eladára amennyit csak szeretnél. Az eladás után 30 nap múlva fog megérkezni hozzád a pénz. Ez a vevők biztonsága miatt van',
+          'Kínálj fel annyi terméket eladára amennyit csak szeretnél. Az eladás után 7 nap múlva fog megérkezni hozzád a pénz. Ez a vevők biztonsága miatt van',
       },
       {
         icon: 'fas fa-exchange-alt',

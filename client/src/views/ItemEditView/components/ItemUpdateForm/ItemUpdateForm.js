@@ -81,7 +81,7 @@ const ItemUpdateForm = props => {
   if(values.category==='bútor/otthon'){
     subCategories=['benti bútor','kinti bútor','bárhol tárolható']
   }else if(values.category==='sport/szabadidő'){
-    subCategories=['labdarúgás','kosárlabda','röplabda','kézilabda','küzdősport','jégkorong/korcsolya','sakk','tenisz','vízisport','túra','futás','séta','lovaglás','téli sport','golf','asztalitenisz','társasjáték','darts','snooker/biliárd'].sort()
+    subCategories=['labdarúgás','kosárlabda','röplabda','kézilabda','küzdősport','jégkorong/korcsolya','sakk','tenisz','vízisport','túra','futás','séta','lovaglás','téli sport','golf','asztalitenisz','kerékpár','társasjáték','darts','snooker/biliárd'].sort()
   }else if(values.category==='műszaki cikk'){
     subCategories=['telefon','számítógép/PC','tablet','laptop','zenelejátszó','TV','fényképező','konzol/videójáték','nyomtató'].sort()
   }else if(values.category==='ruha'){
@@ -126,6 +126,8 @@ const ItemUpdateForm = props => {
     items=['röplabda','háló','gatya','strandröplabda','egyéb'].sort()
   }else if(values.subCategory==='snooker/biliárd'){
     items=['golyó','dákó','asztal','egyéb'].sort()
+  }else if(values.subCategory==='kerékpár'){
+      items=['kerékpár','gatya','védőfelszerelés','kerék','egyéb'].sort()
   }else if(values.subCategory==='séta'){
     items=['sétabot','egyéb'].sort()
   }else if(values.subCategory==='tenisz'){
@@ -447,6 +449,25 @@ const ItemUpdateForm = props => {
             fullWidth
             type="text"
             value={values.street}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            className={classes.inputTitle}
+          >
+            Számlázási cím
+          </Typography>
+          <TextField
+            placeholder="pl. 1221 Budapest Jobbágy utca 10  "
+            variant="outlined"
+            size="medium"
+            name="billingAddress"
+            fullWidth
+            type="text"
+            value={values.billingAddress}
             onChange={handleChange}
           />
         </Grid>

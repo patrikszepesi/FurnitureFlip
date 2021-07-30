@@ -69,10 +69,10 @@ const InvoiceView = props => {
           {
             <tr key={order._id}>
               <td>
-                {order.course.name}
+                {order.item.name}
               </td>
               <td>
-                {order.course.price} Forint
+                {order.item.price} Forint
               </td>
               <td>
                 {order.time.substring(0,order.time.length-14)}

@@ -10,7 +10,6 @@ import {
   getAccountStatus,
   currentInstructor,
   instructorItems,
-  studentCount,
   instructorBalance,
   instructorPayoutSettings,
 } from "../controllers/instructor";
@@ -21,7 +20,6 @@ router.get("/current-instructor", requireSignin, currentInstructor);
 
 router.get("/instructor-courses", requireSignin, instructorItems);
 
-router.post("/instructor/student-count", studentCount);
 
 router.get("/instructor/balance", requireSignin, instructorBalance);
 

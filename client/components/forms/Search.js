@@ -128,7 +128,7 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
     subCategories=['benti bútor','kinti bútor','bárhol tárolható']
     prices=[{name:'1.000-8.000 HUF',value:[1000,8000]},{name:'8.000-20.000 HUF',value:[8000,20000]},{name:'20.000-50.000 HUF',value:[20000,50000]},{name:'50.000-100.000 HUF',value:[50000,100000]},{name:'100.000-200.000 HUF',value:[100000,200000]},{name:'200.000-350.000 HUF',value:[200000,350000]},{name:'350.000+ HUF',value:[350000,10000000000]}]
   }else if(categoryToFilter==='sport/szabadidő'){
-    subCategories=['labdarúgás','kosárlabda','röplabda','kézilabda','küzdősport','jégkorong/korcsolya','sakk','tenisz','vízisport','túra','futás','séta','lovaglás','téli sport','golf','asztalitenisz','társasjáték','darts','snooker/biliárd'].sort()
+    subCategories=['labdarúgás','kosárlabda','röplabda','kézilabda','küzdősport','jégkorong/korcsolya','sakk','tenisz','vízisport','túra','futás','séta','lovaglás','téli sport','golf','asztalitenisz','társasjáték','darts','snooker/biliárd','kerékpár'].sort()
     prices=[{name:'1.000-2.000 HUF',value:[1000,2000]},{name:'2.000-5.000 HUF',value:[2000,5000]},{name:'5.000-10.000 HUF',value:[5000,10000]},{name:'10.000-20.000 HUF',value:[10000,20000]},{name:'20.000-30.000 HUF',value:[20000,30000]},{name:'30.000-40.000 HUF',value:[30000,40000]},{name:'40.000+ HUF',value:[40000,10000000000]}]
   }else if(categoryToFilter==='alkatrész'){
     subCategories=['jármű'].sort()
@@ -181,6 +181,8 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
     items=['röplabda','háló','gatya','strandröplabda','egyéb'].sort()
   }else if(filterObj.subCategory==='snooker/biliárd'){
     items=['golyó','dákó','asztal','egyéb'].sort()
+  }else if(filterObj.subCategory==='kerékpár'){
+    items=['kerékpár','gatya','kerék','egyéb'].sort()
   }else if(filterObj.subCategory==='séta'){
     items=['sétabot','egyéb'].sort()
   }else if(filterObj.subCategory==='tenisz'){

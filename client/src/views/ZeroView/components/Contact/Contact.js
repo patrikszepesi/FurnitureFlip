@@ -85,27 +85,6 @@ const Contact = props => {
           data-aos="fade-up"
           className={classes.listItem}
         >
-          <ListItemAvatar>
-            <Avatar
-              src="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-phone.png"
-              srcSet="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-phone@2x.png 2x"
-              className={classes.icon}
-            />
-          </ListItemAvatar>
-          <ListItemText
-            className={classes.listItemText}
-            primary="Phone"
-            secondary="+39 659-657-0133"
-            primaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textSecondary',
-            }}
-            secondaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textPrimary',
-              component: 'span',
-            }}
-          />
         </ListItem>
         <ListItem
           disableGutters
@@ -122,7 +101,7 @@ const Contact = props => {
           <ListItemText
             className={classes.listItemText}
             primary="Email"
-            secondary="hi@maccarianagency.com"
+            secondary="support@flipit.store"
             primaryTypographyProps={{
               variant: 'subtitle1',
               color: 'textSecondary',
@@ -138,26 +117,6 @@ const Contact = props => {
           data-aos="fade-up"
           className={classes.listItem}
         >
-          <ListItemAvatar>
-            <Avatar
-              src="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-pin.png"
-              srcSet="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-pin@2x.png 2x"
-              className={classes.icon}
-            />
-          </ListItemAvatar>
-          <ListItemText
-            className={classes.listItemText}
-            primary="Head Office"
-            secondary="Via E. Golla 4"
-            primaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textSecondary',
-            }}
-            secondaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textPrimary',
-            }}
-          />
         </ListItem>
       </List>
     </div>

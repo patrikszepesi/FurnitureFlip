@@ -16,6 +16,7 @@ import PinterestIcon from '@material-ui/icons/Pinterest';
 import logo from '../../../../../public/assets/FlipIt.svg'
 import { Image } from '../../../../../components/atoms';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(6, 0),
@@ -39,10 +40,6 @@ const useStyles = makeStyles(theme => ({
   logoContainer: {
     width: 120,
     height: 32,
-  },
-  logoImage: {
-    width: '100%',
-    height: '100%',
   },
   groupTitle: {
     textTransform: 'uppercase',
@@ -91,6 +88,17 @@ const useStyles = makeStyles(theme => ({
   },
   navLink: {
     color: 'rgba(255,255,255,.6)',
+  },
+  logoImage: {
+    width: '150%',
+    height: '150%',
+    [theme.breakpoints.up('sm')]: {
+
+      width: '150%',
+      height: '200%',
+    },
+
+
   },
 }));
 
@@ -181,11 +189,11 @@ const Footer = props => {
             <List disablePadding>
               <ListItem disableGutters className={classes.logoContainerItem}>
                 <div className={classes.logoContainer}>
-                  <a href="/" title="thefront">
+                  <a href="/" title="FlipIt">
                     <Image
                       className={classes.logoImage}
-                      src="https://assets.maccarianagency.com/the-front/logos/logo-negative.svg"
-                      alt="thefront"
+                      src={logo}
+                      alt="FlipIt"
                       lazy={false}
                     />
                   </a>

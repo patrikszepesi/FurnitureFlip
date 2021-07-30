@@ -108,6 +108,7 @@ const ItemCreateView = (props = {}) => {
       city:'',
       street:'',
       loading: false,
+      billingAddress:'',
       images:[]
     });
     const [image, setImage] = useState({});

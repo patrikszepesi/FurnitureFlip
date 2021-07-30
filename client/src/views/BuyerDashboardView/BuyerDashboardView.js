@@ -82,6 +82,7 @@ const useStyles = makeStyles(theme => ({
   image: {
     width: '100%',
     maxWidth: 500,
+    marginTop:'20vw',
     [theme.breakpoints.up('md')]: {
       maxWidth: '100%',
       width: 'auto',
@@ -120,6 +121,7 @@ const BuyerDashboardView = () => {
   } = useContext(Context);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     loadCourses();
@@ -165,7 +167,7 @@ const BuyerDashboardView = () => {
               </div>
             </div>
             <div className={classes.content}>
-              <Story className={classes.contentSection} />
+              <Story user ={user} className={classes.contentSection} />
               <MyCourses courses={courses} className={classes.contentSection} />
               <Contact />
             </div>

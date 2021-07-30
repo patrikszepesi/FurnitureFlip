@@ -37,7 +37,7 @@ const InstructorRoute = ({ children }) => {
     } catch (err) {
       console.log(err);
       setOk(false);
-      router.push("/");
+      router.push("/user/become-seller");
     }
   };
 //

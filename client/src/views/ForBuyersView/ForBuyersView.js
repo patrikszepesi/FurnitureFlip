@@ -61,7 +61,7 @@ const ForBuyersView = props => {
         icon: 'fas fa-user-shield',
         title: ' Biztonság',
         subtitle:
-          'Miután megveszel egy terméket, az eladó csak 30 nap után kapja meg a pénzt, tehát nem tud átverni téged hamis termékkel. Ha valami nincs rendbe csak szólj nekünk',
+          'Miután megveszel egy terméket, az eladó nem azonnal kapja meg a pénzt, tehát nem tud átverni téged hamis termékkel. Ha valami nincs rendbe csak szólj nekünk',
       },
       {
         icon: 'fas fa-leaf',

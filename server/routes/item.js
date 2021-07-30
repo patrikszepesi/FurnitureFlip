@@ -47,17 +47,17 @@ router.get("/course/:slug", read);
 
 
 
-router.put("/course/publish/:courseId", requireSignin, publishItem);
-router.put("/course/unpublish/:courseId", requireSignin, unpublishItem);
+router.put("/course/publish/:itemId", requireSignin, publishItem);
+router.put("/course/unpublish/:itemId", requireSignin, unpublishItem);
 
 
-router.get("/check-enrollment/:courseId", requireSignin, checkEnrollment);
+router.get("/check-enrollment/:itemId", requireSignin, checkEnrollment);
 router.get("/course/invoice/:userId", requireSignin, invoice);
 
 router.post("/paid-enrollment/:itemId", requireSignin, paidEnrollment);
 router.get("/user/:userId", requireSignin, getUser);
 
-router.get("/stripe-success/:courseId", requireSignin, stripeSuccess);
+router.get("/stripe-success/:itemId", requireSignin, stripeSuccess);
 
 router.post("/wishlist/:itemId", requireSignin, addToWishlist);
 router.get("/wishlist", requireSignin, readWishlist);

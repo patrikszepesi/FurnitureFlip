@@ -8,7 +8,11 @@ module.exports=require('./index.js');
 //13. test payment settings
 //14.email format for questions answers and sold verify brought
 //design for landing page
-//invoice download format
+//redirect url in stripe??? apparenlty not needed
+//invoice settings
+//price of item WITH VAT(users should input value that includes VAT)
+//olyan árat adj amiben az áfa is benne van,
+//használt cuccok áfa kötelesek?
 
 
 

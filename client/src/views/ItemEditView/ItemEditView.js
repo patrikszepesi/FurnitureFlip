@@ -107,6 +107,7 @@ const ItemCreateView = (props = {}) => {
       street:'',
       quality:'',
       loading: false,
+      billingAddress:'',
       images:[]
     });
 

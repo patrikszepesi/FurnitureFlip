@@ -69,7 +69,10 @@ const itemSchema = new mongoose.Schema(
       type: Boolean,
     default: false,
     },
-  buyerEmail:"String",
+
+    buyerEmail:"String",
+
+    billingAddress:"String",
 
     images: {
         type: Array,

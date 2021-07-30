@@ -105,6 +105,7 @@ const MyCourses = props => {
 
 
               </ListItem>
+              <br/>
               <p>{'Eladó emailcíme : ' +  course.email} </p>
               <p>{'Eladó telefonszáma : ' +  course.phone} </p>
               <p>{'Átvehető itt : ' +  course.city + ", " } {course.street}</p>

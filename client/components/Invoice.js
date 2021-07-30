@@ -1,93 +1,156 @@
-import { Document, Page, Text, StyleSheet } from '@react-pdf/renderer';
+import { Document, Page, Text, StyleSheet, View, Image } from '@react-pdf/renderer';
+import logo from '../public/assets/social.png'
+
 
 
 const Invoice = ({ order }) => (
 
   <Document>
-    <Page style={styles.body}>
-      <Text style={styles.header} fixed>
-        ~ {new Date().toLocaleString()} ~
-      </Text>
-      <Text style={styles.title}>Számla</Text>
-      <Text style={styles.author}>FurFlip</Text>
+    <Page size="A4" style={styles.page}>
+      <Image style={styles.logo} src={logo} />
+    <>
 
-      <Text style={styles.text}>
-        <Text>
-          Számla letöltése: {'               '}
-          {new Date().toLocaleString()}
-        </Text>
-        {'\n'}
-        <Text>
-          Vásárlás dátuma: {'         '}
-          {order.time}
-        </Text>
-        {'\n'}
-        <Text>
-          Számla azonosító: {'  '}
-          {order._id}
-        </Text>
-        {'\n'}
-        <Text>
-          Összesen fizetett: {'       '}
-          {order.course.price} Forint
-        </Text>
-      </Text>
+    <View style={styles.titleContainer}>
+      <Text style={styles.reportTitle}>Számla</Text>
+      </View>
+      <View style={styles.invoiceNoContainer}>
+                <Text style={styles.label}>Számla azonosító : </Text>
+                <Text style={styles.invoiceDate}>{order._id}</Text>
+            </View >
+            <View style={styles.invoiceDateContainer}>
+                <Text style={styles.label}> számla kelte : </Text>
+                <Text>{order.time.substring(0,10)}</Text>
+            </View >
+            <View style={styles.headerContainer}>
+       <Text style={styles.billTo}>Kereskedő</Text>
+       <Text>hello</Text>
+       <Text>hello</Text>
+       <Text>hello</Text>
+       <Text>hello</Text>
+   </View>
+   <View style={styles.container}>
+        <Text style={styles.description}>Eladott Termék</Text>
+        <Text style={styles.qty}>darab</Text>
+        <Text style={styles.rate}>Ár</Text>
+        <Text style={styles.amount}>Levont jutalék</Text>
+    </View>
+    <View style={styles.container2}>
+         <Text style={styles.description}>{order.item.name}</Text>
+         <Text style={styles.qty}>1</Text>
+         <Text style={styles.rate}>{order.item.price} Forint</Text>
+         <Text style={styles.amount}>{order.item.price} x 10% = {order.item.price * 0.1 } Forint </Text>
+     </View>
+     <View style={styles.invoiceNoContainer}>
+               <Text style={styles.label}>Összesen fizetett  : </Text>
+               <Text style={styles.invoiceDate}>{order.item.price * 0.1 } Forint</Text>
+           </View >
 
-      <Text style={styles.footer}> Köszönjük, hogy velünk vásárolt </Text>
+            </>
     </Page>
   </Document>
 );
 
 const styles = StyleSheet.create({
-  body: {
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35
+
+    titleContainer:{
+        flexDirection: 'row',
+        marginTop: 24,
+    },
+    reportTitle:{
+        color: '#7ed957',
+        letterSpacing: 4,
+        fontSize: 25,
+        textAlign: 'center',
+        textTransform: 'uppercase',
+    },
+    page: {
+      fontFamily: 'Helvetica',
+      fontSize: 11,
+      paddingTop: 30,
+      paddingLeft:60,
+      paddingRight:60,
+      lineHeight: 1.5,
+      flexDirection: 'column',
   },
-  title: {
-    fontSize: 24,
-    textAlign: 'center'
+  logo: {
+      width: 74,
+      height: 66,
+      marginLeft: 'auto',
+      marginRight: 'auto'
   },
-  author: {
-    fontSize: 12,
-    textAlign: 'center',
-    marginBottom: 40
-  },
-  subtitle: {
-    fontSize: 18,
-    margin: 12
-  },
-  text: {
-    margin: 12,
-    fontSize: 14,
-    textAlign: 'justify'
-  },
-  image: {
-    marginVertical: 15,
-    marginHorizontal: 100
-  },
-  header: {
-    fontSize: 12,
-    marginBottom: 20,
-    textAlign: 'center',
-    color: 'grey'
-  },
-  footer: {
-    padding: '100px',
-    fontSize: 12,
-    marginBottom: 20,
-    textAlign: 'center',
-    color: 'grey'
-  },
-  pageNumber: {
-    position: 'absolute',
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    color: 'grey'
-  }
-});
+  invoiceNoContainer: {
+       flexDirection: 'row',
+       marginTop: 36,
+       justifyContent: 'flex-end'
+   },
+   total: {
+        flexDirection: 'row',
+        marginTop: 100,
+        justifyContent: 'flex-end'
+    },
+   invoiceDateContainer: {
+       flexDirection: 'row',
+       justifyContent: 'flex-end'
+   },
+   invoiceDate: {
+           fontSize: 12,
+           fontStyle: 'bold',
+   },
+   label: {
+       width: 100
+   },
+   headerContainer: {
+       marginTop: 36
+   },
+   billTo: {
+       marginTop: 20,
+       paddingBottom: 3,
+       fontFamily: 'Helvetica-Oblique'
+   },
+   tableContainer: {
+       flexDirection: 'row',
+       flexWrap: 'wrap',
+       marginTop: 24,
+       borderWidth: 1,
+       borderColor: '#7ed957',
+   },
+   container: {
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        alignItems: 'center',
+      //  height: 24,
+        textAlign: 'center',
+        fontStyle: 'bold',
+      //  flexGrow: 1,
+       marginTop: 60
+   },
+   container2: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      //  height: 24,
+        textAlign: 'center',
+        fontStyle: 'bold',
+      //  flexGrow: 1,
+       marginTop: 20
+   },
+   description: {
+       width: '30%',
+       borderRightColor: '#7ed957',
+       borderRightWidth: 1,
+   },
+   qty: {
+       width: '10%',
+       borderRightColor: '#7ed957',
+       borderRightWidth: 1,
+   },
+   rate: {
+       width: '25%',
+       borderRightColor: '#7ed957',
+       borderRightWidth: 1,
+   },
+   amount: {
+       width: '35%'
+   }
+  });
 
 export default Invoice;
