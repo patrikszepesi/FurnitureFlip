@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
-import { colors, List, ListItem, ListItemText } from '@material-ui/core';
+import { colors, List, ListItem, ListItemText, Button } from '@material-ui/core';
 import { SectionHeader } from '../../../../../components/molecules';
+import { useRouter } from "next/router";
+
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -42,6 +44,8 @@ const useStyles = makeStyles(theme => ({
 const Contact = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
+  const router = useRouter();
+
 
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -49,7 +53,11 @@ const Contact = props => {
   });
 
   return (
+
     <div className={className} {...rest}>
+    <Button onClick={()=>router.push("/history")} variant="outlined" color="primary" size="large">
+      Vásárlásaim részletesen
+    </Button>
       <SectionHeader
         title="Valami Probléma történt?"
         subtitle="Írj nekünk és megoldjuk a problémádat."
@@ -68,8 +76,8 @@ const Contact = props => {
         >
           <ListItemText
             className={classes.listItemText}
-            primary="Phone"
-            secondary="+39 659-657-0133"
+            primary="Telefon"
+            secondary="06302264860"
             primaryTypographyProps={{
               color: 'textSecondary',
             }}
@@ -87,25 +95,7 @@ const Contact = props => {
           <ListItemText
             className={classes.listItemText}
             primary="Email"
-            secondary="help@gmail.com"
-            primaryTypographyProps={{
-              color: 'textSecondary',
-            }}
-            secondaryTypographyProps={{
-              color: 'textPrimary',
-              component: 'span',
-            }}
-          />
-        </ListItem>
-        <ListItem
-          disableGutters
-          data-aos="fade-up"
-          className={classes.listItem}
-        >
-          <ListItemText
-            className={classes.listItemText}
-            primary="Főépület"
-            secondary="Budapest x utca"
+            secondary="support@flipit.store"
             primaryTypographyProps={{
               color: 'textSecondary',
             }}

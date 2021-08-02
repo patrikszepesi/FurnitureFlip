@@ -11,38 +11,35 @@ const Invoice = ({ order }) => (
     <>
 
     <View style={styles.titleContainer}>
-      <Text style={styles.reportTitle}>Számla</Text>
+      <Text style={styles.reportTitle}>Vásárlási adatok</Text>
       </View>
       <View style={styles.invoiceNoContainer}>
-                <Text style={styles.label}>Számla azonosító : </Text>
+                <Text style={styles.label}> Azonosító : </Text>
                 <Text style={styles.invoiceDate}>{order._id}</Text>
             </View >
             <View style={styles.invoiceDateContainer}>
-                <Text style={styles.label}> számla kelte : </Text>
+                <Text style={styles.label}> Vásárlás dátuma : </Text>
                 <Text>{order.time.substring(0,10)}</Text>
             </View >
             <View style={styles.headerContainer}>
-       <Text style={styles.billTo}>Kereskedő</Text>
-       <Text>hello</Text>
-       <Text>hello</Text>
-       <Text>hello</Text>
-       <Text>hello</Text>
+
    </View>
+     <Text >A vásárlási visszaigazolást emailben is elküldtük neked</Text>
    <View style={styles.container}>
-        <Text style={styles.description}>Eladott Termék</Text>
+        <Text style={styles.description}>Vásárolt Termék</Text>
         <Text style={styles.qty}>darab</Text>
         <Text style={styles.rate}>Ár</Text>
-        <Text style={styles.amount}>Levont jutalék</Text>
+
     </View>
     <View style={styles.container2}>
          <Text style={styles.description}>{order.item.name}</Text>
          <Text style={styles.qty}>1</Text>
          <Text style={styles.rate}>{order.item.price} Forint</Text>
-         <Text style={styles.amount}>{order.item.price} x 10% = {order.item.price * 0.1 } Forint </Text>
+
      </View>
      <View style={styles.invoiceNoContainer}>
                <Text style={styles.label}>Összesen fizetett  : </Text>
-               <Text style={styles.invoiceDate}>{order.item.price * 0.1 } Forint</Text>
+               <Text style={styles.invoiceDate}>{order.item.price  } Forint</Text>
            </View >
 
             </>

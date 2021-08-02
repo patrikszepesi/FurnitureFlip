@@ -69,6 +69,7 @@ const Items = props => {
   const router = useRouter();
   const { state, dispatch } = useContext(Context);
   const { user } = state;
+  console.log(data)
 
 
 
@@ -100,9 +101,11 @@ const Items = props => {
         align="center"
       >
         <i>
-        <h6>Mielőbb írj a vevőnek itt: <a href={"mailto:" +data[0].buyerEmail }>{data[0].buyerEmail}</a></h6>
-        <Button  onClick={() => router.push(`/item/${props.tags}`)} className={classes.button} variant="outlined" color="primary" size="large">
-           Megtekntés
+        <h6>Mielőbb írj a vevőnek itt: <a href={"mailto:" +props.author }>{props.author}</a></h6>
+        <h6>Ár: { props.subtitle} HUF</h6>
+        <h6>Az összeget már kifizette a vevő</h6>
+        <Button onClick={()=>router.push("/seller/revenue")} variant="outlined" color="primary" size="large">
+          Pénzügyi adataiam és kifizetéseim
         </Button>
         </i>
       </Typography>
@@ -111,10 +114,10 @@ const Items = props => {
 
   return (
     <UserRoute>
-    <div className={className} {...rest}>
+    {data && data.length>0 ? <div className={className} {...rest}>
       <DescriptionCta
         title="Általad eladott termékek"
-        subtitle="Emailben elküldtük neked a vevő emailcímét. Írj neki minél előbb, hogy megkaphassa a vásárolt termékét. Az itt megjelenő tárgyakért már fizetett a vevő. Biztonsági okok miatt a pénzt nem egyből, hanem hetente  juttatjuk el a számládra"
+        subtitle="Emailben elküldtük neked a vevő emailcímét. Írj neki minél előbb, hogy megkaphassa a vásárolt termékét. Az itt megjelenő tárgyakért már fizetett a vevő. Biztonsági okok miatt a pénzt nem egyből, hanem 10 napon belül juttatjuk el a számládra"
         primaryCta={
           <Button onClick={()=>router.push("/seller/revenue")} variant="outlined" color="primary" size="large">
             Pénzügyi adataiam és kifizetéseim
@@ -142,8 +145,8 @@ const Items = props => {
               cardContent={
                 <Content
                   title={item.name}
-                  subtitle={item.item}
-                  author={item.author}
+                  subtitle={item.price}
+                  author={item.buyerEmail}
                   date={item.date}
                   tags={item._id}
                 />
@@ -152,7 +155,8 @@ const Items = props => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </div> :(<h1>Még nem adtál el semmit</h1>) }
+
     </UserRoute>
   );
 };

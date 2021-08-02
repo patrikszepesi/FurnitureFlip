@@ -25,7 +25,7 @@ const IncomeView = () => {
     {
       title: 'Build Recurring Revenue',
       description:
-        'Jelenlegi bevételek az össes eladott termék után. Beleszámolva a még be nem folyt összeget',
+        'Jelenlegi bevételek az össes eladott termék után. Beleszámolva azokat az összegeket is amiket az eladó átutalt, de mi még nem utaltunk ki neked',
       icon: 'fas fa-money-bill-wave',
     },
     {

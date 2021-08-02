@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import InstructorRoute from "../../../components/routes/InstructorRoute";
+import UserRoute from "../../../components/routes/UserRoute";
 import { SectionAlternate } from '../../../components/organisms';
 import { useState, useEffect } from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -86,10 +86,10 @@ const InvoiceView = props => {
     const showDownloadLink = order => (
       <PDFDownloadLink
         document={<Invoice order={order} />}
-        fileName="invoice.pdf"
+        fileName="Vásárlás.pdf"
         className="btn btn-sm btn-block btn-outline-primary"
       >
-        Számla letöltése
+         Letöltés
       </PDFDownloadLink>
     );
 
@@ -105,16 +105,16 @@ const InvoiceView = props => {
       ));
 
   return (
-    <InstructorRoute>
+    <UserRoute>
   <SectionAlternate>
   <h4>
-    {orders.length > 0 ? 'Eddigi számlák' : 'Még nincs itt semmi'}
+    {orders.length > 0 ? 'Eddigi vásárlásaim' : 'Még nincs itt semmi'}
   </h4>
   <div className={className} {...rest}>
     {showEachOrders()}
   </div>
   </SectionAlternate>
-  </InstructorRoute>
+  </UserRoute>
   );
 };
 

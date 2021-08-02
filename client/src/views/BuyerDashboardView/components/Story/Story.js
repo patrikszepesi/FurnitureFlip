@@ -12,13 +12,9 @@ const Story = props => {
     defaultMatches: true,
   });
 
-let toShow;
-  if(user&& user.purchases.length>1){
-    toShow='Az eladó a megadott emailcímeden fog keresni, amit megadtál a vásárláskor. Ha valami probléma van akkor minket is tudsz keresni vagy az eladót is tudod keresni a megadott elérhetőségein'
-  }else{
-    toShow="Még nem vettel semmit"
-  }
-  console.log(user)
+
+  let toShow='Ha vásárolsz valamit akkor  az eladó a megadott email címeden fog keresni, amit megadtál a vásárláskor. Ha valami probléma van akkor minket is tudsz keresni vagy az eladót is tudod keresni a megadott elérhetőségein'
+
 
   return (
 
