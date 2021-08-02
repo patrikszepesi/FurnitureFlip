@@ -24,7 +24,7 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Vegyél vagy adj el bármit biztonságosan , {' '}
+                Vegyél vagy adj el bármit biztonságosan, {' '}
                 <Typography color="primary" variant="inherit" component="span">akár új, akár használt. </Typography>
               </span>
             }
@@ -47,7 +47,7 @@ const Hero = props => {
           component="p"
           color="primary"
         >
-          Minden bevételünk után, 5%-ot félreteszünk különböző zöld projektekre
+          Minden bevételünk után, 10%-ot félreteszünk különböző zöld projektekre
         </Typography>
       </HeroSimpleBackground>
     </div>

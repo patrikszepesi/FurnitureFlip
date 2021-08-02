@@ -6,7 +6,6 @@ import { GetStarted, QuickStart, Services } from './components';
 
 
 import {
-  About,
   Features,
   Hero,
   Integrations,
@@ -45,9 +44,6 @@ const IndexView = ({themeMode}) => {
       <SectionAlternate className={classes.sectionAlternate}>
         <Integrations data={integrations} />
       </SectionAlternate>
-      <Section>
-        <About />
-      </Section>
       <SectionAlternate innerNarrowed>
         <Features />
       </SectionAlternate>

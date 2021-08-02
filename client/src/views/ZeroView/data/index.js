@@ -8,7 +8,7 @@ export const folio = [
   },
   {
     cover: 'https://images.unsplash.com/photo-1495556650867-99590cea3657?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2FzdGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60',
-    title: 'A ruhákban található textilnek több mint 200+ év kell, hogy lebomoljon.',
+    title: 'A ruhákban található textilnek több mint 200+ év kell, hogy lebomoljon',
     subtitle:
       'Ebből dobunk ki évente 17 millió tonnát',
     h: 300,
@@ -29,7 +29,7 @@ export const folio = [
   },
   {
     cover: 'https://images.unsplash.com/photo-1562077981-4d7eafd44932?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FzdGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60',
-    title: 'Átlagosan 730 kg. szemetet termel évente egy darab ember',
+    title: 'Átlagosan 730 kiló szemetet termel évente egy darab ember',
     subtitle:
       'Ez napi szinten 2 kiló',
     h: 350,
@@ -59,7 +59,7 @@ export const folio = [
     cover: 'https://images.unsplash.com/photo-1612965110667-4175024b0dcc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGVsZWN0cm9uaWNzJTIwd2FzdGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60',
     title: 'Évente több mint 40 millió tonna elektronikai hulladék termelődik',
     subtitle:
-      'Ezek az elásott hulladék nagyon káros a környezetének',
+      'Ezek az elásott hulladék nagyon károsak a környezetnek',
     h: 550,
   },
   {
@@ -73,7 +73,7 @@ export const folio = [
     cover: 'https://images.unsplash.com/photo-1519403449426-fbfc4ecef59f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZSUyMHdhc3RlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60',
     title: 'Több mint 1000 év kell egy darab cipő lebomlásához',
     subtitle:
-      'Évente több száz millió pár cipiőt dobunk ki',
+      'Évente több száz millió pár cipőt dobunk ki',
     h: 450,
   },
   {

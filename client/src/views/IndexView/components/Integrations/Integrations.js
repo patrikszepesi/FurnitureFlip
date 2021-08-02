@@ -36,7 +36,7 @@ const Integrations = props => {
             <Grid item xs={12} md={6}>
               <SectionHeader
                 title="Ha már nem kell valami, add el itt."
-                subtitle="Lehet valakinek pont az a régi fotogép kell ami ott porosodik a polcodon."
+                subtitle="Lehet valakinek pont az a régi fotógép kell ami ott porosodik a polcodon."
                 align="left"
                 ctaGroup={[
                   <LearnMoreLinkPlain

@@ -149,7 +149,7 @@ const Community = props => {
                 loading
               }
             >
-              {loading ? "Loading..." : "Pénzügyi adatok megtekíntése"}
+              {loading ? "Loading..." : "Pénzügyi adatok megtekintése"}
             </Button>
           ]}
           align="left"
@@ -178,7 +178,7 @@ const Community = props => {
               <Typography color="secondary" variant="inherit" component="span">mielőtt elkezdesz eladni dolgokat</Typography>
             </span>
           }
-          subtitle=" Az eladás után 30 nap múlva érkezik a pénz a számládra Nincs semmilyen rejtett költség. Az eladási ár 90% megy a te megadott bankszámládra, és a maradék 10% pedig a mi jutalékunk"
+          subtitle=" Az eladás után 10 napon belül érkezik a pénz a számládra, Nincs semmilyen rejtett költség. Az eladási ár 90%-a megy az általad megadott bankszámládra, és a maradék 10% pedig a mi jutalékunk"
           ctaGroup={[
             <Button
               variant="contained"

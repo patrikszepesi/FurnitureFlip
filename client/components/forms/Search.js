@@ -115,7 +115,6 @@ const useStyles = makeStyles(theme => ({
 
 const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
   const classes = useStyles();
-  console.log(filterObj)
 
   let subCategories=[]
   let subCategory=''
@@ -126,28 +125,28 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
 
   if(categoryToFilter==='bútor/otthon'){
     subCategories=['benti bútor','kinti bútor','bárhol tárolható']
-    prices=[{name:'1.000-8.000 HUF',value:[1000,8000]},{name:'8.000-20.000 HUF',value:[8000,20000]},{name:'20.000-50.000 HUF',value:[20000,50000]},{name:'50.000-100.000 HUF',value:[50000,100000]},{name:'100.000-200.000 HUF',value:[100000,200000]},{name:'200.000-350.000 HUF',value:[200000,350000]},{name:'350.000+ HUF',value:[350000,10000000000]}]
+    prices=['1.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','25.000 HUF','40.000 HUF','60.000 HUF','90.000 HUF','120.000 HUF','150.000 HUF','200.000 HUF','250.000 HUF','300.000 HUF','400.000 HUF','500.000 HUF','max']
   }else if(categoryToFilter==='sport/szabadidő'){
     subCategories=['labdarúgás','kosárlabda','röplabda','kézilabda','küzdősport','jégkorong/korcsolya','sakk','tenisz','vízisport','túra','futás','séta','lovaglás','téli sport','golf','asztalitenisz','társasjáték','darts','snooker/biliárd','kerékpár'].sort()
-    prices=[{name:'1.000-2.000 HUF',value:[1000,2000]},{name:'2.000-5.000 HUF',value:[2000,5000]},{name:'5.000-10.000 HUF',value:[5000,10000]},{name:'10.000-20.000 HUF',value:[10000,20000]},{name:'20.000-30.000 HUF',value:[20000,30000]},{name:'30.000-40.000 HUF',value:[30000,40000]},{name:'40.000+ HUF',value:[40000,10000000000]}]
+    prices=['1.000 HUF','3.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','20.000 HUF','30.000 HUF','40.000 HUF','60.000 HUF','80.000 HUF','100.000 HUF','max']
   }else if(categoryToFilter==='alkatrész'){
     subCategories=['jármű'].sort()
-    prices=[{name:'1.000-8.000 HUF',value:[1000,8000]},{name:'8.000-20.000 HUF',value:[8000,20000]},{name:'20.000-50.000 HUF',value:[20000,50000]},{name:'50.000-100.000 HUF',value:[50000,100000]},{name:'100.000-200.000 HUF',value:[100000,200000]},{name:'200.000-350.000 HUF',value:[200000,350000]},{name:'350.000+ HUF',value:[350000,10000000000]}]
+    prices=['1.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','25.000 HUF','40.000 HUF','60.000 HUF','90.000 HUF','120.000 HUF','150.000 HUF','200.000 HUF','250.000 HUF','300.000 HUF','400.000 HUF','500.000 HUF','700.000 HUF','1.000.000 HUF','2.000.000 HUF','3.000.000 HUF','6.000.000 HUF','10.000.000 HUF','max']
   }else if(categoryToFilter==='művészet'){
     subCategories=['festmény','design','szobor'].sort()
-    prices=[{name:'1.000-8.000 HUF',value:[1000,8000]},{name:'8.000-20.000 HUF',value:[8000,20000]},{name:'20.000-50.000 HUF',value:[20000,50000]},{name:'50.000-100.000 HUF',value:[50000,100000]},{name:'100.000-200.000 HUF',value:[100000,200000]},{name:'200.000-350.000 HUF',value:[200000,350000]},{name:'350.000+ HUF',value:[350000,10000000000]}]
+    prices=['1.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','25.000 HUF','40.000 HUF','60.000 HUF','90.000 HUF','120.000 HUF','150.000 HUF','200.000 HUF','250.000 HUF','300.000 HUF','400.000 HUF','max']
   }else if(categoryToFilter==='műszaki cikk'){
     subCategories=['telefon','számítógép/PC','tablet','laptop','zenelejátszó','TV','fényképező','konzol/videójáték','nyomtató'].sort()
-    prices=[{name:'1.000-8.000 HUF',value:[1000,8000]},{name:'8.000-20.000 HUF',value:[8000,20000]},{name:'20.000-50.000 HUF',value:[20000,50000]},{name:'50.000-100.000 HUF',value:[50000,100000]},{name:'100.000-200.000 HUF',value:[100000,200000]},{name:'200.000-350.000 HUF',value:[200000,350000]},{name:'350.000+ HUF',value:[350000,10000000000]}]
+    prices=['1.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','25.000 HUF','40.000 HUF','60.000 HUF','90.000 HUF','120.000 HUF','150.000 HUF','200.000 HUF','250.000 HUF','300.000 HUF','400.000 HUF','500.000 HUF','700.000 HUF','900.000 HUF','max']
   }else if(categoryToFilter==='ruha'){
     subCategories=['férfi','női','gyermek/fiú','gyermek/lány','baba/fiú','baba/lány'].sort()
-    prices=[{name:'1.000-2.000 HUF',value:[1000,2000]},{name:'2.000-5.000 HUF',value:[2000,5000]},{name:'5.000-10.000 HUF',value:[5000,10000]},{name:'10.000-20.000 HUF',value:[10000,20000]},{name:'20.000-30.000 HUF',value:[20000,30000]},{name:'30.000-40.000 HUF',value:[30000,40000]},{name:'40.000+ HUF',value:[40000,10000000000]}]
+    prices=['1.000 HUF','3.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','20.000 HUF','30.000 HUF','40.000 HUF','60.000 HUF','80.000 HUF','100.000 HUF','max']
   }else if(categoryToFilter==='mama-baba'){
     subCategories=['játék','szállítás','bútor'].sort()
-    prices=[{name:'1.000-2.000 HUF',value:[1000,2000]},{name:'2.000-5.000 HUF',value:[2000,5000]},{name:'5.000-10.000 HUF',value:[5000,10000]},{name:'10.000-20.000 HUF',value:[10000,20000]},{name:'20.000-30.000 HUF',value:[20000,30000]},{name:'30.000-40.000 HUF',value:[30000,40000]},{name:'40.000+ HUF',value:[40000,10000000000]}]
+    prices=['1.000 HUF','3.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','20.000 HUF','30.000 HUF','40.000 HUF','60.000 HUF','80.000 HUF','100.000 HUF','max']
   }else if(categoryToFilter==='könyv'){
     subCategories=['gyerekeknek','tankönyv','felnőtteknek'].sort()
-    prices=[{name:'1.000-2.000 HUF',value:[1000,2000]},{name:'2.000-5.000 HUF',value:[2000,5000]},{name:'5.000-10.000 HUF',value:[5000,10000]},{name:'10.000-20.000 HUF',value:[10000,20000]},{name:'20.000-30.000 HUF',value:[20000,30000]},{name:'30.000-40.000 HUF',value:[30000,40000]},{name:'40.000+ HUF',value:[40000,10000000000]}]
+    prices=['1.000 HUF','3.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','20.000 HUF','30.000 HUF','40.000 HUF','60.000 HUF','80.000 HUF','100.000 HUF','max']
   }
 
 
@@ -259,11 +258,10 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
 
     const handleFilterChange = (event,name) => {
 
-
       const newFilterObj = { ...filterObj, [name]: event.target.value };
-      console.log(newFilterObj)
 
         onFilterChange(newFilterObj);
+
     };
 
   return (
@@ -275,7 +273,7 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
             <Typography color="secondary" variant="inherit" component="span">és vedd meg egy kattintással</Typography>
           </span>
         }
-        subtitle= {'Kategória : ' + categoryToFilter}
+        subtitle= {'Keresés ezek közül : ' + categoryToFilter}
         fadeUp
       />
       <Section className={classes.heroWrapper}>
@@ -320,16 +318,17 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
             </Grid>
             <Grid item xs={12} md={3}>
               <FormControl className={classes.textField}>
-                <p>Ár</p>
+                <p>Ár(felső limit)</p>
                 <Select
                 value={filterObj.price}
                 onChange={(e) => handleFilterChange(e, 'price')}
                 input={<BootstrapInput />}
                 >
                   <MenuItem value="">
+                    <em>Maxium menniyt költenél</em>
                   </MenuItem>
                       {prices.map(p => {
-                        return <MenuItem value={p.value}>{p.name}</MenuItem>;
+                        return <MenuItem value={p}>{p}</MenuItem>;
                     })}
                 </Select>
               </FormControl>
@@ -343,7 +342,7 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
                 input={<BootstrapInput />}
                 >
                   <MenuItem value="">
-                  <em>None</em>
+                  <em>válassz</em>
                   </MenuItem>
                       {qualities.map(q => {
                         return <MenuItem value={q}>{q}</MenuItem>;

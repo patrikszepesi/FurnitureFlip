@@ -55,7 +55,7 @@ const WhatView = props => {
         icon: 'fas fa-sign-in-alt',
         title: 'Regisztrálj',
         subtitle:
-          'Csupán add meg az emailcímed és a nevedet',
+          'Csupán add meg az email címed és a nevedet',
       },
       {
         icon: 'fas fa-money-check-alt',
@@ -67,13 +67,13 @@ const WhatView = props => {
         icon: 'fas fa-hand-holding-usd',
         title: 'Adj el bármit',
         subtitle:
-          'Kínálj fel annyi terméket eladára amennyit csak szeretnél. Az eladás után 7 nap múlva fog megérkezni hozzád a pénz. Ez a vevők biztonsága miatt van',
+          'Kínálj fel annyi terméket eladásra amennyit csak szeretnél. Az eladás után 7 nap múlva fog megérkezni hozzád a pénz. Ez a vevők biztonságát szolgálja'
       },
       {
         icon: 'fas fa-exchange-alt',
         title: 'Termék átadás',
         subtitle:
-          'Emailben értesítünk téged a vevő elérhetőségeivel, amint valaki megvette és már kifizette valamelyik terméked. Utána lépj kapcsolatba a vevővel és beszéljétek meg, hogy a terméket, hol tudja átvenni ',
+          'Emailben értesítünk téged a vevő elérhetőségeivel, amint valaki megvette és már kifizette valamelyik terméked. Utána lépj kapcsolatba a vevővel és beszéljétek meg, hogy a terméket hol tudja átvenni ',
       },
     ]
 

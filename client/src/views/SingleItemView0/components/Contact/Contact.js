@@ -90,7 +90,7 @@ const Contact = props => {
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
       stripe.redirectToCheckout({ sessionId: data });
     } catch (err) {
-      toast.error('Sikeres regisztráció, Email elküldve az emailcímedre', {
+      toast.error('Hiba', {
            duration: 4000,
     style: {
       border: '5px solid #E1C699',

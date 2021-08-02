@@ -62,7 +62,6 @@ const Items = props => {
   const classes = useStyles();
   const router = useRouter();
 
-console.log(data)
   const BlogMediaContent = props => (
     <Image
       src={props.Location}
@@ -92,16 +91,16 @@ console.log(data)
       >
         <i>
         <Button  onClick={() => router.push(`seller/item/edit/${props.tags}`)} className={classes.button} variant="outlined" color="primary" size="large">
-          Szerkeztés
+          Szerkesztés
         </Button>
         <Button  onClick={() => router.push(`/item/${props.tags}`)} className={classes.button} variant="outlined" color="primary" size="large">
-           Megtekntés
+           Megtekintés
         </Button>
         </i>
       </Typography>
     </div>
   );
-//
+
   return (
     <div className={className} {...rest}>
       <DescriptionCta

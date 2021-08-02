@@ -142,11 +142,6 @@ const Items = props => {
     <div className={className} {...rest}>
       <DescriptionCta
         title="Elmentett termékek"
-        primaryCta={
-          <Button variant="outlined" color="primary" size="large">
-            Ide valami
-          </Button>
-        }
         align={'left'}
         titleProps={{
           variant: 'h4',

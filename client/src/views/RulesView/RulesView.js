@@ -205,7 +205,8 @@ const RulesView = () => {
             </List>
             <SectionHeader
               title="További tudnivalók"
-              subtitle="If Material-UI Store is required to collect indirect taxes (such as sales tax, value-added tax, goods and services tax) under the laws of your state or country of residence, you shall be liable for payment of any such indirect tax. Where Material-UI Store or you are required to collect or remit direct or indirect taxes, you may be required to self-assess said tax under the applicable laws of your country of residence. Non-transferable as used herein means that except as specifically provided in this license agreement, you may not sell, rent, loan, give, sublicense, or otherwise transfer to anyone, CONTENT, or the right to use CONTENT. You may, however, make a one-time transfer of CONTENT to a third party for the sole purpose of causing such a third party to print and/or manufacture your goods incorporating CONTENT subject to the terms and conditions herein. If you become aware that any social media website uses any CONTENT in a manner that exceeds your license hereunder, you agree to remove all derivative works incorporating CONTENT from such Social Media Site and to promptly notify Material-UI SAS of each such social media website's use. You agree to take all commercially reasonable steps to prevent third parties from duplicating any CONTENT. If you become aware of any unauthorized duplication of any CONTENT please notify us via email at support@material-ui.com."
+              subtitle="Az ÁÜTŐ Kft. által üzemeltetett honlapok kódjai az ÁÜTŐ Kft.-től független, külső szerverről érkező és külső szerverre mutató hivatkozásokat is tartalmaznak.
+                Az egyik ilyen külső szerver segíti a honlap látogatottsági és egyéb webanalitikai adatainak független auditálását (Google Analytics)."
               align="left"
               titleProps={{
                 className: classes.fontWeightBold,
@@ -226,7 +227,7 @@ const RulesView = () => {
                   />
                 </ListItemAvatar>
                 <Typography variant="body1" color="textPrimary">
-                A honlap egy marketplace-ként működik ami azt jelenti, hogy bárki tud venni és eladni termékeket. Minden eladás után, az eladott áru utáni összeg 10%-át vonjuk le jutalékként.
+                Az eladókat képesek vagyunk ellenőrizni hiszen megadják a személyes adataikat viszont a terméküket nem tudjuk ezért is nem vállallunk a termékek után bármilyen felelősséget.
                 </Typography>
               </ListItem>
               <ListItem disableGutters>
@@ -248,10 +249,7 @@ const RulesView = () => {
                   />
                 </ListItemAvatar>
                 <Typography variant="body1" color="textPrimary">
-                  “CONTENT” means source code, photos, images, vectors, moving
-                  images, animations, films, videos, audiovisual works, or other
-                  media together with all associated keywords, metadata, and/or
-                  titles.
+                  Az oldal nem használ sütiket, hanem CSFR token-eket használ ami biztosítja, hogy a felhasználó be tudjon lépni és azonosítani tudja önmagát. A token nem ment el semmilyen személyes adatot, és használata nélkül a felhasználó képtelen bejelntekzni és használni az oldalt. A regisztrálással a felhasználó elfogadja, hogy CSFR tokennel fog tudni bejelentkezni.
                 </Typography>
               </ListItem>
               <ListItem disableGutters>
@@ -262,12 +260,84 @@ const RulesView = () => {
                   />
                 </ListItemAvatar>
                 <Typography variant="body1" color="textPrimary">
-                  “WEBSITE” means the service and{' '}
-                  <a href="https://material-ui.com/store/" className={classes.link}>
-                    https://material-ui.com/store/
-                  </a>{' '}
-                  and subsidiary websites.
+                A regisztrációval a felhasználó beleegyezik, hogy, ha el akar adni valamit akkor utána a Stripe segítségével tudja nyomon követni a számlájára érkező összegeket.
                 </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                A regisztrációval a felhasználó beleegyezik, hogy adatait biztonságosan, hashelve elmentjük egy adatbázisba
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                A regisztrációval a felhasználó beleegyezik, hogy nem fog szándékosan hamis termékleírást adni, ha mégis akkor akár büntethető is.
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                A regisztrációkor megadott adatok a hatályos adatvédelmi rendelkezések alapján lesznek kezelve, a személyes adatok tiszteletben tartásával. Az adatokat nem adjuk ki másik félnek!  </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                A regisztrációval a felhasználó beleegyezik, hogy olyan elérhetőséget ad meg amin könnyen elérhető. Amennyiben nem teljesíti kötelességeit akár jogi per is indulhat ellene. A kötelességekhez tartozik az, hogy, ha valki megvesz tőle egy terméket akkor azt átadja megadott időben és nem kér el semmilyen más költséget. Valamint az is, hogy semmi féle
+                 képen nem próbálja meg átverni a vevőt.
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                  A regisztrációval a felhasználó beleegyezik, hogy, ha terméket vásáról akkor utána semmilyen módon nem próbálja átverni a vevőt.
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                Csere esetén az eladónak és vevőnek kell eggyeztetnie, az ÁÜTŐ Kft. semmilyen felelősséget nem vállal ezen a téren
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                  Az ÁÜTŐ Kft. az informatikai környezetünket rendszeresen biztonsági teszteléssel vizsgálja, a talált hibákat vagy gyenge pontokat kijavítja, az informatikai rendszer biztonsági megerősítését folyamatos feladatnak tekinti.                </Typography>
               </ListItem>
             </List>
           </Grid>

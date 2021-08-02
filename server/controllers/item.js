@@ -444,6 +444,7 @@ export const search = async (req, res) => {
 
 let {subCategory, item, category,price,quality,city}=toSend
 
+
 const handleSearch=async(queryObject)=>{
  try {
    let items = await Item.find(queryObject)
@@ -469,13 +470,15 @@ const handleSearch=async(queryObject)=>{
     if(quality.length>0){
       queryObject={...queryObject,quality}
     }
-    if(price[1]>1){
-      queryObject={...queryObject, price:{$gte: price[0],
-       $lte: price[1]}}
+    if(price.length>0 && price!='max'){
+      queryObject={...queryObject, price:{ $lte: Number(price.replace(/[^0-9]/g,''))}}
     }
-
+    if(price.length>0 && price=='max'){
+        queryObject={...queryObject, price:{ $lte: 100000000}}
+    }
   }
    handleSearch(queryObject)
+   console.log(queryObject)
 
 };
 

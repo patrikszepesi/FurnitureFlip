@@ -74,7 +74,7 @@ const ItemUpdateForm = props => {
   const classes = useStyles();
 
   let items=['előbb válassz al-kategóriát']
-  const qualities=['nem használt','alig használt','használt']
+  const qualities=['új','alig használt','használt']
   const categories=['bútor/otthon','sport/szabadidő','műszaki cikk','ruha','könyv','mama-baba','alkatrész','művészet']
   let subCategories=['előbb válassz kategóriát']
 
@@ -173,9 +173,9 @@ const ItemUpdateForm = props => {
   }else if(values.subCategory==='gyermek/lány'){
     items=['sapka','sál','kesztyű','kabát','nadrág','egyéb','hosszú ujjú','rövid ujjú','strandoláshoz','zokni','cipő','papucs','overál','pulóver','hajpánt','csat','hajgumi'].sort()
   }else if(values.subCategory==='felnőtteknek'){
-    items=['filozófia','igaz-történt','kaland/akció','scifi','egyéb','klasszikus','romantikus','komédia','rejtély','fantasy','horror','önéletrajz','történelmi']
+    items=['filozófia','igaz-történet','kaland/akció','scifi','egyéb','klasszikus','romantikus','komédia','rejtély','fantasy','horror','önéletrajz','történelmi']
   }else if(values.subCategory==='gyerekeknek'){
-    items=['igaz-történt','kaland/akció','egyéb','mese','vicces','rejtély','fantasy','történelmi','ismeretterjesztő','képeskönyv','fejlesztő','tanulságos']
+    items=['igaz-történet','kaland/akció','egyéb','mese','vicces','rejtély','fantasy','történelmi','ismeretterjesztő','képeskönyv','fejlesztő','tanulságos']
   }else if(values.subCategory==='tankönyv'){
     items=['statisztika & matek','számvitel','pénzügy','jogi','nyelvi', 'mikro & makroökonómia','politika','stratégia és szervezés','marketing','gazdaságtan','informatika','egyéb','orvosi','kémia','fizika','mérnöki','biológia','erkólcs','vallási',''].sort()
   }else if(values.subCategory==='szállítás'){

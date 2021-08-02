@@ -88,7 +88,6 @@ export const logout = async (req, res) => {
 export const currentUser = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("-password").exec();
-    console.log("CURRENT_USER", user);
     return res.json({ ok: true });
   } catch (err) {
     console.log(err);
@@ -136,7 +135,6 @@ export const forgotPassword = async (req, res) => {
     const emailSent = SES.sendEmail(params).promise();
     emailSent
       .then((data) => {
-        console.log(data);
         res.json({ ok: true });
       })
       .catch((err) => {

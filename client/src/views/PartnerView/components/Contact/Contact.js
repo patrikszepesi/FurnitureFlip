@@ -12,7 +12,7 @@ const Contact = props => {
       <SectionHeader
         title="Támogatnál minket?"
         ctaGroup={[
-          <a class="mailto" href="mailto:contact@test.com">
+          <a class="mailto" href="mailto:support@flipit.store">
           <Button variant="contained" color="primary" size="large">
             Írj nekünk
           </Button>

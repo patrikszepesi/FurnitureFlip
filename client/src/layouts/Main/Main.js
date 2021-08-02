@@ -152,7 +152,7 @@ const Main = ({ children, themeToggler, themeMode }) => {
               href: user ? '/seller/sold': '/login',
             },
             {
-              title: user? 'Jelenlegi hírdetéseim ': 'Regisztráció',
+              title: user? 'Jelenlegi hirdetéseim ': 'Regisztráció',
               href: user? '/seller': '/register',
             },
             {

@@ -40,7 +40,7 @@ const Features = props => {
     <div className={className} {...rest}>
       <SectionHeader
         data-aos="fade-up"
-        title="Céljaink."
+        title="Céljaink"
       />
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} data-aos="fade-up">
@@ -51,7 +51,7 @@ const Features = props => {
           >
             <DescriptionListIcon
               title="Segíteni neked pénzt kereseni"
-              subtitle="Mi nem számolunk fel semmilyen extra kölgséget tőled,nincs hírdetési költség, csak egy kis jutalékot kérünk el tőled"
+              subtitle="Mi nem számolunk fel semmilyen extra költgséget tőled,nincs hirdetési költség, csak egy kis jutalékot kérünk el tőled"
               icon={
                 <Icon
                   fontIconClass="fas fa-hand-holding-usd"
@@ -73,7 +73,7 @@ const Features = props => {
           >
             <DescriptionListIcon
               title="Zero Waste"
-              subtitle="Bíztatni az embereket arra, hogy vigyázzanak a környezetre, és, hogy ne vegyenek mindenből újat. Ezért is ajánljuk fel az összes bevételünk 5%-át zöld tevékenységekre"
+              subtitle="Bíztatni az embereket arra, hogy vigyázzanak a környezetre, és, hogy ne vegyenek mindenből újat. Ezért is ajánljuk fel az összes bevételünk 10%-át zöld tevékenységekre"
               icon={
                 <Icon
                   fontIconClass="fas fa-recycle"
