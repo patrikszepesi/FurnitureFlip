@@ -326,6 +326,28 @@ const RulesView = () => {
                   />
                 </ListItemAvatar>
                 <Typography variant="body1" color="textPrimary">
+                  A regisztrációval a felhasználó beleegyezik, hogy, ha terméket vásáról akkor a regisztrációhoz használt email címét elküldjük az eladónak, aki kapcsolatba lép majd a vevővel, a megadott email címen.
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                  A regisztrációval a felhasználó beleegyezik, hogy, ha terméket értékesít akkor a termék adatainak megadásakor adott telefonszám, átvételi cím és email címet megosztjuk az eladóval.
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
                 Csere esetén az eladónak és vevőnek kell eggyeztetnie, az ÁÜTŐ Kft. semmilyen felelősséget nem vállal ezen a téren
                 </Typography>
               </ListItem>

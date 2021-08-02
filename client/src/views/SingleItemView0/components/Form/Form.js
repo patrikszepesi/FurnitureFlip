@@ -74,7 +74,7 @@ const Form = props => {
 
 const backendCallFalse = () => {
 dispatch({
-  type: "SET_BACKEND_CALL__FALSE",
+  type: "SET_BACKEND_CALL_FALSE",
 });
 };
 
@@ -93,7 +93,7 @@ const { data } = await axios.post(`/api/comment/answer/${item._id}`,{
 
     setAnswerObj(newAnswerObj)
   };
-//
+
   if(backendCallAnswer===true){
       if(answerObj.text.length>2 ){
         sendAnswerToBackend();
@@ -126,7 +126,7 @@ const { data } = await axios.post(`/api/comment/answer/${item._id}`,{
       secondary: '#FFFAEE',
       },
       });
-        backendCallFalse();
+        backendCallFalseAnswer();
       }
     }
     const handleRatingChange = async (event,name, value) => {
@@ -204,6 +204,7 @@ if(backendCall===true){
     },
     });
      backendCallFalse();
+
      }
 
   }

@@ -55,13 +55,13 @@ const ForBuyersView = props => {
         icon: 'fas fa-user-check',
         title: 'Ellenőrzött eladók',
         subtitle:
-          'Az összes eladó ellenőrzött, ami azt jelenti, hogy a személyazonosságát megerősítette',
+          'Az összes eladó ellenőrzött, ami azt jelenti, hogy a személyazonosságát megerősítette.',
       },
       {
         icon: 'fas fa-user-shield',
         title: ' Biztonság',
         subtitle:
-          'Miután megveszel egy terméket, az eladó nem azonnal kapja meg a pénzt, tehát nem tud átverni téged hamis termékkel. Ha valami nincs rendben csak szólj nekünk',
+          'Miután megveszel egy terméket, az eladó nem azonnal kapja meg a pénzt, tehát nem tud átverni téged hamis termékkel. Ha valami nincs rendben csak szólj nekünk. A vásárlás után az eladó kapcsolatba lép veled, hogy hol és mikor tudod átvenni a terméket.',
       },
       {
         icon: 'fas fa-leaf',
@@ -149,7 +149,7 @@ const ForBuyersView = props => {
                   hogy minél több dolgot tudjunk újrahasznosítani
                   </span>
                 }
-                subtitle="Lehet, hogy pont nálad van az könyv amit éppen valaki keres. Ha eladod még pénzt is kapsz érte. és a környezetet is óvod egyben"
+                subtitle="Lehet, hogy pont nálad van az könyv amit éppen valaki keres. Ha eladod még pénzt is kapsz érte, és a környezetet is óvod egyben"
                 align="left"
                 disableGutter
               />

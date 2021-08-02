@@ -339,19 +339,19 @@ export const stripeSuccess = async (req, res) => {
               Data: `
                   <html>
                     <h1>Vásárlás megerősítése</h1>
-                    <p>A vásárló hamarosan kapcsolatba fog lépni veled. Amennyiben ez 5 napon belül nem történik meg, írj nekünk vagy az eladónak</p>
+                    <p>A vásárló hamarosan kapcsolatba fog lépni veled. Amennyiben ez 3 napon belül nem történik meg, írj nekünk vagy az eladónak</p>
 
-                    <p>Eladó adatai:</p>
-                    <h2 style="color:blue;">Emailcíme :   ${ item.email}</h2>
-                    <h2> Telefonszáma : ${ item.phone}</h2>
-                    <i>FurFlip.com</i>
+                    <h2>Eladó adatai:</h2>
+                    <h4>Email címe :   ${ item.email}</h4>
+                    <h4> Telefonszáma : ${ item.phone}</h4>
+                    <a href=www.flipit.store>FlipIt</a>
                   </html>
                 `,
             },
           },
           Subject: {
             Charset: "UTF-8",
-            Data: "Vásárlás megerősítése",
+            Data: "|FlipIt| Vásárlás megerősítése",
           },
         },
       };
@@ -368,26 +368,23 @@ export const stripeSuccess = async (req, res) => {
               Data: `
                   <html>
                     <h1>Valaki megvette az egyik tárgyadat</h1>
-                    <p>A vevő már kifizette a terméket, a pénzt xy napon utaljuk neked, ha sikeresen átvette tőled a vevő a tárgyat</p>
-                    <p>Befolyt össze megtekíntése</p>
-                    <i>www.furflip.com/seller/revenue</i>
+                    <p>A vevő már kifizette a terméket, a pénzt 10 napon belül utaljuk neked, ha sikeresen átvette tőled a vevő a tárgyat</p>
+                    <p>Befolyt összeg megtekíntése <a href=www.flipit.store/seller/revenue>www.flipit.store/seller/revenue</a> </p>
 
-
-                    <p>Tárgy amit megvettek tőled:</p>
-                    <h2 style="color:blue;">${item.name}</h2>
+                    <p>Tárgy amit megvettek tőled: ${item.name}</p>
 
                     <p>Írj vissza a vevőnek minél előbb, hogy a tárgyat hol és mikor tudja átvenni</p>
-                    <p>Vevő emailcíme:</p>
-                    <h2 style="color:blue;">${session.customer_details.email}</h2>
+                    <p>Vevő email címe: ${session.customer_details.email}</p>
+                    <p>Az eladásról készült számlát 8 napon belül küldjük erre az email címre</p>
 
-                    <i>FurFlip.com</i>
+                    <h6>FlipIt</h6>
                   </html>
                 `,
             },
           },
           Subject: {
             Charset: "UTF-8",
-            Data: "Valaki megvette az egyik tárgyadat",
+            Data: "|FlipIt| Valaki megvette az egyik tárgyadat",
           },
         },
       };
@@ -555,20 +552,20 @@ export const comments = async (req, res) => {
               Charset: "UTF-8",
               Data: `
                   <html>
-                    <h1>Valaki kérdezett valamit az egyik termékedről</h1>
-                    <p>Jelentkezz be, kattins az alábbi linkre és válaszolj a potenciális vevő kérdésre</p>
-                    <i>www.sell.com/item/${itemWithQuestion._id}</i>
+                      <h4>FlipIt</h4>
+                    <h2>Valaki kérdezett valamit a(z) ${itemWithQuestion.name} termékedről</h2>
+                    <h4>Kattins az alábbi linkre és válaszolj a potenciális vevő kérdésre</h4>
+                        <p>Ha nem vagy bejelentkezve akkor előbb jelentkezz be</p>
+                      <h4>  <a href=www.flipit.store/item/${itemWithQuestion._id}>Válaszolj itt </a> </h4>
 
-                    <h2 style="color:red;">${itemWithQuestion.name}</h2>
-                    <h2 style="color:red;">${itemWithQuestion.item}</h2>
-                    <i>FurFlip.com</i>
+                  <h6>FlipIt</h6>
                   </html>
                 `,
             },
           },
           Subject: {
             Charset: "UTF-8",
-            Data: "Valaki kérdezett valamit az egyik termékedről",
+            Data: "|FlipIt| Valaki kérdezett valamit az egyik termékedről",
           },
         },
       };
@@ -641,20 +638,18 @@ export const commentAnswers = async (req, res) => {
             Charset: "UTF-8",
             Data: `
                 <html>
-                  <h1>Válaszoltak a kérdésedre</h1>
-                  <p>Az eladó válaszolt a kérdésedre</p>
+                  <h3>Válaszoltak a kérdésedre</h3>
+                  <p>Az eladó válaszolt a kérdésedre amit erről a termékrők kérdztél: ${ itemToLookForForEmail.name}  </p>
+                  <p>Nézd meg a választ itt: <a href=www.flipit.store/item/${itemToLookForForEmail._id}>www.flipit.store/item/${itemToLookForForEmail._id}</a></p>
 
-                  <p>Termék neve?</p>
-                  <h2 style="color:blue;">${itemToLookForForEmail.name}</h2>
-
-                  <i>FurFlip.com</i>
+                  <h6>FlipIt</h6>
                 </html>
               `,
           },
         },
         Subject: {
           Charset: "UTF-8",
-          Data: "Válasz a kérdésre",
+          Data: "|FlipIt| Válasz a kérdésre",
         },
       },
     };

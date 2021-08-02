@@ -25,7 +25,7 @@ export const register = async (req, res) => {
         .send("Jelszó kötelező és minimum 6 karakterből kell, hogy álljon");
     }
     let userExist = await User.findOne({ email }).exec();
-    if (userExist) return res.status(400).send("Email is taken");
+    if (userExist) return res.status(400).send("Ez az email már foglalt");
 
     // hash password
     const hashedPassword = await hashPassword(password);
