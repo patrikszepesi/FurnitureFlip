@@ -370,7 +370,7 @@ const RulesView = () => {
                   <SectionHeader
                     title="Kérdésed van?"
                     subtitle="Írj nekünk bármikor, itt:"
-                    ctaGroup={[<Button variant="contained"><a class="mailto" href="mailto:support.flipit.store">support@flipit.store</a></Button>]}
+                    ctaGroup={[<Button variant="contained"><a class="mailto" href="mailto:support@flipit.store">support@flipit.store</a></Button>]}
                     disableGutter
                     align="left"
                     titleProps={{

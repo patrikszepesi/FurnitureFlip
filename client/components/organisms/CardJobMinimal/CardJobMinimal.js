@@ -69,7 +69,7 @@ const CardJobMinimal = props => {
       >
         <div className="card-job-minimal__title-container">
           <Typography
-            variant="subtitle1"
+            variant="bod2"
             className={clsx(classes.title, 'card-job-minimal__title')}
             {...titleProps}
           >
@@ -78,7 +78,7 @@ const CardJobMinimal = props => {
         </div>
         <div className="card-job-minimal__location-conatiner">
           <Typography
-            variant="body2"
+            variant="subtitle1"
             color="textSecondary"
             className="card-job-minimal__location"
             {...subtitleProps}
