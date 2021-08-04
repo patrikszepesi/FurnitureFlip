@@ -91,6 +91,8 @@ const itemSchema = new mongoose.Schema(
         type: Array,
         required:true
       },
+      purchaseDate:{type:Date},
+      
       comments: [
       {
         text:{type:String,required:true},

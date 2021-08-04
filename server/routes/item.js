@@ -32,7 +32,8 @@ import {
   sold,
   ownerGetData,
   loadInvoices,
-  completedInvoice
+  completedInvoice,
+  loadAllInvoices
 } from "../controllers/item";
 
 
@@ -82,6 +83,8 @@ router.get("/sold", requireSignin, sold);
 
 router.get("/user-courses", requireSignin, userItems);
 router.get("/load-invocies", requireSignin, loadInvoices);
+router.get("/load-all", requireSignin, loadAllInvoices);
+
 
 
 router.get("/user/course/:slug", requireSignin, read);

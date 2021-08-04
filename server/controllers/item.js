@@ -321,8 +321,9 @@ export const stripeSuccess = async (req, res) => {
       user.stripeSession.id
     );
 
+//add time of purchase
     const itemToUpdateEmail = await Item.findByIdAndUpdate(req.params.itemId, {
-      $set: {buyerEmail: session.customer_details.email}
+      $set: {buyerEmail: session.customer_details.email, purchaseDate:Date.now()}
     }).exec();
 
 
@@ -631,6 +632,23 @@ export const loadInvoices = async (req, res) => {
       $and: [
       {  sold: true },
       {billingCompleted: false}
+        ]
+     })
+    .exec();
+    res.json(itemsToBeProccessed)
+  } catch(err){
+    console.log(error)
+  }
+};
+
+export const loadAllInvoices = async (req, res) => {
+
+  try{
+    const itemsToBeProccessed = await Item.find({
+
+      $and: [
+      {  sold: true },
+      {billingCompleted: true}
         ]
      })
     .exec();

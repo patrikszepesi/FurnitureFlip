@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
   coverContent: {
     [theme.breakpoints.up('md')]: {
       position: 'sticky',
-      top: '50%',
+      top: '100%',
       transform: 'translateY(-50%)',
       padding: theme.spacing(2),
     },

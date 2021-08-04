@@ -79,6 +79,7 @@ const Accordion2 = props => {
                  Számlázási címe: {item.billingAddress}<br/>
                  Eladott termék: {item.name} |  Ára:{item.price} Forint<br/>
                  Azonosító: {item._id}<br/>
+                 Vásárlás dátum: {item.purchaseDate}<br/>
 
                 </Typography>
               </Grid>

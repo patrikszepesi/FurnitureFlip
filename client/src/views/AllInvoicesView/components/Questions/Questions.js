@@ -66,7 +66,7 @@ const Questions = props => {
   const loadInvoices = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("/api/load-invocies");
+      const { data } = await axios.get("/api/load-all");
       setInvocies(data);
       setLoading(false);
     } catch (err) {
