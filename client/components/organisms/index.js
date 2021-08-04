@@ -10,6 +10,7 @@ export { default as CardJobMinimal } from './CardJobMinimal';
 export { default as CardJobTag } from './CardJobTag';
 export { default as CardJobCompany } from './CardJobCompany';
 export { default as Accordion } from './Accordion';
+export { default as Accordion2 } from './Accordion2';
 export { default as HeroShaped } from './HeroShaped';
 export { default as HeroShapedAuth } from './HeroShapedAuth';
 export { default as HeroShapedStripe } from './HeroShapedStripe';

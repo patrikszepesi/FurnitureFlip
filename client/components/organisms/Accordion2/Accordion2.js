@@ -10,10 +10,10 @@ import {
   Accordion as MuiAccordion,
   AccordionSummary as MuiAccordionSummary,
   AccordionDetails as MuiAccordionDetails,
+  Button
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-import { LearnMoreLink } from '../../../components/atoms';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
  *
  * @param {*} props
  */
-const Accordion = props => {
+const Accordion2 = props => {
   const {
     items,
     className,
@@ -42,14 +42,17 @@ const Accordion = props => {
     subtitleProps,
     textProps,
     linkProps,
+    handleSubmit,
     ...rest
   } = props;
-
   const classes = useStyles();
-  return (
 
+
+
+
+  return (
     <div {...rest} className={clsx('accordion', classes.root, className)}>
-      {items && items.length &&  items.map(item => (
+      {items.map(item => (
         <MuiAccordion
           className={clsx('accordion__item-wrapper', classes.listItem)}
           key={item.id}
@@ -71,21 +74,14 @@ const Accordion = props => {
                   className="accorion_item-title"
                   {...titleProps}
                 >
-                  {item.name}
+                 Név:   {item.billingNameUser} <br/>
+                 Email címe:{item.email} <br/>
+                 Számlázási címe: {item.billingAddress}<br/>
+                 Eladott termék: {item.name} |  Ára:{item.price} Forint<br/>
+                 Azonosító: {item._id}<br/>
+
                 </Typography>
               </Grid>
-              {item.subtitle && (
-                <Grid item xs={12} className="accorion_item-subtitle-container">
-                  <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    className="accorion_item-subtitle"
-                    {...subtitleProps}
-                  >
-                    {item.subtitle}
-                  </Typography>
-                </Grid>
-              )}
             </Grid>
           </MuiAccordionSummary>
           <MuiAccordionDetails>
@@ -94,22 +90,22 @@ const Accordion = props => {
               spacing={2}
               className="accordion__collapsable-text-container"
             >
-              {item.value &&  item.value.map(item => (
-                <Grid
-                  item
-                  xs={12}
-                  className="accordion__collapsable-link-wrapper"
-                >
+              <Grid
+                item
+                xs={12}
+                className="accordion__collapsable-text-wrapper"
+              >
                 <Typography
-                  variant="subtitle1"
-                  color="textSecondary"
-                  className="accorion_item-subtitle"
-                  {...subtitleProps}
+                  variant="body1"
+                  color="textPrimary"
+                  className="accordion__collapsable-text"
+                  {...textProps}
                 >
-                  {item}
+                <Button onClick={()=>handleSubmit(item._id)}  color="primary" variant="outlined" size="large">
+                  Számla leadva
+                </Button>
                 </Typography>
-                </Grid>
-              ))}
+              </Grid>
             </Grid>
           </MuiAccordionDetails>
         </MuiAccordion>
@@ -117,39 +113,12 @@ const Accordion = props => {
     </div>
   );
 };
-
-Accordion.defaultProps = {
+Accordion2.defaultProps = {
   titleProps: {},
   subtitleProps: {},
   textProps: {},
   linkProps: {},
 };
 
-Accordion.propTypes = {
-  /**
-   * Classname from the parent component
-   */
-  className: PropTypes.string,
-  /**
-   * Items to show inside the accordion
-   */
-  items: PropTypes.array.isRequired,
-  /**
-   * Additional properties to pass to the title Typography component
-   */
-  titleProps: PropTypes.object,
-  /**
-   * Additional properties to pass to the subtitle Typography component
-   */
-  subtitleProps: PropTypes.object,
-  /**
-   * Additional properties to pass to the text Typography component
-   */
-  textProps: PropTypes.object,
-  /**
-   * Additional properties to pass to the link component
-   */
-  linkProps: PropTypes.object,
-};
 
-export default Accordion;
+export default Accordion2;

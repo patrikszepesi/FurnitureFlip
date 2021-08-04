@@ -106,7 +106,7 @@ export const create = async (req, res) => {
     res.json(item);
   } catch (err) {
     console.log(err);
-    return res.status(400).send("Item create failed. Try again.");
+    return res.status(400).send("Sikertelen művelet, kitöltötted az összes mezőt?");
   }
 };
 
@@ -121,6 +121,24 @@ export const read = async (req, res) => {
     console.log(err);
   }
 };
+
+
+export const completedInvoice = async (req, res) => {
+
+const { itemId } = req.body;
+
+  try {
+    const item = await Item.findOneAndUpdate(
+      {_id: itemId},
+      {billingCompleted:true}
+    )
+    .exec();
+    res.json(item);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
 export const ownerGetData = async (req, res) => {
 
@@ -339,7 +357,7 @@ export const stripeSuccess = async (req, res) => {
               Data: `
                   <html>
                     <h1>Vásárlás megerősítése</h1>
-                    <p>A vásárló hamarosan kapcsolatba fog lépni veled. Amennyiben ez 3 napon belül nem történik meg, írj nekünk vagy az eladónak</p>
+                    <p>Az eladó hamarosan kapcsolatba fog lépni veled. Amennyiben ez 3 napon belül nem történik meg, írj nekünk vagy az eladónak</p>
 
                     <h2>Eladó adatai:</h2>
                     <h4>Email címe :   ${ item.email}</h4>
@@ -604,6 +622,25 @@ export const getComments = async (req, res) => {
     console.log(error)
   }
 };
+
+export const loadInvoices = async (req, res) => {
+
+  try{
+    const itemsToBeProccessed = await Item.find({
+
+      $and: [
+      {  sold: true },
+      {billingCompleted: false}
+        ]
+     })
+    .exec();
+    res.json(itemsToBeProccessed)
+  } catch(err){
+    console.log(error)
+  }
+};
+
+
 
 export const commentAnswers = async (req, res) => {
   //send email to the person who asked the question

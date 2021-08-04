@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from "react";
+import { useState,useContext } from "react";
 import axios from "axios";
 import Resizer from "react-image-file-resizer";
 import toast, { Toaster } from 'react-hot-toast';
@@ -13,6 +13,8 @@ import { Hero, ItemCreateForm  } from './components';
 import InstructorRoute from "../../../components/routes/InstructorRoute";
 import FileUpload from "../../../components/forms/FileUpload";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Context } from "../../../context";
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -91,7 +93,13 @@ const TabPanel = props => {
   );
 };
 
+
+
 const ItemCreateView = (props = {}) => {
+  const {
+    state: { user },
+  } = useContext(Context);
+
   const classes = useStyles();
   let pageId =  'general';
   const [values, setValues] = useState({
@@ -107,6 +115,7 @@ const ItemCreateView = (props = {}) => {
       phone:'',
       city:'',
       street:'',
+      billingNameUser:"",
       loading: false,
       billingAddress:'',
       images:[]
@@ -117,12 +126,23 @@ const ItemCreateView = (props = {}) => {
     const [loading, setLoading] = useState(false);
 
 
+
     // router
     const router = useRouter();
 
     const handleChange = (e) => {
-      setValues({ ...values, [e.target.name]: e.target.value });
+
+      if(e.target.name=="billingNameUser"){
+
+          user.name=e.target.value
+          values.billingNameUser=e.target.value
+          setValues({ ...values, [e.target.name]: e.target.value });
+
+      }else{
+        setValues({ ...values, [e.target.name]: e.target.value });
+      }
     };
+
 
     const handleImage = (e) => {
       let file = e.target.files[0];
@@ -248,7 +268,9 @@ const ItemCreateView = (props = {}) => {
                       setValues={setValues}
                       preview={preview}
                       uploadButtonText={uploadButtonText}
-                      handleImageRemove={handleImageRemove} />
+                      handleImageRemove={handleImageRemove}
+                      user={user}
+                       />
 
               </TabPanel>
             </CardBase>

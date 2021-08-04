@@ -37,6 +37,7 @@ const StripeCallback = () => {
 
   return (
     <div className={classes.root}>
+    <h1>Ne zárd be az ablakot</h1>
       <CircularProgress />
     </div>
   );

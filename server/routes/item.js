@@ -30,7 +30,9 @@ import {
   getComments,
   commentAnswers,
   sold,
-  ownerGetData
+  ownerGetData,
+  loadInvoices,
+  completedInvoice
 } from "../controllers/item";
 
 
@@ -49,6 +51,9 @@ router.get("/course/:slug", read);
 
 router.put("/course/publish/:itemId", requireSignin, publishItem);
 router.put("/course/unpublish/:itemId", requireSignin, unpublishItem);
+
+router.put("/invoice-completed", requireSignin, completedInvoice);
+
 
 
 router.get("/check-enrollment/:itemId", requireSignin, checkEnrollment);
@@ -76,6 +81,9 @@ router.get("/sold", requireSignin, sold);
 
 
 router.get("/user-courses", requireSignin, userItems);
+router.get("/load-invocies", requireSignin, loadInvoices);
+
+
 router.get("/user/course/:slug", requireSignin, read);
 
 router.post("/search/filters", search);

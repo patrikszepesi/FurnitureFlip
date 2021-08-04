@@ -22,7 +22,7 @@ const Faq = props => {
 
   return (
     <div className={className} {...rest}>
-    <h3>Kövesd ezt a 8 lépést, ha elakadtál, hogy, hogyan kell beállítani azt, hogy eladó lehess!</h3>
+    <h3>Elakadtál az eladói beállításoknál? Kövesd ezt a 8 egyszerű lépést</h3>
 
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>

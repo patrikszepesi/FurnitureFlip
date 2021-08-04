@@ -14,7 +14,6 @@ import { SectionHeader } from '../../../components/molecules';
 import myImage from '../../../public/assets/undraw_Successful_purchase_re_mpig.svg'
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-
 const useStyles = makeStyles(theme => ({
   rootForLoading: {
     width: '100%',
@@ -111,7 +110,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
+//
 const BuyerDashboardView = () => {
   const classes = useStyles();
 

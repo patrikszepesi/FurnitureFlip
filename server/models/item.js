@@ -72,10 +72,24 @@ const itemSchema = new mongoose.Schema(
 
     buyerEmail:"String",
 
-    billingAddress:"String",
+    billingAddress:{
+      type:String,
+      required:true
+    },
+
+    billingNameUser:{
+      type:String,
+      required:true
+    },
+
+    billingCompleted:{
+      type:Boolean,
+    default:false,
+    },
 
     images: {
         type: Array,
+        required:true
       },
       comments: [
       {

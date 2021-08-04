@@ -43,7 +43,7 @@ export const faq = {
         updated: '2.3',
       },
       {
-        title: 'Az utolsó dolog az adatok ellenőrzése. Miután ellenőrízted az adataidat nyomj a küldés gombra',
+        title: 'Az utolsó dolog az adatok ellenőrzése. Miután ellenőrizted az adataidat nyomj a küldés gombra',
         updated: '2.4',
       },
     ],

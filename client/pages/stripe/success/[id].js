@@ -38,6 +38,7 @@ const StripeSuccess = () => {
         <div className="col-md-9 pb-5">
           <div className="d-flex justify-content-center p-5">
           <div className={classes.root}>
+            <h1>ne zárd be az ablakot</h1>
             <CircularProgress />
           </div>
           </div>

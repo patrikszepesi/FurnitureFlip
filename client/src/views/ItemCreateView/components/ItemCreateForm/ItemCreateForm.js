@@ -70,6 +70,7 @@ const ItemCreateForm = props => {
     handleImage,
     handleChange,
     values,
+    user,
     setValues,
     preview,
     uploadButtonText,
@@ -97,7 +98,7 @@ const ItemCreateForm = props => {
   }else if(values.category==='alkatrész'){
     subCategories=['jármű'].sort()
   }else if(values.category==='művészet'){
-    subCategories=['festmény','design','szobor'].sort()
+    subCategories=['festmény','szobor'].sort()
   }
   if(values.subCategory==='benti bútor'){
     items=['szék','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
@@ -197,10 +198,6 @@ const ItemCreateForm = props => {
     items=['benti','kinti'].sort()
   }
 
-  // const children = [];
-  // for (let i = 1000; i <= 15000; i+=500) {
-  //   children.push(<Option key={i.toFixed(2)}>HUF{i}</Option>);
-  // }
 
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -209,7 +206,7 @@ const ItemCreateForm = props => {
 
   return (
       <>
-        {values && values.categories!=undefined && (
+        {values && values.categories!=undefined &&  (
         <form onSubmit={handleSubmit}>
     <div className={className} {...rest}>
       <Grid container spacing={isMd ? 6 : 2}>
@@ -379,7 +376,7 @@ const ItemCreateForm = props => {
           >
              Az elérhetőségedet valamint az utca címet kizárólag azután fogja látni a vevő miután már megvette a terméked
           </Typography>
-            <p>Azt a címet add meg ahol a vevő át fogja tudni venni a terméket tőled</p>
+            <p>Azt a címet add meg ahol a vevő át fogja tudni venni a terméket tőled, nem feltétlenül kell megadnod az otthoni címedet</p>
 
           <Divider />
         </Grid>
@@ -483,7 +480,29 @@ const ItemCreateForm = props => {
             onChange={handleChange}
           />
         </Grid>
-
+        <Grid item xs={12} sm={6}>
+        <Tooltip title={<h3 style={{ color: "lightblue" }}>A terméked eladása után levonunk egy 10%-os jutalékot amiután fogsz számlát kapni, ezért kell megadnod a nevedet</h3>}>
+        <IconButton aria-label="help">
+          <LiveHelpIcon />
+        </IconButton>
+      </Tooltip>
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            className={classes.inputTitle}
+          >
+          Neved(számlához)
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="medium"
+            name="billingNameUser"
+            fullWidth
+            type="text"
+            value={user.name}
+            onChange={handleChange}
+          />
+        </Grid>
 
         <Grid item container justify="flex-start" xs={12}>
           <Button
