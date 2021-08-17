@@ -70,7 +70,7 @@ const Reviews = props => {
         }
         subtitle={
           <span className={classes.textWhite}>
-            és támogasd te is évente az xy alapítványt
+            és támogasd te is a környezetet
           </span>
         }
         align="left"

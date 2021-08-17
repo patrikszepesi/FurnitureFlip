@@ -177,7 +177,9 @@ const RegisterView = () => {
                   <Grid item xs={12}>
                     <i>
                       <Typography variant="subtitle2">
-                        *Kötelező mezők
+                      A regisztráció gombra kattintva elfogadod az alábbiakat:
+                        Adatkezelési Tájékoztató, és a
+                        Flipit.store Általános Felhasználási Feltételeit
                       </Typography>
                     </i>
                   </Grid>

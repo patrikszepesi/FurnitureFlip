@@ -7,7 +7,6 @@ module.exports=require('./index.js');
 //13. test payment settings
 //redirect url in stripe??? apparenlty not needed
 //olyan árat adj amiben az áfa is benne van,
-//használt cuccok áfa kötelesek?
 
 
 

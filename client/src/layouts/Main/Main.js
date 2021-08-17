@@ -103,16 +103,16 @@ const Main = ({ children, themeToggler, themeMode }) => {
           groupTitle: 'Általános',
           pages: [
             {
-              title: 'ÁSZF',
-              href: '/aszf',
-            },
-            {
               title: ' Hogyan Működik, Eladóknak',
               href: '/what',
             },
             {
               title: ' Hogyan Működik, Vevőknek',
               href: '/for-buyers',
+            },
+            {
+              title: 'ÁSZF',
+              href: '/aszf',
             },
 
           ],
