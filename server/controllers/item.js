@@ -90,12 +90,13 @@ export const removeImage = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+  console.log(req.body)
   // return;
   try {
     const alreadyExist = await Item.findOne({
       slug: slugify(req.body.name.toLowerCase()),
     });
-    if (alreadyExist) return res.status(400).send("Title is taken");
+    if (alreadyExist) return res.status(400).send("Már van ilyen nevű termék");
 
     const item = await new Item({
       slug: slugify(req.body.name),
@@ -179,6 +180,32 @@ export const update = async (req, res) => {
     return res.status(400).send(err.message);
   }
 };
+
+export const deleteItem = async (req, res) => {
+    const { slug } = req.params;
+  const item = await Item.findOne({ _id:slug }).exec();
+  console.log(item.instructor)
+  console.log("booya")
+  console.log(req.user._id)
+  console.log("after")
+  if (req.user._id != item.instructor) {
+    return res.status(400).send("Unauthorized");
+  }
+
+  try {
+
+    // console.log(slug);
+    const item = await Item.deleteOne({ _id:slug }).exec();
+
+
+
+    res.json({ok:true});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err.message);
+  }
+};
+
 
 
 

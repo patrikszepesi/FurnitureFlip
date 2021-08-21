@@ -124,7 +124,7 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
   let difficulties=[]
 
   if(categoryToFilter==='bútor/otthon'){
-    subCategories=['benti bútor','kinti bútor','bárhol tárolható']
+    subCategories=['benti ','kinti ','bárhol tárolható']
     prices=['1.000 HUF','5.000 HUF','10.000 HUF','15.000 HUF','25.000 HUF','40.000 HUF','60.000 HUF','90.000 HUF','120.000 HUF','150.000 HUF','200.000 HUF','250.000 HUF','300.000 HUF','400.000 HUF','500.000 HUF','max']
   }else if(categoryToFilter==='sport/szabadidő'){
     subCategories=['labdarúgás','kosárlabda','röplabda','kézilabda','küzdősport','jégkorong/korcsolya','sakk','tenisz','vízisport','túra','futás','séta','lovaglás','téli sport','golf','asztalitenisz','társasjáték','darts','snooker/biliárd','kerékpár'].sort()
@@ -150,10 +150,10 @@ const Search = ({categoryToFilter, onFilterChange, filterObj}) => {
   }
 
 
-  if(filterObj.subCategory==='benti bútor'){
-    items=['szék','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
-  }else if(filterObj.subCategory==='kinti bútor'){
-    items=['napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi','egyéb','ajtó','tégla','csempe'].sort()
+  if(filterObj.subCategory==='benti '){
+    items=['szék','sütő','mikró','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
+  }else if(filterObj.subCategory==='kinti '){
+    items=['napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi','egyéb','ajtó','tégla','grill','csempe'].sort()
   }else if(filterObj.subCategory==='bárhol tárolható'){
     items=['szék','asztal','kanapé','lámpa','kád','zuhany','ajtó','tégla','csempe','fotel','ágy','evőeszköz','egyéb','garnitúra','napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi'].sort()
   }else if(filterObj.subCategory==='labdarúgás'){

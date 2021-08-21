@@ -84,7 +84,7 @@ const ItemCreateForm = props => {
   let subCategories=['előbb válassz kategóriát']
 
   if(values.category==='bútor/otthon'){
-    subCategories=['benti bútor','kinti bútor','bárhol tárolható']
+    subCategories=['benti','kinti','bárhol tárolható']
   }else if(values.category==='sport/szabadidő'){
     subCategories=['labdarúgás','kosárlabda','röplabda','kézilabda','küzdősport','jégkorong/korcsolya','sakk','tenisz','vízisport','kerékpár','túra','futás','séta','lovaglás','téli sport','golf','asztalitenisz','társasjáték','darts','snooker/biliárd'].sort()
   }else if(values.category==='műszaki cikk'){
@@ -100,10 +100,10 @@ const ItemCreateForm = props => {
   }else if(values.category==='művészet'){
     subCategories=['festmény','szobor'].sort()
   }
-  if(values.subCategory==='benti bútor'){
-    items=['szék','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
-  }else if(values.subCategory=== 'kinti bútor'){
-    items=['napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi','egyéb','ajtó','tégla','csempe','szék'].sort()
+  if(values.subCategory==='benti'){
+    items=['szék','sütő','mikró','asztal','kanapé','lámpa','kád','zuhany','fotel','ágy','evőeszköz','egyéb','garnitúra','szekrény','ajtó','tégla','csempe'].sort()
+  }else if(values.subCategory=== 'kinti'){
+    items=['napernyő','grill','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi','egyéb','ajtó','tégla','csempe','szék'].sort()
   }else if(values.subCategory==='bárhol tárolható'){
     items=['szék','asztal','kanapé','lámpa','kád','zuhany','ajtó','tégla','csempe','fotel','ágy','evőeszköz','egyéb','garnitúra','napernyő','napágy','kiülő','hintaágy','kinti-ágy','medence','jacuzzi'].sort()
   }else if(values.subCategory==='labdarúgás'){
@@ -339,7 +339,7 @@ const ItemCreateForm = props => {
           Ár
           </Typography>
           <TextField
-            placeholder="Forintban"
+            placeholder="minimum 300 Forint"
             variant="outlined"
             size="medium"
             name="price"
@@ -386,7 +386,7 @@ const ItemCreateForm = props => {
             color="textPrimary"
             className={classes.inputTitle}
           >
-            Emailcímed
+            Email címed
           </Typography>
           <TextField
             placeholder=""
@@ -424,7 +424,7 @@ const ItemCreateForm = props => {
             color="textPrimary"
             className={classes.inputTitle}
           >
-            átadás Városa
+            Átadás városa
           </Typography>
           <TextField
             placeholder="pl. Budapest  "
@@ -457,7 +457,7 @@ const ItemCreateForm = props => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Tooltip title={<h3 style={{ color: "lightblue" }}>A terméked eladása után levonunk egy 10%-os jutalékot amiután fogsz számlát kapni, ezért kell megadnod a számlázási címedet</h3>}>
+        <Tooltip title={<h3 style={{ color: "lightblue" }}>A terméked eladása után levonunk egy 10%-os jutalékot, amiről számla kerül kiállításra, ehhez pedig szükséges a számlázási címed</h3>}>
         <IconButton aria-label="help">
           <LiveHelpIcon />
         </IconButton>
@@ -481,7 +481,7 @@ const ItemCreateForm = props => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Tooltip title={<h3 style={{ color: "lightblue" }}>A terméked eladása után levonunk egy 10%-os jutalékot amiután fogsz számlát kapni, ezért kell megadnod a nevedet</h3>}>
+        <Tooltip title={<h3 style={{ color: "lightblue" }}>A terméked eladása után levonunk egy 10%-os jutalékot, amiről számla kerül kiállításra, ehhez pedig szükséges a neved</h3>}>
         <IconButton aria-label="help">
           <LiveHelpIcon />
         </IconButton>
@@ -499,7 +499,7 @@ const ItemCreateForm = props => {
             name="billingNameUser"
             fullWidth
             type="text"
-            value={user.name}
+            value={values.billingNameUser}
             onChange={handleChange}
           />
         </Grid>

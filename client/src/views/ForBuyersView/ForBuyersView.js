@@ -55,7 +55,7 @@ const ForBuyersView = props => {
         icon: 'fas fa-user-check',
         title: 'Ellenőrzött eladók',
         subtitle:
-          'Az összes eladó ellenőrzött, ami azt jelenti, hogy a személyazonosságát megerősítette.',
+          'Az összes eladó ellenőrzött, vagy az ellenőrzési folyamatban van, ami azt jelenti, hogy a személyazonosságuk hamarosan megerősítésre fog kerülni.',
       },
       {
         icon: 'fas fa-user-shield',
@@ -67,7 +67,7 @@ const ForBuyersView = props => {
         icon: 'fas fa-leaf',
         title: 'Zero Waste',
         subtitle:
-          'A bevételünk 5%-át különböző zöld projektekre használjuk majd fel',
+          'A bevételünk 10%-át különböző zöld projektekre használjuk majd fel',
       },
       {
         icon: 'fas fa-times-circle',

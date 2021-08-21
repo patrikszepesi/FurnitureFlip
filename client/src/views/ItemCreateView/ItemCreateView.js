@@ -132,15 +132,15 @@ const ItemCreateView = (props = {}) => {
 
     const handleChange = (e) => {
 
-      if(e.target.name=="billingNameUser"){
-
-          user.name=e.target.value
-          values.billingNameUser=e.target.value
-          setValues({ ...values, [e.target.name]: e.target.value });
-
-      }else{
+      // if(e.target.name=="billingNameUser"){
+      //
+      //     user.name=e.target.value
+      //     values.billingNameUser=e.target.value
+      //     setValues({ ...values, [e.target.name]: e.target.value });
+      //
+      // }else{
         setValues({ ...values, [e.target.name]: e.target.value });
-      }
+      //}
     };
 
 
@@ -182,33 +182,38 @@ const ItemCreateView = (props = {}) => {
         toast("Image upload failed. Try later.");
       }
     };
-
+//
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        // console.log(values);
-        const { data } = await axios.post("/api/course", {
-          ...values,
-          image,
-        });
-        toast("Minden kész", {
-           duration: 4000,
-      style: {
-      border: '5px solid #E1C699',
-      padding: '16px',
-      color: '#713200',
-      minWidth:'800px',
-      marginTop:'70px',
-      },
-      iconTheme: {
-      primary: '#713200',
-      secondary: '#FFFAEE',
-      },
-      })
-        router.push("/seller");
-      } catch (err) {
-        toast(err.response.data);
+      if(values.price<299){
+        toast("Minimum ár 300 Forint");
+      }else{
+        try {
+          // console.log(values);
+          const { data } = await axios.post("/api/course", {
+            ...values,
+            image,
+          });
+          toast("Minden kész", {
+             duration: 4000,
+        style: {
+        border: '5px solid #E1C699',
+        padding: '16px',
+        color: '#713200',
+        minWidth:'800px',
+        marginTop:'70px',
+        },
+        iconTheme: {
+        primary: '#713200',
+        secondary: '#FFFAEE',
+        },
+        })
+          router.push("/seller");
+        } catch (err) {
+          toast(err.response.data);
+        }
       }
+
     };
 
   return (

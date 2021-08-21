@@ -205,7 +205,7 @@ const RulesView = () => {
                   />
                 </ListItemAvatar>
                 <Typography variant="body1" color="textPrimary">
-                  Minden eladónak kötelessége igazolnia önmagát igazolvánnyal és valamilyen tartózkodási igazolvánnyal.
+                  Minden eladónak kötelessége igazolnia önmagát igazolvánnyal és valamilyen tartózkodási igazolvánnyal, ha a Stripe felszólítja. Ennek elmulasztása esetén a Stripe blokkolhatja/zárolhatja az eladó kifizetéseit amíg a szükséges adatok pótlása nem teljesül.
                </Typography>
               </ListItem>
             </List>
@@ -276,6 +276,18 @@ const RulesView = () => {
                 </ListItemAvatar>
                 <Typography variant="body1" color="textPrimary">
                 	A regisztrációval a felhasználó beleegyezik, hogy nem fog szándékosan hamis, félrevezető termékleírást adni, aminek megsértése súlyos következményekkel jár.
+                </Typography>
+              </ListItem>
+              <ListItem disableGutters>
+                <ListItemAvatar>
+                  <Avatar
+                    src="https://assets.maccarianagency.com/the-front/illustrations/check-icon-yellow.svg"
+                    className={classes.checkBox}
+                  />
+                </ListItemAvatar>
+                <Typography variant="body1" color="textPrimary">
+                A regisztrációval az eladó beleegyezik:   Az eladónak legfeljebb kettő napja van értesíteni a vevőt arról, ha az eladásra bocsátott termékét már kifizette a vevő, azonban az eladó már nem rendelkezik a termékkel. Ennek elhalasztása esetén az eladónak kell visszatéríteni a befolyt összeget a vevőnek. Amennyiben ez nem teljesül jogi lépéseket kezdeményezhet az ÁÜTŐ Kft.
+
                 </Typography>
               </ListItem>
               <ListItem disableGutters>

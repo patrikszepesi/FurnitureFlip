@@ -53,7 +53,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
                 }
               )
               .then(res => {
-                console.log('IMAGE UPLOAD RES DATA', res);
+
                 setLoading(false);
                 allUploadedFiles.push(res.data); //push to array of images to keep track of all images
 
@@ -88,8 +88,8 @@ const FileUpload = ({ values, setValues, setLoading }) => {
           return item.key !== image.key; //return all that dont match the public id(one we want to delete) of the one we put in
         });
         setValues({ ...values, images: filteredImages }); //set new values to filtered image state, with one already removed
-        console.log(values)
-        console.log("after")
+        //console.log(values)
+        //console.log("after")
       })
       .catch(err => {
         console.log(err);

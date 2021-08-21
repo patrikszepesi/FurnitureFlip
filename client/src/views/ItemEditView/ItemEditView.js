@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import clsx from 'clsx';
 import { parse } from 'query-string';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, List, ListItem, Grid, Typography } from '@material-ui/core';
+import { Box, List, ListItem, Grid, Typography,Button } from '@material-ui/core';
 import { SectionAlternate, CardBase } from '../../../components/organisms';
 import { Hero, ItemUpdateForm } from './components';
 import InstructorRoute from "../../../components/routes/InstructorRoute";
 import FileUpload from "../../../components/forms/FileUpload";
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 
 
@@ -25,6 +26,12 @@ const useStyles = makeStyles(theme => ({
     '& > * + *': {
       marginLeft: theme.spacing(2),
     }},
+    deleteButton:{
+        fontWeight: 1000,
+        marginLeft:theme.spacing(10),
+        marginTop:theme.spacing(2),
+        color:'red'
+    },
 
   section: {
     '& .section-alternate__content': {
@@ -179,29 +186,71 @@ const ItemCreateView = (props = {}) => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        const { data } = await axios.put(`/api/course/${values._id}`, {
-          ...values,
-          image,
-        });
-        toast("A termék adatainak módosítása megtörtént", {
-           duration: 4000,
-      style: {
-      border: '5px solid #E1C699',
-      padding: '16px',
-      color: '#713200',
-      minWidth:'800px',
-      marginTop:'70px',
-      },
-      iconTheme: {
-      primary: '#713200',
-      secondary: '#FFFAEE',
-      },
-      })
-        router.push("/seller");
-      } catch (err) {
-        toast(err.response.data);
+
+      if(values.price<299){
+        toast("Minimum ár 300 Forint");
+      }else{
+        try {
+          const { data } = await axios.put(`/api/course/${values._id}`, {
+            ...values,
+            image,
+          });
+          toast("A termék adatainak módosítása megtörtént", {
+             duration: 4000,
+        style: {
+        border: '5px solid #E1C699',
+        padding: '16px',
+        color: '#713200',
+        minWidth:'800px',
+        marginTop:'70px',
+        },
+        iconTheme: {
+        primary: '#713200',
+        secondary: '#FFFAEE',
+        },
+        })
+          router.push("/seller");
+        } catch (err) {
+          toast(err.response.data);
+        }
       }
+
+    };
+
+    function confirmAction() {
+        let confirmAction = confirm("Biztos kitörlöd?");
+        if (confirmAction) {
+          handleDelete()
+        } else {
+          alert("Nincs törölve");
+        }
+      }
+
+    const handleDelete = async (e) => {
+
+        try {
+           const { data } = await axios.post(`/api/course-delete/${values._id}`, {
+             ...values,
+             image,
+           });
+          toast("Tárgy törlése" , {
+             duration: 2000,
+        style: {
+        border: '5px solid #E1C699',
+        padding: '16px',
+        color: '#713200',
+        minWidth:'800px',
+        marginTop:'70px',
+        },
+        iconTheme: {
+        primary: '#713200',
+        secondary: '#FFFAEE',
+        },
+        })
+          router.push("/seller");
+        } catch (err) {
+          toast(err.response.data);
+        }
     };
 
   return (
@@ -260,6 +309,17 @@ const ItemCreateView = (props = {}) => {
                   handleImageRemove={handleImageRemove} />
               </TabPanel>
             </CardBase>
+            <Button
+            onClick={confirmAction}
+            disabled={values.loading || values.uploading}
+            className={classes.deleteButton}
+            loading={values.loading}
+            variant="contained"
+            type="submit"
+            size="small"
+            >
+              {values.loading ? "Törlés..." : "Tárgy törlése"}
+            </Button>
           </Grid>
         </Grid>
       </SectionAlternate>

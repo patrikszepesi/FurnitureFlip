@@ -51,7 +51,7 @@ const Features = props => {
           >
             <DescriptionListIcon
               title="Segíteni neked pénzt kereseni"
-              subtitle="Mi nem számolunk fel semmilyen extra költgséget tőled,nincs hirdetési költség, csak egy kis jutalékot kérünk el tőled"
+              subtitle="Mi nem számolunk fel semmilyen extra költséget tőled,nincs hirdetési költség, csak egy kis jutalékot kérünk el tőled"
               icon={
                 <Icon
                   fontIconClass="fas fa-hand-holding-usd"
@@ -73,7 +73,7 @@ const Features = props => {
           >
             <DescriptionListIcon
               title="Zero Waste"
-              subtitle="Bíztatni az embereket arra, hogy vigyázzanak a környezetre, és, hogy ne vegyenek mindenből újat. Ezért is ajánljuk fel az összes bevételünk 10%-át zöld tevékenységekre"
+              subtitle="Biztatni az embereket arra, hogy vigyázzanak a környezetre, és, hogy ne vegyenek mindenből újat. Ezért is ajánljuk fel az összes bevételünk 10%-át zöld tevékenységekre"
               icon={
                 <Icon
                   fontIconClass="fas fa-recycle"
